@@ -6,12 +6,19 @@ User creates tracks - points of interest in geographical areas accompanied by ph
 ##User Stories
 ###As a user I would like to 
 track my location
+
 take and store photos of a location
+
 organize photos by category
+
 see all photos associated with each category
+
 see interesting attractions near my current location
+
 broadcast my location to other users of the app - V2
+
 share my photo/activity on social media
+
 create a user profile
 
 ##Model
@@ -29,10 +36,15 @@ User
 
 ###Footprint
 User will have at least one footprint showing their current location. Must remember to ask permission and give ability to hide current location.
+
 Image
+
 Latitude
+
 Longitude
+
 Description
+
 Track
 
 ##Firebase
@@ -112,7 +124,9 @@ Photo UI add Facebook, Twitter buttons
 #Track App V2 
 ##Brainstorm:
 Allow users to follow each other’s Tracks
+
 broadcast my location to other users of the app 
+
 Incorporate hiking trails
 
 
