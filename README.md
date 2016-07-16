@@ -84,6 +84,9 @@ UI to access camera or choose photos from the photo library
 
 UI for selected photo and for setting footprint attributes
 
+![](https://github.com/melbrng/TrackApp/blob/master/images/user_2.png)
+![](https://github.com/melbrng/TrackApp/blob/master/images/user_2a.png)
+
 ##User story 3 - Organize photos by category
 ### Model
 Allow a user to assign each footprint to an existing Track or create/assign to a new Track
