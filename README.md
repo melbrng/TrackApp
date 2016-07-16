@@ -63,6 +63,8 @@ Authenticate or create user
 
 Core location sets the user’s current location
 
+![](https://github.com/melbrng/TrackApp/blob/master/images/user_1.png)
+
 ### View and View Controllers
 Login/auth UI and add track button
 
