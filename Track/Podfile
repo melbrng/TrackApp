@@ -4,6 +4,7 @@
  use_frameworks!
 
 target 'Track' do
+pod 'Firebase'
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
