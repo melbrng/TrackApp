@@ -101,6 +101,8 @@ Track UI for creating a new track and assign to footprint
 
 Retrieve all footprints for the logged in user
 
+![](https://github.com/melbrng/TrackApp/blob/master/images/user_4.png)
+
 ###View and View Controllers
 
 Tableview UI that allows the user to scroll through all photos (footprints) in a category (Track)
@@ -116,6 +118,8 @@ Implement a user class for the profile name, description and profile image
 User profile UI for creating or editing user information
 
 User profile UI will contain a tableView of Tracks
+
+![](https://github.com/melbrng/TrackApp/blob/master/images/user_5.png)
 
 ##User story 6 - Share my photo/activity on social media
 
