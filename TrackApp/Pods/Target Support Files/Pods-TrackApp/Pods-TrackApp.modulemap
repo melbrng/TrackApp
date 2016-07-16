@@ -1,0 +1,6 @@
+framework module Pods_TrackApp {
+  umbrella header "Pods-TrackApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
