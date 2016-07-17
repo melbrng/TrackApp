@@ -18,10 +18,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,14 +35,8 @@ class LoginViewController: UIViewController {
         
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
             
-            loginUser(email, password: password) { (stringvalue) -> () in
-                    self.userUID = stringvalue
-            }
-            
-
+            loginUser(email, password: password)
        }
-        
-        print("useruid: " + self.userUID)
         
     }
     
@@ -66,27 +58,24 @@ class LoginViewController: UIViewController {
 
 
     
+    func loginUser(email: String,password: String) {
+        
+        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+    
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                if user != nil {
+                    print("Successful login")
+                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    
+                }
+            }
 
-    
-    
-//    func loginUser(email: String,password: String) {
-//        
-//        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-//    
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            } else {
-//                if let user = user {
-//                    print("Successful login")
-//                    self.performSegueWithIdentifier("loginToMap", sender: nil)
-//                    
-//                }
-//            }
-//
-//        }
-//        
-//    }
+        }
+        
+    }
     
     func loginUser(email: String,password: String, completionHandler: (userID: String) -> ()) {
         
@@ -108,7 +97,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    
+
 
 
     /*
