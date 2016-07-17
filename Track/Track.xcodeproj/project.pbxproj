@@ -19,6 +19,8 @@
 		4339FFA51D3C068700CF0EDF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA41D3C068700CF0EDF /* MapViewController.swift */; };
 		4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */; };
 		4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA71D3C08DA00CF0EDF /* Track.swift */; };
+		4339FFAD1D3C12A700CF0EDF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */; };
+		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
 		4731291F9132531E6249FA70 /* Pods_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		4339FFA41D3C068700CF0EDF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		4339FFA71D3C08DA00CF0EDF /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4572246DDB7546D07F17F310 /* Pods-Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.debug.xcconfig"; sourceTree = "<group>"; };
 		59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Track.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		702AD1203A164DB446EA2726 /* Pods-Track.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.release.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */,
+				4339FFAD1D3C12A700CF0EDF /* CoreLocation.framework in Frameworks */,
 				4731291F9132531E6249FA70 /* Pods_Track.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +181,8 @@
 		E21A391D170BFF815DB8D170 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4339FFAE1D3C12C900CF0EDF /* MapKit.framework */,
+				4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */,
 				59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */,
 			);
 			name = Frameworks;

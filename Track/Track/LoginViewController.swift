@@ -16,6 +16,9 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTouched(sender: AnyObject) {
         
+        loginEmailTextField.text = "testuser@gmail.com"
+        loginPasswordTextField.text = "password"
+        
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
         
             FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in

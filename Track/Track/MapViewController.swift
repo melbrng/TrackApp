@@ -19,7 +19,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
-    let melPointAnnotation = MKPointAnnotation()
+    let userPointAnnotation = MKPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,18 +47,18 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         mapView .setRegion(region, animated: true)
         
         
-        melPointAnnotation.coordinate = userLocation.coordinate
-        melPointAnnotation.title = "Where is Mel?"
-        melPointAnnotation.subtitle = "Mel is here!"
+        userPointAnnotation.coordinate = userLocation.coordinate
+        userPointAnnotation.title = "Where is Mel?"
+        userPointAnnotation.subtitle = "Mel is here!"
         
-        mapView.addAnnotation(melPointAnnotation)
+        mapView.addAnnotation(userPointAnnotation)
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         // Don't want to show a custom image if the annotation is the user's location.
-//        guard !annotation.isKindOfClass(MKUserLocation) else {
-//            return nil
-//        }
+        guard !annotation.isKindOfClass(MKUserLocation) else {
+            return nil
+        }
         
         let annotationIdentifier = "AnnotationIdentifier"
         
@@ -76,15 +76,14 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         if let annotationView = annotationView {
             // Configure your annotation view here
             annotationView.canShowCallout = true
-            annotationView.image = UIImage(named: "yourImage")
+            annotationView.image = UIImage(named: "")
         }
         
         return annotationView
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        //let annotation = view.annotation
+
         
         let photoViewController = PhotoViewController()
         presentViewController(photoViewController, animated: true, completion: nil)
@@ -137,7 +136,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
         let track = Track()
-        track.annotation = melPointAnnotation
+        track.annotation = userPointAnnotation
         track.image = image
         dismissViewControllerAnimated(true, completion: nil)
     }
