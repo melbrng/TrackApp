@@ -11,8 +11,24 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
+    var userUID = String()
+    
     @IBOutlet weak var loginEmailTextField: UITextField!
     @IBOutlet weak var loginPasswordTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: Authentication
     
     @IBAction func loginButtonTouched(sender: AnyObject) {
         
@@ -20,18 +36,18 @@ class LoginViewController: UIViewController {
         loginPasswordTextField.text = "password"
         
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
-        
-            FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                } else {
-                    print("Successful login")
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
-                }
+            
+            loginUser(email, password: password) { (stringvalue) -> () in
+                    self.userUID = stringvalue
             }
-        }
+            
+
+       }
+        
+        print("useruid: " + self.userUID)
+        
     }
+    
     
     @IBAction func signupButtonTouched(sender: AnyObject) {
         
@@ -50,17 +66,50 @@ class LoginViewController: UIViewController {
 
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+//    func loginUser(email: String,password: String) {
+//        
+//        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+//    
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            } else {
+//                if let user = user {
+//                    print("Successful login")
+//                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+//                    
+//                }
+//            }
+//
+//        }
+//        
+//    }
+    
+    func loginUser(email: String,password: String, completionHandler: (userID: String) -> ()) {
+        
+        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                if let user = user {
+                    completionHandler(userID: user.uid)
+                    print("Successful login")
+                    
+                }
+            }
+            
+        }
+        
     }
     
+    
+    
+
 
     /*
     // MARK: - Navigation

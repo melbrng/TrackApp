@@ -12,7 +12,7 @@ pod 'Firebase/Database'
 end
 
 target 'TrackTests' do
-
+pod 'Firebase'
 end
 
 target 'TrackUITests' do
