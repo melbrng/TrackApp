@@ -111,11 +111,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="uFB-LM-qds">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C96-qS-Uox">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="track"/>
-                        </button>
+                        <barButtonItem key="leftBarButtonItem" title="Track" id="HyA-KY-CB3">
+                            <connections>
+                                <action selector="trackLocation:" destination="MNr-Sw-nqv" id="Fus-FB-PG3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Profile" id="YfK-gK-CHp"/>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="y6l-RM-bdJ" id="nuJ-ah-yYH"/>
