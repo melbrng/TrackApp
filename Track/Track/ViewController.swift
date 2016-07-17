@@ -7,23 +7,15 @@
 //
 
 import UIKit
-import FirebaseAuth
+
 
 class ViewController: UIViewController {
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        FIRAuth.auth()?.signInWithEmail("testuser@gmail.com", password: "password") { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else {
-                print("Successful login")
-            }
-        }
+
     }
 
     override func didReceiveMemoryWarning() {
