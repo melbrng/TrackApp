@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,11 +47,22 @@ class LoginViewController: UIViewController {
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
             
             FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
+                
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 } else {
                     print("Successfully created account.")
+                    
+                    //create database user entry
+                    let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
+                    FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
+                    
+                    // Store the uid
+                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
+                    
+                    //move onto mapview
+                    self.performSegueWithIdentifier("loginToMap", sender: nil)
                 }
             }
         }
@@ -68,6 +80,15 @@ class LoginViewController: UIViewController {
             } else {
                 if user != nil {
                     print("Successful login")
+                    
+                    //create database user entry
+                    let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
+                    FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
+                    
+                    // Store the uid
+                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
+                    
+                    //move onto mapview
                     self.performSegueWithIdentifier("loginToMap", sender: nil)
                     
                 }
@@ -77,29 +98,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    func loginUser(email: String,password: String, completionHandler: (userID: String) -> ()) {
-        
-        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else {
-                if let user = user {
-                    completionHandler(userID: user.uid)
-                    print("Successful login")
-                    
-                }
-            }
-            
-        }
-        
-    }
     
-    
-
-
-
     /*
     // MARK: - Navigation
 
