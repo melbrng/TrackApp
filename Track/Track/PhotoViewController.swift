@@ -9,8 +9,13 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
+    @IBOutlet weak var trackedImageView: UIImageView!
+    var trackedImage = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        trackedImageView.image = trackedImage
 
     }
 

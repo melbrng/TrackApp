@@ -20,6 +20,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let photoPicker = UIImagePickerController()
     
     let userPointAnnotation = MKPointAnnotation()
+    var selectedImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,10 +136,25 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-//        let track = Track()
-//        track.annotation = userPointAnnotation
-//        track.image = image
-        dismissViewControllerAnimated(true, completion: nil)
+        selectedImage = image
+
+        dismissViewControllerAnimated(true) { () -> Void  in
+            
+            self.performSegueWithIdentifier("ShowTrack", sender: nil)
+        }
+        
+            
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "ShowTrack"){
+            
+            let photoViewController:PhotoViewController = segue.destinationViewController as! PhotoViewController
+            photoViewController.trackedImage = selectedImage
+            
+            
+        }
     }
 }
 
