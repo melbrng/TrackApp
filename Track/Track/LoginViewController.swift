@@ -21,6 +21,19 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         loginPasswordTextField.secureTextEntry = true
+        
+        //monitor the user authentication state and present mapview is user is already logged in
+        FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
+            if let user = user {
+                print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
+                
+                //move onto mapview
+                self.performSegueWithIdentifier("loginToMap", sender: nil)
+                
+            } else {
+                print("No user is signed in.")
+            }
+        }
 
     }
 
