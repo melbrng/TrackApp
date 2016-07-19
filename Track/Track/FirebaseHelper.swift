@@ -44,7 +44,7 @@ class FirebaseHelper{
         return currentUser
     }
     
-    
+    //query by uid
     func queryUserByUid(uid: String){
         
         let reference = USER_REF.child("\(uid)/")
@@ -52,7 +52,7 @@ class FirebaseHelper{
         reference.observeEventType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
                 print("snapshot : " + String(snapshot.value))
-                //You should have a dictionary here now. Do a sort by valueForKey
+                
                 
             }else{
                 print("No Snapshot?!")
@@ -61,6 +61,7 @@ class FirebaseHelper{
         
     }
     
+    //create a new user in the firebase database instance
     func createNewUser(uid: String, user: Dictionary<String, String>) {
 
         

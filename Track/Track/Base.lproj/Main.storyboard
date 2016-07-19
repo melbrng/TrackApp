@@ -64,6 +64,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UD5-aK-nBD">
+                                <rect key="frame" x="144" y="263" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -106,6 +109,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="loginActivityIndicator" destination="UD5-aK-nBD" id="Xaq-iQ-bcQ"/>
                         <outlet property="loginEmailTextField" destination="dMk-cb-29o" id="XY9-T6-KJj"/>
                         <outlet property="loginPasswordTextField" destination="EPf-DF-5dc" id="5GI-gN-iwA"/>
                         <segue destination="Pyh-XR-vgJ" kind="presentation" identifier="loginToMap" id="Iyb-n3-c09"/>
