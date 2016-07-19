@@ -30,6 +30,7 @@ Image
 
 ###Track
 Comprised of 1 or more Footprints
+
 [Footprint]
 Description
 User
