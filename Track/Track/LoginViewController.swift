@@ -23,16 +23,13 @@ class LoginViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
     
     // MARK: Authentication
     
     @IBAction func loginButtonTouched(sender: AnyObject) {
-        
-//        loginEmailTextField.text = "testuser@gmail.com"
-//        loginPasswordTextField.text = "password"
         
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
             

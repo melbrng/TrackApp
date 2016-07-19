@@ -135,9 +135,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-//        let track = Track()
-//        track.annotation = userPointAnnotation
-//        track.image = image
+
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
