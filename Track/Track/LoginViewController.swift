@@ -12,6 +12,7 @@ import Firebase
 class LoginViewController: UIViewController {
 
     var userUID = String()
+    var isSet = false
     
     //The handler for the auth state listener, to allow cancelling later.
     var handle: FIRAuthStateDidChangeListenerHandle?
@@ -30,8 +31,17 @@ class LoginViewController: UIViewController {
             if let user = user {
                 print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
                 
+                //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
+                if(self.isSet == false){
+                    self.isSet = true
+                } else {
+                    self.isSet = false
+                }
+                
                 //move onto mapview
-                self.performSegueWithIdentifier("loginToMap", sender: nil)
+                if(self.isSet == true){
+                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                }
                 
             } else {
                 print("No user is signed in.")
