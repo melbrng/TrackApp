@@ -13,6 +13,9 @@ class LoginViewController: UIViewController {
 
     var userUID = String()
     
+    //The handler for the auth state listener, to allow cancelling later.
+    var handle: FIRAuthStateDidChangeListenerHandle?
+    
     @IBOutlet weak var loginEmailTextField: UITextField!
     @IBOutlet weak var loginPasswordTextField: UITextField!
     @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
@@ -23,7 +26,7 @@ class LoginViewController: UIViewController {
         loginPasswordTextField.secureTextEntry = true
         
         //monitor the user authentication state and present mapview is user is already logged in
-        FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
+        handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
             if let user = user {
                 print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
                 
@@ -43,10 +46,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
-        // MARK:  ### We could also this unwindToLogout, it's the unwindTo... that's important
-        // Any which way we name it, we can add our log out code here
-        // and hook up our interface so that the Logout button connects
-        // to the Exit property of the Map View Controller.
+        // logout when we unwind back to LoginVC
+        
+        try! FIRAuth.auth()!.signOut()
     }
     
     // MARK: Authentication
@@ -128,10 +130,12 @@ class LoginViewController: UIViewController {
         
     }
     
+    
     // MARK: ## I've added this method (and a breakpoint here) to mark when I'm segueing away from this view.
     // This should only happen once, of course...
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+        
+        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
     }
     
     func loginErrorMessage(title: String, message: String) {

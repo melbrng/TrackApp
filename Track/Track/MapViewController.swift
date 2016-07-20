@@ -15,14 +15,6 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
-    @IBAction func logout(sender: AnyObject) {
-        
-        try! FIRAuth.auth()!.signOut()
-        
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     let locationManager = CLLocationManager()
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
