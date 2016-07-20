@@ -42,6 +42,12 @@ class LoginViewController: UIViewController {
 
     }
     
+    @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
+        // MARK:  ### We could also this unwindToLogout, it's the unwindTo... that's important
+        // Any which way we name it, we can add our log out code here
+        // and hook up our interface so that the Logout button connects
+        // to the Exit property of the Map View Controller.
+    }
     
     // MARK: Authentication
     
@@ -122,6 +128,11 @@ class LoginViewController: UIViewController {
         
     }
     
+    // MARK: ## I've added this method (and a breakpoint here) to mark when I'm segueing away from this view.
+    // This should only happen once, of course...
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+    }
     
     func loginErrorMessage(title: String, message: String) {
         

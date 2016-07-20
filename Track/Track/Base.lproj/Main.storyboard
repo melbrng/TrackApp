@@ -35,7 +35,7 @@
                                     <action selector="loginButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLI-ct-XRG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCt-u3-AZS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCt-u3-AZS">
                                 <rect key="frame" x="29" y="99" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -141,7 +141,7 @@
                     <toolbarItems>
                         <barButtonItem title="Logout" id="5BC-Mg-dkb">
                             <connections>
-                                <action selector="logout:" destination="MNr-Sw-nqv" id="MJW-J7-Ded"/>
+                                <segue destination="PAL-q8-zD8" kind="unwind" unwindAction="unwindToViewController:" id="SbO-DY-alH"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -160,6 +160,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PAL-q8-zD8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2631" y="258"/>
         </scene>
