@@ -35,7 +35,7 @@
                                     <action selector="loginButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLI-ct-XRG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCt-u3-AZS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCt-u3-AZS">
                                 <rect key="frame" x="29" y="99" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,16 +108,17 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="GOJ-7n-afd"/>
                     <connections>
                         <outlet property="loginActivityIndicator" destination="UD5-aK-nBD" id="Xaq-iQ-bcQ"/>
                         <outlet property="loginEmailTextField" destination="dMk-cb-29o" id="XY9-T6-KJj"/>
                         <outlet property="loginPasswordTextField" destination="EPf-DF-5dc" id="5GI-gN-iwA"/>
-                        <segue destination="Pyh-XR-vgJ" kind="presentation" identifier="loginToMap" id="Iyb-n3-c09"/>
+                        <segue destination="BnW-dV-U8R" kind="show" identifier="loginToMap" animates="NO" id="9UE-hh-8z2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-60" y="258"/>
+            <point key="canvasLocation" x="801" y="258"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="8Ga-Iy-IFk">
@@ -132,11 +133,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-RM-bdJ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="77" width="600" height="462"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Logout" id="5BC-Mg-dkb">
+                            <connections>
+                                <action selector="logout:" destination="MNr-Sw-nqv" id="MJW-J7-Ded"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="uFB-LM-qds">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Track" id="HyA-KY-CB3">
@@ -146,31 +154,37 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Profile" id="YfK-gK-CHp"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="y6l-RM-bdJ" id="nuJ-ah-yYH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661" y="258"/>
+            <point key="canvasLocation" x="2631" y="258"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="uWa-2L-b4K">
+        <scene sceneID="mGu-eI-VHp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pyh-XR-vgJ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="BnW-dV-U8R" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pw4-ci-CwK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xg9-w8-ns8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cae-Q3-0Xk">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="MNr-Sw-nqv" kind="relationship" relationship="rootViewController" id="zGQ-9V-vPc"/>
+                        <segue destination="MNr-Sw-nqv" kind="relationship" relationship="rootViewController" id="fq6-Tm-l8i"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bIL-Pv-SaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ct9-ag-HfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="769" y="258"/>
+            <point key="canvasLocation" x="1681" y="258"/>
         </scene>
     </scenes>
 </document>

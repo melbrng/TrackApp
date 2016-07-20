@@ -8,12 +8,20 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 
 class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    
+    @IBAction func logout(sender: AnyObject) {
+        
+        try! FIRAuth.auth()!.signOut()
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     let locationManager = CLLocationManager()
     let cameraPicker = UIImagePickerController()
