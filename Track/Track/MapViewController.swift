@@ -8,12 +8,12 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 
 class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
     
     let locationManager = CLLocationManager()
     let cameraPicker = UIImagePickerController()
@@ -135,7 +135,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
+
         selectedImage = image
 
         dismissViewControllerAnimated(true) { () -> Void  in
@@ -155,6 +155,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
             
             
         }
+
     }
 }
 
