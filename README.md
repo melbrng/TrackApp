@@ -2,10 +2,11 @@
 ##V1
 App that allows Users to creates Tracks and Footprints detailing interesting geographical areas travelled.
 
-Frameworks
-
+##Frameworks
 MapKit
+
 CoreLocation
+
 Firebase
 
 ##User Stories
