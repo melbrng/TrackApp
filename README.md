@@ -1,7 +1,12 @@
-# TrackApp
+#Track App 
+##V1
+App that allows Users to creates Tracks and Footprints detailing interesting geographical areas travelled.
 
-#Track App V1
-User creates tracks - points of interest in geographical areas accompanied by photo(s)
+Frameworks
+
+MapKit
+CoreLocation
+Firebase
 
 ##User Stories
 ###As a user I would like to 
