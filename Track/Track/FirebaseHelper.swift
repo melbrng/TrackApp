@@ -19,9 +19,12 @@ class FirebaseHelper{
     //override init so noone else can
     private init() {}
     
+    //MARK: References
+    
     private var _BASE_REF = FIRDatabase.database().referenceFromURL(BASE_URL)
     private var _USER_REF = FIRDatabase.database().referenceFromURL("\(BASE_URL)/users")
     private var _TRACK_REF = FIRDatabase.database().referenceFromURL("\(BASE_URL)/tracks")
+    private var _FOOT_REF = FIRDatabase.database().referenceFromURL("\(BASE_URL)/footprints")
     
     var BASE_REF: FIRDatabaseReference {
         return _BASE_REF
@@ -35,6 +38,10 @@ class FirebaseHelper{
         return _TRACK_REF
     }
     
+    var FOOT_REF: FIRDatabaseReference {
+        return _FOOT_REF
+    }
+    
     var CURRENT_USER_REF: FIRDatabaseReference {
         
         let userID = NSUserDefaults.standardUserDefaults().valueForKey("uid") as! String
@@ -43,6 +50,8 @@ class FirebaseHelper{
         
         return currentUser
     }
+    
+    //MARK: Actions
     
     //query by uid
     func queryUserByUid(uid: String){
@@ -64,7 +73,6 @@ class FirebaseHelper{
     //create a new user in the firebase database instance
     func createNewUser(uid: String, user: Dictionary<String, String>) {
 
-        
         USER_REF.child(uid).setValue(user)
     }
     

@@ -24,6 +24,8 @@
 		4339FFB21D3C237D00CF0EDF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA41D3C068700CF0EDF /* MapViewController.swift */; };
 		4339FFB31D3C239400CF0EDF /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
+		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
+		43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
 		4731291F9132531E6249FA70 /* Pods_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		43D6EE621D418C6900A2DF31 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		43D6EE641D418C7900A2DF31 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		4572246DDB7546D07F17F310 /* Pods-Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.debug.xcconfig"; sourceTree = "<group>"; };
 		59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Track.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6599B5A5F763BC9314A1DB55 /* Pods-TrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrackTests/Pods-TrackTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,7 +176,9 @@
 		4339FFAA1D3C090B00CF0EDF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				43D6EE621D418C6900A2DF31 /* User.swift */,
 				4339FFA71D3C08DA00CF0EDF /* Track.swift */,
+				43D6EE641D418C7900A2DF31 /* Footprint.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -432,9 +438,11 @@
 				43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */,
 				4339FFA21D3AEE0500CF0EDF /* LoginViewController.swift in Sources */,
 				4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */,
+				43D6EE631D418C6900A2DF31 /* User.swift in Sources */,
 				4339FFA51D3C068700CF0EDF /* MapViewController.swift in Sources */,
 				4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */,
 				4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */,
+				43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

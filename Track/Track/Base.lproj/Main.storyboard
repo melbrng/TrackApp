@@ -133,45 +133,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
-                                <rect key="frame" x="68" y="64" width="336" height="350"/>
+                                <rect key="frame" x="68" y="64" width="272" height="307"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cpy-SY-4l5">
-                                <rect key="frame" x="182" y="550" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
-                                <rect key="frame" x="68" y="442" width="240" height="30"/>
+                                <rect key="frame" x="68" y="399" width="240" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
-                                <rect key="frame" x="68" y="512" width="240" height="30"/>
+                                <rect key="frame" x="68" y="457" width="240" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cg-ls-49X">
-                                <rect key="frame" x="68" y="422" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="68" y="379" width="39" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="footprint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRX-AX-EbZ">
-                                <rect key="frame" x="68" y="492" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="68" y="437" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nRO-4d-qHz"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="nRO-4d-qHz">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="LlN-66-NYo"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="X6U-SH-D5V"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="trackedImageView" destination="mZW-qh-hbA" id="n1f-3I-mIU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVe-Yc-tsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1870" y="-450"/>
+            <point key="canvasLocation" x="2554" y="300"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="8Ga-Iy-IFk">
@@ -210,13 +210,13 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="y6l-RM-bdJ" id="nuJ-ah-yYH"/>
-                        <segue destination="Kxd-Yg-de5" kind="presentation" identifier="ShowTrack" id="vMq-Fd-m2J"/>
+                        <segue destination="3zf-Nq-oYX" kind="show" identifier="SetTrack" id="zsI-xE-4L9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PAL-q8-zD8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1870" y="356"/>
+            <point key="canvasLocation" x="1803" y="300"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mGu-eI-VHp">
@@ -240,24 +240,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct9-ag-HfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="985" y="300"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="1cX-Ne-lGS">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kxd-Yg-de5" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l08-du-61n">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="3zf-Nq-oYX" kind="relationship" relationship="rootViewController" id="9Ks-3S-eVP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yQg-1h-APe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="935" y="-450"/>
         </scene>
     </scenes>
 </document>

@@ -140,7 +140,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
 
         dismissViewControllerAnimated(true) { () -> Void  in
             
-            self.performSegueWithIdentifier("ShowTrack", sender: nil)
+            self.performSegueWithIdentifier("SetTrack", sender: nil)
         }
         
             
@@ -148,7 +148,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "ShowTrack"){
+        if(segue.identifier == "SetTrack"){
             
             let photoViewController:PhotoViewController = segue.destinationViewController as! PhotoViewController
             photoViewController.trackedImage = selectedImage
