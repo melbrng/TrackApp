@@ -84,21 +84,33 @@ class LoginViewController: UIViewController {
                 
                 if let error = error {
                     self.loginErrorMessage("Sign Up Error", message: error.localizedDescription)
-                    //print(error.localizedDescription)
+                    
                     return
                 } else {
                     
                     //create database user entry
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
+                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
+                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
                     
                     // Store the uid
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
+                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
                     
                     self.loginActivityIndicator.stopAnimating()
                     
                     //move onto mapview
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
+                    if(self.isSet == false){
+                        self.isSet = true
+                    } else {
+                        self.isSet = false
+                    }
+                    
+                    //move onto mapview
+                    if(self.isSet == true){
+                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    }
                 }
             }
         }
@@ -116,8 +128,8 @@ class LoginViewController: UIViewController {
             if let error = error {
                 
                 self.loginErrorMessage("Login Error", message: error.localizedDescription)
-                //print(error.localizedDescription)
                 return
+                
             } else {
                 if user != nil {
 
@@ -126,7 +138,7 @@ class LoginViewController: UIViewController {
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
                     // Store the uid
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
+                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
                     
                     self.loginActivityIndicator.stopAnimating()
                     
@@ -147,6 +159,7 @@ class LoginViewController: UIViewController {
         
         FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
     }
+    
     
     func loginErrorMessage(title: String, message: String) {
         

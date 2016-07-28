@@ -39,6 +39,12 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
+        
+        
+        FirebaseHelper.sharedInstance.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!)
+        
+        FirebaseHelper.sharedInstance.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!)
+        
     }
     
     // MARK : Map User location

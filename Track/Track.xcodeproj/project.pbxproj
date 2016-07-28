@@ -21,8 +21,6 @@
 		4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA71D3C08DA00CF0EDF /* Track.swift */; };
 		4339FFAD1D3C12A700CF0EDF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */; };
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
-		4339FFB21D3C237D00CF0EDF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA41D3C068700CF0EDF /* MapViewController.swift */; };
-		4339FFB31D3C239400CF0EDF /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
 		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
 		43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
@@ -450,8 +448,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4339FFB31D3C239400CF0EDF /* PhotoViewController.swift in Sources */,
-				4339FFB21D3C237D00CF0EDF /* MapViewController.swift in Sources */,
 				4339FF851D3AD07100CF0EDF /* TrackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
