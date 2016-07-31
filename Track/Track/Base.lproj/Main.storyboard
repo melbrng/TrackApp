@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -113,12 +113,13 @@
                         <outlet property="loginActivityIndicator" destination="UD5-aK-nBD" id="Xaq-iQ-bcQ"/>
                         <outlet property="loginEmailTextField" destination="dMk-cb-29o" id="XY9-T6-KJj"/>
                         <outlet property="loginPasswordTextField" destination="EPf-DF-5dc" id="5GI-gN-iwA"/>
-                        <segue destination="BnW-dV-U8R" kind="show" identifier="loginToMap" animates="NO" id="9UE-hh-8z2"/>
+                        <segue destination="BQ7-uc-xSQ" kind="show" identifier="loginToMap" id="sRw-n4-Iv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="Gg2-Ge-GzI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="229" y="300"/>
+            <point key="canvasLocation" x="1879" y="300"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="MHo-bM-LEy">
@@ -129,18 +130,15 @@
                         <viewControllerLayoutGuide type="bottom" id="kwP-sp-OEX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="v4O-zf-Sxj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
-                                <rect key="frame" x="68" y="64" width="272" height="307"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
                                 <rect key="frame" x="68" y="399" width="240" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
                                 <rect key="frame" x="68" y="457" width="240" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -157,21 +155,34 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
+                                <rect key="frame" x="68" y="72" width="272" height="307"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="nRO-4d-qHz">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="LlN-66-NYo"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="X6U-SH-D5V"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="9q4-YL-lM5">
+                            <connections>
+                                <action selector="add:" destination="3zf-Nq-oYX" id="lPD-3S-MPc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="LdM-9V-cSu">
+                            <connections>
+                                <action selector="cancel:" destination="3zf-Nq-oYX" id="0hf-4h-ahw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footprintTextField" destination="inv-0f-pdb" id="Po4-Uk-Bsr"/>
+                        <outlet property="trackTextField" destination="y1x-Bn-QSV" id="z0A-8b-H1K"/>
                         <outlet property="trackedImageView" destination="mZW-qh-hbA" id="n1f-3I-mIU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVe-Yc-tsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2554" y="300"/>
+            <point key="canvasLocation" x="4178" y="300"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="8Ga-Iy-IFk">
@@ -182,19 +193,20 @@
                         <viewControllerLayoutGuide type="bottom" id="SAO-Gr-0Em"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wXj-W6-1JV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-RM-bdJ">
-                                <rect key="frame" x="0.0" y="77" width="600" height="462"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
                         <barButtonItem title="Logout" id="5BC-Mg-dkb">
                             <connections>
-                                <segue destination="PAL-q8-zD8" kind="unwind" unwindAction="unwindToViewController:" id="SbO-DY-alH"/>
+                                <segue destination="Gg2-Ge-GzI" kind="unwind" unwindAction="unwindToViewController:" id="M7p-2r-k0l"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -207,39 +219,37 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Profile" id="YfK-gK-CHp"/>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="mapView" destination="y6l-RM-bdJ" id="nuJ-ah-yYH"/>
                         <segue destination="3zf-Nq-oYX" kind="show" identifier="SetTrack" id="zsI-xE-4L9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="PAL-q8-zD8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1803" y="300"/>
+            <point key="canvasLocation" x="3427" y="300"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="mGu-eI-VHp">
+        <scene sceneID="4Vb-fa-OdZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="BnW-dV-U8R" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="BQ7-uc-xSQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xg9-w8-ns8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="afh-Ha-0hx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cae-Q3-0Xk">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="v1z-ke-Dmj">
                         <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="MNr-Sw-nqv" kind="relationship" relationship="rootViewController" id="fq6-Tm-l8i"/>
+                        <segue destination="MNr-Sw-nqv" kind="relationship" relationship="rootViewController" id="WFU-kV-Dc5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ct9-ag-HfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1dG-r5-Ujx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="300"/>
+            <point key="canvasLocation" x="2615" y="300"/>
         </scene>
     </scenes>
 </document>

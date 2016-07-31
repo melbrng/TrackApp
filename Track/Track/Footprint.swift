@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import UIKit
+import MapKit
+
+class Footprint {
+    
+    var footprintImage = UIImage()
+    var userPointAnnotation = MKPointAnnotation()
+    
+    
+}
