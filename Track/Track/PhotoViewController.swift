@@ -11,7 +11,7 @@ protocol PhotoViewControllerDelegate {
     func addFootprint(sender: PhotoViewController)
 }
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var trackedImageView: UIImageView!
     @IBOutlet weak var trackTextField: UITextField!
@@ -22,6 +22,8 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        trackTextField.delegate = self
+        footprintTextField.delegate = self
         
         trackedImageView.image = footprint.footprintImage
         
@@ -34,13 +36,22 @@ class PhotoViewController: UIViewController {
     
     @IBAction func add(sender: AnyObject) {
         
-//        footprint.userPointAnnotation.title = footprintTextField.text
-//        footprint.userPointAnnotation.subtitle = trackTextField.text
-        
-        footprint.userPointAnnotation.title = "Title"
-        footprint.userPointAnnotation.subtitle = "subtitle"
+        footprint.userPointAnnotation.title = footprintTextField.text
+        footprint.userPointAnnotation.subtitle = trackTextField.text
         
         delegate!.addFootprint(self)
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    //dismiss keyboard on return key
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if(textField == footprintTextField){
+            footprintTextField.resignFirstResponder()
+        }else{
+            trackTextField.resignFirstResponder()
+        }
+        return true
     }
 }
