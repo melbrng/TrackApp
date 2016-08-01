@@ -13,7 +13,9 @@ import MapKit
 class Footprint {
     
     var footprintImage = UIImage()
-    var userPointAnnotation = MKPointAnnotation()
+    
+    //firebase will contain lat, lon, title, subtitle, tag for creation of annotation
+    var footprintPointAnnotation = MKPointAnnotation()
     
     
 }

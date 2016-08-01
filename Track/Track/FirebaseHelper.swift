@@ -159,9 +159,11 @@ class FirebaseHelper{
         
         let footKey = FOOT_REF.child("tracks").childByAutoId().key
         let footprint = ["uid": footKey,
-                         "author": "username",
-                         "title": "title",
-                         "body": "body"]
+                         "latitude": "",
+                         "longitude": "",
+                         "title": "",
+                         "subtitle": "",
+                         "tag": ""]
         
         let footUpdates = ["/\(uid)/\(trackKey)/": footprint]
         

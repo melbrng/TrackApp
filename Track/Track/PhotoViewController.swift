@@ -36,8 +36,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func add(sender: AnyObject) {
         
-        footprint.userPointAnnotation.title = footprintTextField.text
-        footprint.userPointAnnotation.subtitle = trackTextField.text
+        footprint.footprintPointAnnotation.title = footprintTextField.text
+        footprint.footprintPointAnnotation.subtitle = trackTextField.text
         
         delegate!.addFootprint(self)
         self.navigationController?.popViewControllerAnimated(true)

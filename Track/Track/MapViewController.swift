@@ -22,7 +22,6 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let photoPicker = UIImagePickerController()
     
     let userPointAnnotation = MKPointAnnotation()
-    var footprintArray = [Footprint]()
     var annotations = [MKPointAnnotation]()
     var selectedFootprint = Footprint()
     
@@ -40,19 +39,28 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         photoPicker.delegate = self
         
 //        FirebaseHelper.sharedInstance.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!)
-//        
 //        FirebaseHelper.sharedInstance.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!)
         
         let newAnnotation = MKPointAnnotation()
     
+        //test annotation
         var coordinate = CLLocationCoordinate2D()
         coordinate.latitude = 37.390749
         coordinate.longitude = -122.081651
         newAnnotation.coordinate = coordinate
         newAnnotation.title = "Acc Headquarters"
-        newAnnotation.subtitle = "Mel is here!"
+        newAnnotation.subtitle = "stuff is here!"
  
         annotations.append(newAnnotation)
+        
+    }
+    
+    func loadFootprintData(){
+        
+        //Parse JSON into Footprint
+        
+        //create a dictionary to store the annotationView Tag and Footprint
+        
         
     }
     
@@ -75,12 +83,11 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
        // let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
       //  mapView .setRegion(region, animated: true)
         
+        userPointAnnotation.coordinate = userLocation.coordinate
+        userPointAnnotation.title = "Where is Mel?"
+        userPointAnnotation.subtitle = "Mel is here!"
         
-//        userPointAnnotation.coordinate = userLocation.coordinate
-//        userPointAnnotation.title = "Where is Mel?"
-//        userPointAnnotation.subtitle = "Mel is here!"
-//        
-//        mapView.addAnnotation(userPointAnnotation)
+        mapView.addAnnotation(userPointAnnotation)
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -105,22 +112,20 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         }
         
         if let annotationView = annotationView {
+            
             // Configure your annotation view here
             annotationView.canShowCallout = true
+            //annotationView.tag
         }
         
         return annotationView
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-
         
-        let photoViewController = PhotoViewController()
-        photoViewController.delegate = self
-        photoViewController.footprint = selectedFootprint
-        presentViewController(photoViewController, animated: true, completion: nil)
-        
-        
+    
+        self.performSegueWithIdentifier("SetTrack", sender: nil)
+    
     }
     
     
@@ -168,17 +173,21 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        //set location coordinates for image
+        print(editingInfo.debugDescription)
+        
+        //set location coordinates for image to current location
         if let location = locationManager.location{
 
             selectedFootprint.footprintImage = image
             let annotation = MKPointAnnotation()
             annotation.coordinate = location.coordinate
-            selectedFootprint.userPointAnnotation = annotation
+            
+            //set the annotationTag for callout tapped
 
             
+            selectedFootprint.footprintPointAnnotation = annotation
+
         }
-        
 
         dismissViewControllerAnimated(true) { () -> Void  in
             
@@ -189,8 +198,8 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     // MARK: PhotoViewControllerDelegate
     func addFootprint(sender: PhotoViewController) {
-        //footprintArray.append(sender.footprint)
-        annotations.append(sender.footprint.userPointAnnotation)
+ 
+        annotations.append(sender.footprint.footprintPointAnnotation)
         mapView.removeAnnotations(annotations)
         mapView.addAnnotations(annotations)
     }
@@ -198,13 +207,13 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if(segue.identifier == "SetTrack"){
             
             let photoViewController:PhotoViewController = segue.destinationViewController as! PhotoViewController
             photoViewController.delegate = self
             photoViewController.footprint = selectedFootprint
-            
-            
+   
         }
 
     }
