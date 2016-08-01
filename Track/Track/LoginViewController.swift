@@ -75,44 +75,9 @@ class LoginViewController: UIViewController {
     
     @IBAction func signupButtonTouched(sender: AnyObject) {
         
-        //start activityIndicator on the main thread (UI stuff!)
-        self.loginActivityIndicator.startAnimating()
-        
         if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
             
-            FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-                
-                if let error = error {
-                    self.loginErrorMessage("Sign Up Error", message: error.localizedDescription)
-                    
-                    return
-                } else {
-                    
-                    //create database user entry
-                    let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
-                    FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
-                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
-                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
-                    
-                    // Store the uid
-                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
-                    
-                    self.loginActivityIndicator.stopAnimating()
-                    
-                    //move onto mapview
-                    //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
-                    if(self.isSet == false){
-                        self.isSet = true
-                    } else {
-                        self.isSet = false
-                    }
-                    
-                    //move onto mapview
-                    if(self.isSet == true){
-                        self.performSegueWithIdentifier("loginToMap", sender: nil)
-                    }
-                }
-            }
+            signUpUser(email, password: password)
         }
     }
 
@@ -137,9 +102,6 @@ class LoginViewController: UIViewController {
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
-                    // Store the uid
-                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
-                    
                     self.loginActivityIndicator.stopAnimating()
                     
                     //move onto mapview
@@ -153,8 +115,50 @@ class LoginViewController: UIViewController {
     }
     
     
-    // MARK: ## I've added this method (and a breakpoint here) to mark when I'm segueing away from this view.
-    // This should only happen once, of course...
+    func signUpUser(email: String,password: String){
+        
+        //start activityIndicator on the main thread (UI stuff!)
+        self.loginActivityIndicator.startAnimating()
+        
+        if let email = loginEmailTextField.text, password = loginPasswordTextField.text {
+            
+            FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
+                
+                if let error = error {
+                    self.loginErrorMessage("Sign Up Error", message: error.localizedDescription)
+                    
+                    return
+                } else {
+                    
+                    //create database user entry
+                    let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
+                    FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
+//                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
+//                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
+
+                    
+                    self.loginActivityIndicator.stopAnimating()
+                    
+                    //move onto mapview
+                    //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
+                    if(self.isSet == false){
+                        self.isSet = true
+                    } else {
+                        self.isSet = false
+                    }
+                    
+                    //move onto mapview
+                    if(self.isSet == true){
+                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
+    // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
