@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
 
     var userUID = String()
     var isSet = false
+    let firebaseHelper = FirebaseHelper.sharedInstance
     
     //The handler for the auth state listener, to allow cancelling later.
     var handle: FIRAuthStateDidChangeListenerHandle?
@@ -133,8 +134,8 @@ class LoginViewController: UIViewController {
                     //create database user entry
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
-//                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
-//                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
+                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
+                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
 
                     
                     self.loginActivityIndicator.stopAnimating()

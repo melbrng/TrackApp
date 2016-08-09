@@ -15,6 +15,7 @@ let STORAGE_URL = "gs://track-8f48d.appspot.com"
 
 class FirebaseHelper{
     
+    
     //singleton
     static let sharedInstance = FirebaseHelper()
     
@@ -24,6 +25,7 @@ class FirebaseHelper{
     var trackKey = String()
     
     var trackHandle: FIRDatabaseHandle?
+    var trackDict = [String: AnyObject]()
     
     //MARK: Database References
     
@@ -59,7 +61,6 @@ class FirebaseHelper{
     
     //MARK: Storage References
     
-
     
     
     //MARK: Queries
@@ -89,7 +90,7 @@ class FirebaseHelper{
         reference.observeEventType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
                 print("snapshot : " + String(snapshot.value))
-                
+                self.trackDict = snapshot.value as! [String : AnyObject]
                 
             }else{
                 print("No Snapshot?!")
@@ -144,12 +145,23 @@ class FirebaseHelper{
         
     }
     
+    func createNewTrack(uid: String, track: Dictionary<String,String>){
+        
+//        trackKey = TRACK_REF.childByAutoId().key
+//        let track = ["uid": trackKey,
+//                     "name": "name",
+//                     "desc": "desc"]
+        
+        TRACK_REF.child(uid).setValue(track)
+        
+    }
+    
     func createNewTrack(uid: String){
         
-        trackKey = TRACK_REF.childByAutoId().key
-        let track = ["uid": trackKey,
-                     "name": "name",
-                     "desc": "desc"]
+                trackKey = TRACK_REF.childByAutoId().key
+                let track = ["uid": trackKey,
+                             "name": "new name",
+                             "desc": "new desc"]
         
         TRACK_REF.child(uid).setValue(track)
         

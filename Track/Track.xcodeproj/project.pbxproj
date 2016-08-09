@@ -23,6 +23,13 @@
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
 		4369CB6E1D4FDFE10056463B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA11D3AEE0500CF0EDF /* LoginViewController.swift */; };
 		4369CB6F1D4FDFED0056463B /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
+		4369CB731D4FF22A0056463B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */; };
+		4369CB741D4FF25E0056463B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */; };
+		4369CB751D4FF2620056463B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA41D3C068700CF0EDF /* MapViewController.swift */; };
+		4369CB761D4FF2650056463B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
+		4369CB771D4FF2680056463B /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA71D3C08DA00CF0EDF /* Track.swift */; };
+		4369CB781D4FF26A0056463B /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
+		4369CB7B1D4FF4320056463B /* FirebaseHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369CB791D4FF4320056463B /* FirebaseHelperTests.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
 		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
 		43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
@@ -66,6 +73,7 @@
 		4339FFA71D3C08DA00CF0EDF /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4369CB791D4FF4320056463B /* FirebaseHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelperTests.swift; sourceTree = "<group>"; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		43D6EE621D418C6900A2DF31 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		43D6EE641D418C7900A2DF31 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
@@ -160,6 +168,7 @@
 			children = (
 				4339FF841D3AD07100CF0EDF /* TrackTests.swift */,
 				4339FF861D3AD07100CF0EDF /* Info.plist */,
+				4369CB791D4FF4320056463B /* FirebaseHelperTests.swift */,
 			);
 			path = TrackTests;
 			sourceTree = "<group>";
@@ -450,9 +459,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4369CB731D4FF22A0056463B /* AppDelegate.swift in Sources */,
+				4369CB751D4FF2620056463B /* MapViewController.swift in Sources */,
 				4369CB6E1D4FDFE10056463B /* LoginViewController.swift in Sources */,
+				4369CB771D4FF2680056463B /* Track.swift in Sources */,
 				4369CB6F1D4FDFED0056463B /* FirebaseHelper.swift in Sources */,
+				4369CB781D4FF26A0056463B /* Footprint.swift in Sources */,
+				4369CB7B1D4FF4320056463B /* FirebaseHelperTests.swift in Sources */,
 				4339FF851D3AD07100CF0EDF /* TrackTests.swift in Sources */,
+				4369CB741D4FF25E0056463B /* PhotoViewController.swift in Sources */,
+				4369CB761D4FF2650056463B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
