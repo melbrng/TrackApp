@@ -6,6 +6,7 @@
 //  Copyright © 2016 melbo. All rights reserved.
 //
 import UIKit
+import MapKit
 
 protocol PhotoViewControllerDelegate {
     func addFootprint(sender: PhotoViewController)
@@ -17,7 +18,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var trackTextField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
-    var footprint = Footprint()
+    //var footprint = Footprint()
+    var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
+    
     var delegate: PhotoViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -25,7 +28,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate {
         trackTextField.delegate = self
         footprintTextField.delegate = self
         
-        trackedImageView.image = footprint.footprintImage
+        trackedImageView.image = footprintAnnotation.image
+        trackTextField.text = footprintAnnotation.title
+        footprintTextField.text = footprintAnnotation.subtitle
         
     }
 
@@ -36,11 +41,29 @@ class PhotoViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func add(sender: AnyObject) {
         
-        footprint.footprintPointAnnotation.title = footprintTextField.text
-        footprint.footprintPointAnnotation.subtitle = trackTextField.text
+        footprintAnnotation.title = footprintTextField.text
+        footprintAnnotation.subtitle = trackTextField.text
         
-        delegate!.addFootprint(self)
-        self.navigationController?.popViewControllerAnimated(true)
+        //save the selected photo to the photolibrary
+        UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+
+    }
+    
+
+    
+    func imageSaved(image: UIImage!, didFinishSavingWithError error: NSError?, contextInfo: AnyObject?) {
+        if (error != nil) {
+            // error - add a alertview
+        } else {
+            
+            //save and get tag uid FootprintAnnotation
+            FirebaseHelper.sharedInstance.createNewFootprint(footprintAnnotation)
+            
+            //upon successful save, call delegate
+            delegate!.addFootprint(self)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     

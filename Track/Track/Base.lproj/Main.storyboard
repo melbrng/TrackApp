@@ -129,11 +129,11 @@
                         <viewControllerLayoutGuide type="top" id="nfW-e7-m9A"/>
                         <viewControllerLayoutGuide type="bottom" id="kwP-sp-OEX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="v4O-zf-Sxj">
+                    <view key="view" contentMode="scaleAspectFit" id="v4O-zf-Sxj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
                                 <rect key="frame" x="0.0" y="72" width="374" height="367"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">

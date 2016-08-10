@@ -12,10 +12,11 @@ import MapKit
 
 class Footprint {
     
-    var footprintImage = UIImage()
+    var track: String = ""
+    var tag: String = ""
     
-    //firebase will contain lat, lon, title, subtitle, tag for creation of annotation
-    var footprintPointAnnotation = MKPointAnnotation()
+    var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
+
     
     
 }

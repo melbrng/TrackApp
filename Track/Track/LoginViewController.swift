@@ -91,8 +91,6 @@ class LoginViewController: UIViewController {
                     //create database user entry
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
-                    FirebaseHelper.sharedInstance.createNewTrack((user?.uid)!)
-                    FirebaseHelper.sharedInstance.createNewFootprint((user?.uid)!)
                     
                     // Store the uid
                     //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
@@ -136,9 +134,6 @@ class LoginViewController: UIViewController {
                     //create database user entry
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
-                    
-                    // Store the uid
-                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
                     
                     self.loginActivityIndicator.stopAnimating()
                     
