@@ -13,6 +13,12 @@ import MapKit
 class Track {
     
     var image = UIImage()
-    var annotation = MKPointAnnotation()
+    var trackName: String
+    var trackDescription: String
+    
+    init(name: String, desc: String) {
+        self.trackName = name
+        self.trackDescription = desc
+    }
     
 }

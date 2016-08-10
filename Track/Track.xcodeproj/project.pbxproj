@@ -27,6 +27,7 @@
 		43B3CE481D5AB1D7003F5021 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE471D5AB1D7003F5021 /* orange.png */; };
 		43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE491D5AB1DB003F5021 /* purple.png */; };
 		43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE4B1D5AB1E1003F5021 /* red.png */; };
+		43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */; };
 		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
 		43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
 		4731291F9132531E6249FA70 /* Pods_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59BEE2B99F5A00C047E72B39 /* Pods_Track.framework */; };
@@ -75,6 +76,7 @@
 		43B3CE471D5AB1D7003F5021 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		43B3CE491D5AB1DB003F5021 /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		43B3CE4B1D5AB1E1003F5021 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrackViewController.swift; sourceTree = "<group>"; };
 		43D6EE621D418C6900A2DF31 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		43D6EE641D418C7900A2DF31 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		4572246DDB7546D07F17F310 /* Pods-Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */,
 				4339FFA11D3AEE0500CF0EDF /* LoginViewController.swift */,
 				4339FFA41D3C068700CF0EDF /* MapViewController.swift */,
+				43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */,
 				43D6EE631D418C6900A2DF31 /* User.swift in Sources */,
 				4339FFA51D3C068700CF0EDF /* MapViewController.swift in Sources */,
+				43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */,
 				4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */,
 				4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */,
 				43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */,

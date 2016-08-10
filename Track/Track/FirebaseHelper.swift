@@ -144,14 +144,14 @@ class FirebaseHelper{
         
     }
     
-    func createNewTrack(uid: String){
+    func createNewTrack(track: Track){
         
         trackKey = TRACK_REF.childByAutoId().key
         let track = ["uid": trackKey,
-                     "name": "name",
-                     "desc": "desc"]
+                     "name": track.trackName,
+                     "desc": track.trackDescription]
         
-        TRACK_REF.child(uid).setValue(track)
+        TRACK_REF.child(trackKey).setValue(track)
         
     }
     
