@@ -18,8 +18,12 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     @IBOutlet weak var trackTextField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
+    let firebaseHelper = FirebaseHelper.sharedInstance
+    
     var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var delegate: PhotoViewControllerDelegate?
+    
+    var toSaveTrackKey: String?
     
     //tableview picker for popover
     var tableViewPicker =  UITableView()
@@ -49,6 +53,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         footprintAnnotation.title = footprintTextField.text
         footprintAnnotation.subtitle = trackTextField.text
+        footprintAnnotation.trackGUID = toSaveTrackKey
+        
         
         //save the selected photo to the photolibrary
         UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -174,11 +180,14 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     func addTrack(sender: AddTrackViewController) {
         let x = sender.newTrack
-        items.append(x!)
+        items.append(x.trackName)
+        
+        
+        
+        trackTextField.text = x.trackName
+        toSaveTrackKey = firebaseHelper.trackKey
         
         tableViewPicker.reloadData()
-        
-        trackTextField.text = x
         
        
         

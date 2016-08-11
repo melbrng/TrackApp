@@ -15,17 +15,16 @@ protocol AddTrackViewControllerDelegate {
 class AddTrackViewController: UIViewController {
     
     var delegate: AddTrackViewControllerDelegate?
-    var newTrack:String?
+    var newTrack = Track(name: String(), desc: String())
 
     @IBOutlet weak var trackNameTextField: UITextField!
     @IBOutlet weak var trackDescriptionTextField: UITextField!
     
     @IBAction func saveTrack(sender: AnyObject) {
         
-        newTrack = trackNameTextField.text
-        let track = Track.init(name: trackNameTextField.text!, desc: trackDescriptionTextField.text!)
+        newTrack = Track.init(name: trackNameTextField.text!, desc: trackDescriptionTextField.text!)
 
-        FirebaseHelper.sharedInstance.createNewTrack(track)
+        FirebaseHelper.sharedInstance.createNewTrack(newTrack)
         
         //upon successful save, call delegate
         delegate?.addTrack(self)

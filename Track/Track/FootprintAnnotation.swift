@@ -14,6 +14,7 @@ class FootprintAnnotation: NSObject, MKAnnotation {
     var image: UIImage
     var title: String?
     var subtitle: String?
+    var trackGUID: String?
 
 
     init(coordinate: CLLocationCoordinate2D, image: UIImage) {

@@ -157,18 +157,17 @@ class FirebaseHelper{
     
     func createNewFootprint(footprintAnnotation: FootprintAnnotation){
         
+        let trackKey = footprintAnnotation.trackGUID
+        
         let footKey = FOOT_REF.child("tracks").childByAutoId().key
         
         let footprint : [String : AnyObject] = ["uid": footKey,
                          "latitude": String(footprintAnnotation.coordinate.latitude),
                          "longitude": String(footprintAnnotation.coordinate.longitude),
-                         "title": footprintAnnotation.title!,
-                         "subtitle": footprintAnnotation.subtitle!]
+                         "footprint": footprintAnnotation.title!,
+                         "track": footprintAnnotation.subtitle!]
         
-        if(trackKey.isEmpty){
-            trackKey = TRACK_REF.childByAutoId().key
-        }
-        let footUpdates = ["/\(footKey)/\(trackKey)/": footprint]
+        let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]
         
         FOOT_REF.updateChildValues(footUpdates)
 
