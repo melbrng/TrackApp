@@ -156,6 +156,7 @@
 				43B3CE491D5AB1DB003F5021 /* purple.png */,
 				43B3CE4B1D5AB1E1003F5021 /* red.png */,
 				43B3CE471D5AB1D7003F5021 /* orange.png */,
+				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
 				4339FFAB1D3C091200CF0EDF /* Controllers */,
 				4339FFAA1D3C090B00CF0EDF /* Models */,
 				4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */,
@@ -164,7 +165,6 @@
 				4339FF9D1D3AD0A200CF0EDF /* GoogleService-Info.plist */,
 				4339FF781D3AD07100CF0EDF /* LaunchScreen.storyboard */,
 				4339FF7B1D3AD07100CF0EDF /* Info.plist */,
-				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
 			);
 			path = Track;
 			sourceTree = "<group>";

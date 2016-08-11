@@ -12,13 +12,16 @@ protocol PhotoViewControllerDelegate {
     func addFootprint(sender: PhotoViewController)
 }
 
+let firebaseHelper = FirebaseHelper.sharedInstance
+
+
 class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var trackedImageView: UIImageView!
     @IBOutlet weak var trackTextField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
-    let firebaseHelper = FirebaseHelper.sharedInstance
+    
     
     var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var delegate: PhotoViewControllerDelegate?
@@ -27,7 +30,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     //tableview picker for popover
     var tableViewPicker =  UITableView()
-    var items: [String] = ["New Track","Viper", "X", "Games"]
+   // var items: [String] = ["New Track","Viper", "X", "Games"]
+    var trackItems = firebaseHelper.trackArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +40,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         
         trackedImageView.image = footprintAnnotation.image
-        trackTextField.text = footprintAnnotation.title
-        footprintTextField.text = footprintAnnotation.subtitle
+        trackTextField.text = footprintAnnotation.subtitle
+        footprintTextField.text = footprintAnnotation.title
         
         createTableViewPicker()
 
@@ -53,7 +57,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         footprintAnnotation.title = footprintTextField.text
         footprintAnnotation.subtitle = trackTextField.text
-        footprintAnnotation.trackGUID = toSaveTrackKey
+        footprintAnnotation.trackUID = toSaveTrackKey
         
         
         //save the selected photo to the photolibrary
@@ -105,21 +109,20 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return self.trackItems.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:UITableViewCell = tableViewPicker.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         
-        cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.text = self.trackItems[indexPath.row].trackName
         
         return cell
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell #\(indexPath.row)!")
         
         if(indexPath.row == 0){
             closeTable()
@@ -180,7 +183,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     func addTrack(sender: AddTrackViewController) {
         let x = sender.newTrack
-        items.append(x.trackName)
+       // items.append(x.trackName)
+        trackItems.append(sender.newTrack)
         
         
         

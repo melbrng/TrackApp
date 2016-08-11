@@ -15,10 +15,17 @@ class Track {
     var image = UIImage()
     var trackName: String
     var trackDescription: String
+    var trackUID: String?
     
     init(name: String, desc: String) {
         self.trackName = name
         self.trackDescription = desc
+    }
+    
+    init(name: String, desc: String, uid: String) {
+        self.trackName = name
+        self.trackDescription = desc
+        self.trackUID = uid
     }
     
 }

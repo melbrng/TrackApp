@@ -25,6 +25,8 @@ class FirebaseHelper{
     
     var trackHandle: FIRDatabaseHandle?
     
+    let currentUserUID = FIRAuth.auth()!.currentUser?.uid
+    
     //MARK: Database References
     
     private var _BASE_REF = FIRDatabase.database().referenceFromURL(BASE_URL)
@@ -61,6 +63,9 @@ class FirebaseHelper{
     
 
     
+    //MARK: Data
+    
+    var trackArray = [Track]()
     
     //MARK: Queries
     
@@ -71,8 +76,10 @@ class FirebaseHelper{
         
         reference.observeEventType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
-                print("snapshot : " + String(snapshot.value))
-                
+                //print("snapshot : " + String(snapshot.value))
+                print(snapshot.value?.objectForKey("email"))
+                print(snapshot.value?.objectForKey("provider"))
+                print(snapshot.value?.objectForKey("username"))
                 
             }else{
                 print("No Snapshot?!")
@@ -90,7 +97,15 @@ class FirebaseHelper{
             if (snapshot.exists()) {
                 print("snapshot : " + String(snapshot.value))
                 
-                
+                for x in snapshot.children{
+                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("uid") as! String)
+//                print(x.value?.objectForKey("desc"))
+//                print(x.value?.objectForKey("name"))
+//                print(x.value?.objectForKey("uid"))
+                    
+                    self.trackArray.append(track)
+                    
+                }
             }else{
                 print("No Snapshot?!")
             }
@@ -127,6 +142,8 @@ class FirebaseHelper{
             if (snapshot.exists()) {
                 print("snapshot : " + String(snapshot.value))
                 
+               
+                
                 
             }else{
                 print("No Snapshot?!")
@@ -151,13 +168,19 @@ class FirebaseHelper{
                      "name": track.trackName,
                      "desc": track.trackDescription]
         
-        TRACK_REF.child(trackKey).setValue(track)
+        let trackPath = "/" + currentUserUID! + "/" + trackKey + "/"
+        
+        TRACK_REF.child(trackPath).setValue(track)
+        
+        //TRACK_REF.child(trackKey).setValue(track)
+        
+        //TRACK_REF.childByAutoId().setValue(track)
         
     }
     
     func createNewFootprint(footprintAnnotation: FootprintAnnotation){
         
-        let trackKey = footprintAnnotation.trackGUID
+        let trackKey = footprintAnnotation.trackUID
         
         let footKey = FOOT_REF.child("tracks").childByAutoId().key
         
@@ -167,9 +190,14 @@ class FirebaseHelper{
                          "footprint": footprintAnnotation.title!,
                          "track": footprintAnnotation.subtitle!]
         
-        let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]
+        //this is for updating  not insertion
+        //let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]
+        //FOOT_REF.updateChildValues(footUpdates)
         
-        FOOT_REF.updateChildValues(footUpdates)
+        //inserting
+        let trackPath = "/" + currentUserUID! + "/" + trackKey! + "/"
+        let footprintPath = trackPath + footKey + "/"
+        FOOT_REF.child(footprintPath).setValue(footprint)
 
         
     }
