@@ -19,13 +19,14 @@ class FirebaseHelper{
     //singleton
     static let sharedInstance = FirebaseHelper()
     
+    //completion handler
+    typealias CompletionHandler = (success:Bool) -> Void
+    
     //override init so noone else can
     private init() {}
     
     var trackKey = String()
-    
     var trackHandle: FIRDatabaseHandle?
-    
     let currentUserUID = FIRAuth.auth()!.currentUser?.uid
     
     //MARK: Database References
@@ -64,14 +65,13 @@ class FirebaseHelper{
     
 
     
-    //MARK: Data
+    //MARK: Data Arrays
     
     var trackArray = [Track]()
     let defaultTrack = Track(name: "Add New Track", desc: "Default track")
-    
     var footprintArray = [FootprintAnnotation]()
     
-    //MARK: Queries
+    //MARK: Query Users
     
     //query user by uid
     func queryUserByUid(uid: String){
@@ -80,7 +80,7 @@ class FirebaseHelper{
         
         reference.observeEventType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
-                //print("snapshot : " + String(snapshot.value))
+    
                 print(snapshot.value?.objectForKey("email"))
                 print(snapshot.value?.objectForKey("provider"))
                 print(snapshot.value?.objectForKey("username"))
@@ -92,8 +92,8 @@ class FirebaseHelper{
         
     }
     
-    //query tracks by uid
-    func queryTracksByUid(uid: String){
+    //MARK: Query Tracks
+    func queryTracksByUid(uid: String, completion: CompletionHandler){
         
         let reference = TRACK_REF.child("\(uid)/")
         
@@ -111,15 +111,18 @@ class FirebaseHelper{
                     
                 }
                 
-                print("done retrieving tracks")
             }else{
                 print("No Snapshot?!")
             }
         })
         
+        
+        let flag = true
+        completion(success: flag)
+        
     }
     
-    typealias CompletionHandler = (success:Bool) -> Void
+   
     
     //query tracks by uid
     func queryTracksByUidAndListen(uid: String, completion: CompletionHandler){
@@ -131,6 +134,7 @@ class FirebaseHelper{
                 
                 //recreate array for every load
                 self.trackArray = [Track]()
+                
                 //add the "Add New Track" track
                 self.trackArray.append(self.defaultTrack)
                 
@@ -140,8 +144,7 @@ class FirebaseHelper{
                     self.trackArray.append(track)
                     
                 }
-                
-                print("done retrieving tracks")
+
             }else{
                 print("No Snapshot?!")
             }
@@ -164,8 +167,7 @@ class FirebaseHelper{
                     self.trackArray.append(track)
                     
                 }
-                
-                print(" retrieved ")
+
             }else{
                 print("No Snapshot?!")
             }
@@ -173,8 +175,18 @@ class FirebaseHelper{
         
     }
     
+    //not sure if need this
+    func queryForRemovedTracks(){
+        
+        // Listen for deleted tracks
+        TRACK_REF.observeEventType(.ChildRemoved, withBlock: { (snapshot) -> Void in
+            //            let index = self.indexOfMessage(snapshot)
+            //            self.comments.removeAtIndex(index)
+            //            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        })
+    }
     
-    //query footprints by uid
+    //MARK: Query Footprints
     func queryFootprintsByUid(uid: String, completion: CompletionHandler){
         
         let reference = FOOT_REF.child("\(uid)/")
@@ -215,15 +227,7 @@ class FirebaseHelper{
     
 
     
-    func queryForRemovedTracks(){
-        
-        // Listen for deleted tracks
-        TRACK_REF.observeEventType(.ChildRemoved, withBlock: { (snapshot) -> Void in
-            //            let index = self.indexOfMessage(snapshot)
-            //            self.comments.removeAtIndex(index)
-            //            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
-        })
-    }
+
     
     //MARK: Create
     

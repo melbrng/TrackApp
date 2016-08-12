@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
         loginPasswordTextField.secureTextEntry = true
         
         //monitor the user authentication state and present mapview is user is already logged in
+        
         handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
             if let user = user {
                 print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
@@ -42,19 +43,26 @@ class LoginViewController: UIViewController {
                 
                 //move onto mapview
                 if(self.isSet == true){
-                    
-                  //  firebaseHelper.queryTracksByUidAndListen((FIRAuth.auth()?.currentUser?.uid)!)
+
                    
-                    firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
                             if success{
-                                print("download success")
-                                self.performSegueWithIdentifier("loginToMap", sender: nil)
-                            } else {
+                                print("tracks downloaded successfully")
                                 
+                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                                    if success{
+                                        
+                                        print("footprints downloaded successfully")
+                                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                                        
+                                    } else {
+                                        print("footprints download failed")
+                                    }
+                                })
+                            } else {
+                               print("tracks download failed") 
                             }
                         })
-                    
-                    
                 }
                 
             } else {
@@ -69,8 +77,8 @@ class LoginViewController: UIViewController {
 
     }
     
+    // logout when we unwind back to LoginVC
     @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
-        // logout when we unwind back to LoginVC
         
         try! FIRAuth.auth()!.signOut()
     }
@@ -161,15 +169,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    
-    // MARK: ## I've added this method (and a breakpoint here) to mark when I'm segueing away from this view.
-    // This should only happen once, of course...
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
-    }
-    
-    
     func loginErrorMessage(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -177,5 +176,14 @@ class LoginViewController: UIViewController {
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
+    // MARK: Segue
+    // This should only happen once, of course...
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
+    }
+
 
 }

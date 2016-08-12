@@ -198,7 +198,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         trackTextField.text = x.trackName
         toSaveTrackKey = firebaseHelper.trackKey
-       //  firebaseHelper.listenForNewTracks()
+        firebaseHelper.listenForNewTracks()
        // tableViewPicker.reloadData()
         
        

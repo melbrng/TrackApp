@@ -12,6 +12,7 @@ protocol AddTrackViewControllerDelegate {
     func addTrack(sender: AddTrackViewController)
 }
 
+
 class AddTrackViewController: UIViewController {
     
     var delegate: AddTrackViewControllerDelegate?
@@ -28,10 +29,7 @@ class AddTrackViewController: UIViewController {
         
         //upon successful save, call delegate
         delegate?.addTrack(self)
-        
-
-        
-        
+    
         self.navigationController?.popViewControllerAnimated(true)
         
     }
