@@ -25,9 +25,10 @@ class FirebaseHelper{
     //override init so noone else can
     private init() {}
     
-    var trackKey = String()
+    var trackUID = String()
     var trackHandle: FIRDatabaseHandle?
     let currentUserUID = FIRAuth.auth()!.currentUser?.uid
+    var testDataLoad:Bool?
     
     //MARK: Database References
     
@@ -70,6 +71,21 @@ class FirebaseHelper{
     var trackArray = [Track]()
     let defaultTrack = Track(name: "Add New Track", desc: "Default track")
     var footprintArray = [FootprintAnnotation]()
+    
+    //test data load
+    func loadTestData(load: Bool, completion: CompletionHandler){
+        
+        testDataLoad = load
+        
+        if(load){
+    
+            let testData = TestData()
+            testData.loadData()
+        }
+        
+        let flag = true
+        completion(success: flag)
+    }
     
     //MARK: Query Users
     
@@ -240,12 +256,13 @@ class FirebaseHelper{
     
     func createNewTrack(track: Track){
         
-        trackKey = TRACK_REF.childByAutoId().key
-        let track = ["trackUID": trackKey,
+        trackUID = TRACK_REF.childByAutoId().key
+        
+        let track = ["trackUID": trackUID,
                      "name": track.trackName,
                      "desc": track.trackDescription]
         
-        let trackPath = "/" + currentUserUID! + "/" + trackKey + "/"
+        let trackPath = "/" + currentUserUID! + "/" + trackUID + "/"
         
         TRACK_REF.child(trackPath).setValue(track)
         
@@ -257,26 +274,40 @@ class FirebaseHelper{
     
     func createNewFootprint(footprintAnnotation: FootprintAnnotation){
         
-        let trackKey = footprintAnnotation.trackUID
+        var footprintTrackUID: String
+        let footUID = FOOT_REF.child("tracks").childByAutoId().key
+        var footprint : [String : AnyObject]
         
-        let footKey = FOOT_REF.child("tracks").childByAutoId().key
+        if(testDataLoad!){
+            footprintTrackUID = trackUID
+            
+             footprint = ["footUID": footUID,
+                        "latitude": String(footprintAnnotation.coordinate.latitude),
+                        "longitude": String(footprintAnnotation.coordinate.longitude),
+                        "title": footprintAnnotation.title!,
+                        "subtitle": "Test Track",
+                        "trackUID": footprintTrackUID]
+        } else {
+            footprintTrackUID = footprintAnnotation.trackUID!
+            
+            footprint = ["footUID": footUID,
+                        "latitude": String(footprintAnnotation.coordinate.latitude),
+                        "longitude": String(footprintAnnotation.coordinate.longitude),
+                        "title": footprintAnnotation.title!,
+                        "subtitle": footprintAnnotation.subtitle!,
+                        "trackUID": footprintTrackUID]
+        }
         
-        let footprint : [String : AnyObject] = ["footUID": footKey,
-                         "latitude": String(footprintAnnotation.coordinate.latitude),
-                         "longitude": String(footprintAnnotation.coordinate.longitude),
-                         "title": footprintAnnotation.title!,
-                         "subtitle": footprintAnnotation.subtitle!,
-                         "trackUID": footprintAnnotation.trackUID!]
+    
+        //inserting
+        let trackPath = "/" + currentUserUID! + "/" + footprintTrackUID + "/"
+        let footprintPath = trackPath + footUID + "/"
+        
+        FOOT_REF.child(footprintPath).setValue(footprint)
         
         //this is for updating  not insertion
         //let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]
         //FOOT_REF.updateChildValues(footUpdates)
-        
-        //inserting
-        let trackPath = "/" + currentUserUID! + "/" + trackKey! + "/"
-        let footprintPath = trackPath + footKey + "/"
-        FOOT_REF.child(footprintPath).setValue(footprint)
-
         
     }
     

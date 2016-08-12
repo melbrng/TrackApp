@@ -190,18 +190,13 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     //MARK: Add Track Delegate
     
     func addTrack(sender: AddTrackViewController) {
-        let x = sender.newTrack
-       // items.append(x.trackName)
-        //trackItems.append(sender.newTrack)
         
+        let newTrack = sender.newTrack
+        trackTextField.text = newTrack.trackName
+        toSaveTrackKey = firebaseHelper.trackUID
         
-        
-        trackTextField.text = x.trackName
-        toSaveTrackKey = firebaseHelper.trackKey
         firebaseHelper.listenForNewTracks()
-       // tableViewPicker.reloadData()
-        
-       
+
         
     }
     

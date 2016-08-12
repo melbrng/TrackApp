@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2BD81FAB4777EEB16852F1D8 /* Pods_TrackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AD9808B5BCD493EEA51632 /* Pods_TrackTests.framework */; };
+		432B10721D5E7C22002111DD /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432B10711D5E7C22002111DD /* TestData.swift */; };
 		4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */; };
 		4339FF751D3AD07100CF0EDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4339FF731D3AD07100CF0EDF /* Main.storyboard */; };
 		4339FF771D3AD07100CF0EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4339FF761D3AD07100CF0EDF /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		432B10711D5E7C22002111DD /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		4339FF6C1D3AD07100CF0EDF /* Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Track.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4339FF741D3AD07100CF0EDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				4339FFA71D3C08DA00CF0EDF /* Track.swift */,
 				43D6EE641D418C7900A2DF31 /* Footprint.swift */,
 				43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */,
+				432B10711D5E7C22002111DD /* TestData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */,
+				432B10721D5E7C22002111DD /* TestData.swift in Sources */,
 				43B3CE441D5A8106003F5021 /* FootprintAnnotation.swift in Sources */,
 				4339FFA21D3AEE0500CF0EDF /* LoginViewController.swift in Sources */,
 				4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */,

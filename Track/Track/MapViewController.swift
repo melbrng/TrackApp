@@ -11,26 +11,23 @@ import MapKit
 import Firebase
 
 
-
-
 class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoViewControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    
     
     let locationManager = CLLocationManager()
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
     var annotations = [FootprintAnnotation]()
-    
     var selectedFootprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
-    
     var viewFootprints = [String : Footprint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+
         //must ask for permission to use location services
         //below combined with setting the NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys in info.plist
         locationManager.delegate = self
@@ -42,41 +39,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         photoPicker.delegate = self
         
         annotations = firebaseHelper.footprintArray
-        print("footprintArray: " + String(firebaseHelper.footprintArray.count))
-        
-        //test annotations
-        var coordinate = CLLocationCoordinate2D()
-        coordinate.latitude = 37.390749
-        coordinate.longitude = -122.081651
-        let newAnnotation = FootprintAnnotation(coordinate: coordinate, image: UIImage())
-        newAnnotation.title = "Acc Headquarters"
-        newAnnotation.subtitle = "stuff is here!"
-        newAnnotation.image = UIImage.init(imageLiteral: "blue.png")
- 
-        annotations.append(newAnnotation)
-        
-        //test annotation
-        var coordinateA = CLLocationCoordinate2D()
-        coordinateA.latitude = 47.390749
-        coordinateA.longitude = -102.081651
-        let newAnnotationA = FootprintAnnotation(coordinate: coordinateA, image: UIImage())
-        newAnnotationA.title = "A Headquarters"
-        newAnnotationA.subtitle = "chocolate"
-        newAnnotationA.image = UIImage.init(imageLiteral: "red.png")
-        
-        annotations.append(newAnnotationA)
-        
-        //test annotation
-        var coordinateB = CLLocationCoordinate2D()
-        coordinateB.latitude = 45.390749
-        coordinateB.longitude = -103.081651
-        let newAnnotationB = FootprintAnnotation(coordinate: coordinateB, image: UIImage())
-        newAnnotationB.title = "Purple Pie"
-        newAnnotationB.subtitle = "tequila"
-        newAnnotationB.image = UIImage.init(imageLiteral: "purple.png")
-        
-        annotations.append(newAnnotationB)
-        
+    
         mapView.addAnnotations(annotations)
         
     }

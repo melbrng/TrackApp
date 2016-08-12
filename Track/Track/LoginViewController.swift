@@ -26,6 +26,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //loads test data
+        firebaseHelper.loadTestData(true, completion: { (success) -> Void in
+            if success{
+                print("test data loaded successfully")
+            } else {
+                print("test data load failed")
+            }
+        })
+        
+        
         loginPasswordTextField.secureTextEntry = true
         
         //monitor the user authentication state and present mapview is user is already logged in
