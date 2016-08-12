@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import MapKit
 
 
 let BASE_URL = "https://track-8f48d.firebaseio.com"
@@ -66,6 +67,9 @@ class FirebaseHelper{
     //MARK: Data
     
     var trackArray = [Track]()
+    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
+    
+    var footprintArray = [FootprintAnnotation]()
     
     //MARK: Queries
     
@@ -93,63 +97,132 @@ class FirebaseHelper{
         
         let reference = TRACK_REF.child("\(uid)/")
         
-        reference.observeEventType(.Value, withBlock: { snapshot in
+        self.trackArray = [Track]()
+        //add the "Add New Track" track
+        self.trackArray.append(self.defaultTrack)
+        
+        reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
-                print("snapshot : " + String(snapshot.value))
-                
+            
                 for x in snapshot.children{
-                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("uid") as! String)
-//                print(x.value?.objectForKey("desc"))
-//                print(x.value?.objectForKey("name"))
-//                print(x.value?.objectForKey("uid"))
+                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
                     
                     self.trackArray.append(track)
                     
                 }
+                
+                print("done retrieving tracks")
             }else{
                 print("No Snapshot?!")
             }
         })
+        
+    }
+    
+    typealias CompletionHandler = (success:Bool) -> Void
+    
+    //query tracks by uid
+    func queryTracksByUidAndListen(uid: String, completion: CompletionHandler){
+        
+        let reference = TRACK_REF.child("\(uid)/")
+    
+        reference.observeEventType(.Value, withBlock: { snapshot in
+            if (snapshot.exists()) {
+                
+                //recreate array for every load
+                self.trackArray = [Track]()
+                //add the "Add New Track" track
+                self.trackArray.append(self.defaultTrack)
+                
+                for x in snapshot.children{
+                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
+                    
+                    self.trackArray.append(track)
+                    
+                }
+                
+                print("done retrieving tracks")
+            }else{
+                print("No Snapshot?!")
+            }
+        })
+        
+        let flag = true
+        completion(success: flag)
         
     }
     
     func listenForNewTracks() {
         
         // Listen for new tracks
-        trackHandle = TRACK_REF.observeEventType(.ChildAdded, withBlock: { (snapshot) -> Void in
- //           self.comments.append(snapshot)
-//            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.comments.count-1, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
-        })
-        
-    }
-    
-    func queryForRemovedTracks(){
-        
-    // Listen for deleted tracks
-        TRACK_REF.observeEventType(.ChildRemoved, withBlock: { (snapshot) -> Void in
-//            let index = self.indexOfMessage(snapshot)
-//            self.comments.removeAtIndex(index)
-//            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
-        })
-    }
-    
-    //query footprints by uid
-    func queryFootprintsByUid(uid: String){
-        
-        let reference = FOOT_REF.child("\(uid)/")
-        
-        reference.observeEventType(.Value, withBlock: { snapshot in
+        trackHandle = TRACK_REF.observeEventType(.ChildAdded, withBlock: { snapshot in
             if (snapshot.exists()) {
-                print("snapshot : " + String(snapshot.value))
                 
-               
+                for x in snapshot.children{
+                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
+                    
+                    self.trackArray.append(track)
+                    
+                }
                 
-                
+                print(" retrieved ")
             }else{
                 print("No Snapshot?!")
             }
         })
         
+    }
+    
+    
+    //query footprints by uid
+    func queryFootprintsByUid(uid: String, completion: CompletionHandler){
+        
+        let reference = FOOT_REF.child("\(uid)/")
+        
+        reference.observeSingleEventOfType (.Value, withBlock: { snapshot in
+            if (snapshot.exists()) {
+                
+                self.footprintArray = [FootprintAnnotation]()
+                for track in snapshot.children {
+                    
+                    for footprint in track.children {
+                        
+                        var coordinate = CLLocationCoordinate2D()
+                        coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
+                        coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
+                            
+                        let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                            footUID: footprint.value?.objectForKey("footUID") as! String,
+                            title: footprint.value?.objectForKey("title") as! String,
+                            subtitle: footprint.value?.objectForKey("subtitle") as! String)
+                        
+                        self.footprintArray.append(footprintAnnotation)
+                    }
+                   
+                }
+                
+              print(self.footprintArray.count)
+                let flag = true
+                completion(success: flag)
+                
+            }else{
+                print("No Snapshot?!")
+            }
+        })
+    
+        
+    }
+    
+
+    
+    func queryForRemovedTracks(){
+        
+        // Listen for deleted tracks
+        TRACK_REF.observeEventType(.ChildRemoved, withBlock: { (snapshot) -> Void in
+            //            let index = self.indexOfMessage(snapshot)
+            //            self.comments.removeAtIndex(index)
+            //            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        })
     }
     
     //MARK: Create
@@ -164,7 +237,7 @@ class FirebaseHelper{
     func createNewTrack(track: Track){
         
         trackKey = TRACK_REF.childByAutoId().key
-        let track = ["uid": trackKey,
+        let track = ["trackUID": trackKey,
                      "name": track.trackName,
                      "desc": track.trackDescription]
         
@@ -184,11 +257,12 @@ class FirebaseHelper{
         
         let footKey = FOOT_REF.child("tracks").childByAutoId().key
         
-        let footprint : [String : AnyObject] = ["uid": footKey,
+        let footprint : [String : AnyObject] = ["footUID": footKey,
                          "latitude": String(footprintAnnotation.coordinate.latitude),
                          "longitude": String(footprintAnnotation.coordinate.longitude),
-                         "footprint": footprintAnnotation.title!,
-                         "track": footprintAnnotation.subtitle!]
+                         "title": footprintAnnotation.title!,
+                         "subtitle": footprintAnnotation.subtitle!,
+                         "trackUID": footprintAnnotation.trackUID!]
         
         //this is for updating  not insertion
         //let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]

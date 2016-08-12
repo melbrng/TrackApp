@@ -21,14 +21,15 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
-    let userPointAnnotation = MKPointAnnotation()
     var annotations = [FootprintAnnotation]()
+    
     var selectedFootprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
     
     var viewFootprints = [String : Footprint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //must ask for permission to use location services
         //below combined with setting the NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys in info.plist
@@ -40,9 +41,8 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
-        FirebaseHelper.sharedInstance.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!)
-        //FirebaseHelper.sharedInstance.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!)
-        FirebaseHelper.sharedInstance.queryUserByUid((FIRAuth.auth()?.currentUser?.uid)!)
+        annotations = firebaseHelper.footprintArray
+        print("footprintArray: " + String(firebaseHelper.footprintArray.count))
         
         //test annotations
         var coordinate = CLLocationCoordinate2D()
@@ -81,12 +81,12 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
     }
     
-    func loadFootprintData(){
+
+    override func viewDidAppear(animated: Bool) {
         
-        //Parse JSON into Footprint
+        super.viewDidAppear(true)
         
-        //create a dictionary to store the annotationView Tag and Footprint
-        
+
         
     }
     

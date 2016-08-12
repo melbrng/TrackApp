@@ -28,12 +28,17 @@ class AddTrackViewController: UIViewController {
         
         //upon successful save, call delegate
         delegate?.addTrack(self)
+        
+
+        
+        
         self.navigationController?.popViewControllerAnimated(true)
         
     }
     
     @IBAction func cancelSaveTrack(sender: AnyObject) {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+
     }
 }

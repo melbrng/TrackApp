@@ -12,7 +12,7 @@ protocol PhotoViewControllerDelegate {
     func addFootprint(sender: PhotoViewController)
 }
 
-let firebaseHelper = FirebaseHelper.sharedInstance
+
 
 
 class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -30,11 +30,12 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     //tableview picker for popover
     var tableViewPicker =  UITableView()
-   // var items: [String] = ["New Track","Viper", "X", "Games"]
     var trackItems = firebaseHelper.trackArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("trackArray: " + String(firebaseHelper.trackArray.count))
         trackTextField.delegate = self
         footprintTextField.delegate = self
         
@@ -45,6 +46,13 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         createTableViewPicker()
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        trackItems = firebaseHelper.trackArray
+        tableViewPicker.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +69,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         
         //save the selected photo to the photolibrary
-        UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image!, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     func imageSaved(image: UIImage!, didFinishSavingWithError error: NSError?, contextInfo: AnyObject?) {
@@ -184,14 +192,14 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     func addTrack(sender: AddTrackViewController) {
         let x = sender.newTrack
        // items.append(x.trackName)
-        trackItems.append(sender.newTrack)
+        //trackItems.append(sender.newTrack)
         
         
         
         trackTextField.text = x.trackName
         toSaveTrackKey = firebaseHelper.trackKey
-        
-        tableViewPicker.reloadData()
+       //  firebaseHelper.listenForNewTracks()
+       // tableViewPicker.reloadData()
         
        
         

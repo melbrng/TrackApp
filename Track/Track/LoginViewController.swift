@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+let firebaseHelper = FirebaseHelper.sharedInstance
+
 class LoginViewController: UIViewController {
 
     var userUID = String()
@@ -40,7 +42,19 @@ class LoginViewController: UIViewController {
                 
                 //move onto mapview
                 if(self.isSet == true){
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    
+                  //  firebaseHelper.queryTracksByUidAndListen((FIRAuth.auth()?.currentUser?.uid)!)
+                   
+                    firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                            if success{
+                                print("download success")
+                                self.performSegueWithIdentifier("loginToMap", sender: nil)
+                            } else {
+                                
+                            }
+                        })
+                    
+                    
                 }
                 
             } else {
