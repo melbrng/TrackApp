@@ -140,53 +140,33 @@ class FirebaseHelper{
     
    
     
-    //query tracks by uid
-    func queryTracksByUidAndListen(uid: String, completion: CompletionHandler){
+    func listenForNewTracks(uid: String) {
         
         let reference = TRACK_REF.child("\(uid)/")
-    
-        reference.observeEventType(.Value, withBlock: { snapshot in
-            if (snapshot.exists()) {
-                
-                //recreate array for every load
-                self.trackArray = [Track]()
-                
-                //add the "Add New Track" track
-                self.trackArray.append(self.defaultTrack)
-                
-                for x in snapshot.children{
-                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
-                    
-                    self.trackArray.append(track)
-                    
-                }
-
-            }else{
-                print("No Snapshot?!")
-            }
-        })
-        
-        let flag = true
-        completion(success: flag)
-        
-    }
-    
-    func listenForNewTracks() {
         
         // Listen for new tracks
-        trackHandle = TRACK_REF.observeEventType(.ChildAdded, withBlock: { snapshot in
+        reference.queryLimitedToLast(1)
+        trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
             if (snapshot.exists()) {
+               
+//                self.trackArray = [Track]()
+//                //add the "Add New Track" track
+//                self.trackArray.append(self.defaultTrack)
+
+                print("childrenCount " + String(snapshot.childrenCount))
                 
-                for x in snapshot.children{
-                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
+                print(snapshot)
+                
+                    let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String)
                     
                     self.trackArray.append(track)
-                    
-                }
+                
 
-            }else{
+            } else {
                 print("No Snapshot?!")
             }
+            
+            print(self.trackArray.count)
         })
         
     }
@@ -229,7 +209,7 @@ class FirebaseHelper{
                    
                 }
                 
-              print(self.footprintArray.count)
+                print(self.footprintArray.count)
                 let flag = true
                 completion(success: flag)
                 
@@ -242,7 +222,42 @@ class FirebaseHelper{
     }
     
 
-    
+    func listenForNewFootprints(uid: String, completion: CompletionHandler) {
+        
+        let reference = FOOT_REF.child("\(uid)/")
+        
+        // Listen for new tracks
+        trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
+            if (snapshot.exists()) {
+                
+                //self.footprintArray = [FootprintAnnotation]()
+                        
+                    for track in snapshot.children {
+                        
+                        for footprint in track.children {
+                            
+                            var coordinate = CLLocationCoordinate2D()
+                            coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
+                            coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
+                            
+                            let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                                footUID: footprint.value?.objectForKey("footUID") as! String,
+                                title: footprint.value?.objectForKey("title") as! String,
+                                subtitle: footprint.value?.objectForKey("subtitle") as! String)
+                            
+                            self.footprintArray.append(footprintAnnotation)
+                        }
+                }
+                    
+                let flag = true
+                completion(success: flag)
+                
+            } else {
+                print("No Snapshot?!")
+            }
+        })
+        
+    }
 
     
     //MARK: Create

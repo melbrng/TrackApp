@@ -38,8 +38,22 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
+//        firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+//            if success{
+//
+//                print("footprints downloaded successfully")
+//                self.annotations = firebaseHelper.footprintArray
+//                
+//                self.mapView.addAnnotations(self.annotations)
+//
+//
+//            } else {
+//                print("footprints download failed")
+//            }
+//        })
+        
         annotations = firebaseHelper.footprintArray
-    
+        
         mapView.addAnnotations(annotations)
         
     }
@@ -190,7 +204,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
         
         //reload annotations
-        annotations.append(sender.footprintAnnotation)
+        //annotations.append(sender.footprintAnnotation)
         mapView.removeAnnotations(annotations)
         mapView.addAnnotations(annotations)
         

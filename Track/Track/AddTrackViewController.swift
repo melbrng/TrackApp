@@ -17,9 +17,17 @@ class AddTrackViewController: UIViewController {
     
     var delegate: AddTrackViewControllerDelegate?
     var newTrack = Track(name: String(), desc: String())
+    var trackProfileImage = UIImage()
 
     @IBOutlet weak var trackNameTextField: UITextField!
     @IBOutlet weak var trackDescriptionTextField: UITextField!
+    @IBOutlet weak var trackImageView: UIImageView!
+    
+    
+    override func viewDidLoad() {
+        
+        trackImageView.image = trackProfileImage
+    }
     
     @IBAction func saveTrack(sender: AnyObject) {
         

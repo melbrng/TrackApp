@@ -27,12 +27,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         //loads test data
-        firebaseHelper.loadTestData(true, completion: { (success) -> Void in
-            if success{
-                print("test data loaded successfully")
-            } else {
-                print("test data load failed")
-            }
+        firebaseHelper.loadTestData(false, completion: { (success) -> Void in
         })
         
         
@@ -53,26 +48,25 @@ class LoginViewController: UIViewController {
                 
                 //move onto mapview
                 if(self.isSet == true){
-
-                   
-                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
-                            if success{
-                                print("tracks downloaded successfully")
-                                
+                    
+//                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+//                            if success{
+//                                print("tracks downloaded successfully")
+                    
                                 firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
                                     if success{
                                         
                                         print("footprints downloaded successfully")
-                                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                                         self.performSegueWithIdentifier("loginToMap", sender: nil)
                                         
                                     } else {
                                         print("footprints download failed")
                                     }
                                 })
-                            } else {
-                               print("tracks download failed") 
-                            }
-                        })
+//                            } else {
+//                               print("tracks download failed") 
+//                            }
+//                        })
                 }
                 
             } else {

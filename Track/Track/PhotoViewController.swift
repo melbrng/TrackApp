@@ -7,6 +7,8 @@
 //
 import UIKit
 import MapKit
+import FirebaseDatabase
+
 
 protocol PhotoViewControllerDelegate {
     func addFootprint(sender: PhotoViewController)
@@ -21,8 +23,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     @IBOutlet weak var trackTextField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
-    
-    
     var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var delegate: PhotoViewControllerDelegate?
     
@@ -32,27 +32,49 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     var tableViewPicker =  UITableView()
     var trackItems = firebaseHelper.trackArray
     
+    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("trackArray: " + String(firebaseHelper.trackArray.count))
         trackTextField.delegate = self
         footprintTextField.delegate = self
-        
         
         trackedImageView.image = footprintAnnotation.image
         trackTextField.text = footprintAnnotation.subtitle
         footprintTextField.text = footprintAnnotation.title
         
-        createTableViewPicker()
+        self.createTableViewPicker()
+
+        
+       
 
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
+
+        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
+        self.trackItems = [Track]()
+        self.trackItems.append(self.defaultTrack)
+        // Listen for new tracks
+        reference.observeEventType(.ChildAdded, withBlock: { snapshot in
+
+            if (snapshot.exists()) {
+
+                    let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String)
+                    self.trackItems.append(track)
+                
+                
+            } else {
+                print("No Snapshot?!")
+            }
+            
+            self.tableViewPicker.reloadData()
+        })
         
-        trackItems = firebaseHelper.trackArray
-        tableViewPicker.reloadData()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -182,6 +204,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         if(segue.identifier == "CreateNewTrack"){
             
             let addTrackViewController:AddTrackViewController = segue.destinationViewController as! AddTrackViewController
+            addTrackViewController.trackProfileImage = footprintAnnotation.image!
             addTrackViewController.delegate = self
             
         }
@@ -195,7 +218,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         trackTextField.text = newTrack.trackName
         toSaveTrackKey = firebaseHelper.trackUID
         
-        firebaseHelper.listenForNewTracks()
+        
 
         
     }
