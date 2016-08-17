@@ -31,7 +31,7 @@ class AddTrackViewController: UIViewController {
     
     @IBAction func saveTrack(sender: AnyObject) {
         
-        newTrack = Track.init(name: trackNameTextField.text!, desc: trackDescriptionTextField.text!)
+        newTrack = Track.init(name: trackNameTextField.text!, desc: trackDescriptionTextField.text!, image: trackProfileImage, imagePath: String())
 
         FirebaseHelper.sharedInstance.createNewTrack(newTrack)
         

@@ -16,6 +16,7 @@ class FootprintAnnotation: NSObject, MKAnnotation {
     var subtitle: String?
     var trackUID: String?
     var footprintUID: String?
+    var imagePath: String?
 
 
     init(coordinate: CLLocationCoordinate2D, image: UIImage) {
@@ -23,12 +24,15 @@ class FootprintAnnotation: NSObject, MKAnnotation {
         self.image = image
     }
     
-    init(coordinate: CLLocationCoordinate2D, trackUID: String, footUID: String, title: String, subtitle: String) {
+    init(coordinate: CLLocationCoordinate2D, trackUID: String, footUID: String, title: String, subtitle: String, image: UIImage, imagePath: String) {
         self.coordinate = coordinate
         self.trackUID  = trackUID
         self.footprintUID = footUID
         self.title = title
         self.subtitle = subtitle
+        self.image = image
+        self.imagePath = imagePath
+    
     }
     
 

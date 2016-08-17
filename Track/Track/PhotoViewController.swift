@@ -26,7 +26,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var delegate: PhotoViewControllerDelegate?
     
-    var toSaveTrackKey: String?
+    var toSaveTrackUID: String?
     
     //tableview picker for popover
     var tableViewPicker =  UITableView()
@@ -47,9 +47,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         self.createTableViewPicker()
 
-        
-       
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -58,13 +55,23 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
         self.trackItems = [Track]()
         self.trackItems.append(self.defaultTrack)
+        
         // Listen for new tracks
         reference.observeEventType(.ChildAdded, withBlock: { snapshot in
 
             if (snapshot.exists()) {
 
-                    let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String)
-                    self.trackItems.append(track)
+                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
+                
+                //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Track
+                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
+                    if success{
+                        track.trackImage = firebaseHelper.retrievedImage
+                        print("query image retrieved")
+                    }
+                })
+                
+                self.trackItems.append(track)
                 
                 
             } else {
@@ -87,26 +94,35 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         footprintAnnotation.title = footprintTextField.text
         footprintAnnotation.subtitle = trackTextField.text
-        footprintAnnotation.trackUID = toSaveTrackKey
+        footprintAnnotation.trackUID = toSaveTrackUID
         
+        //MARK: This should be a completion block
+        //save and get tag uid FootprintAnnotation
+        FirebaseHelper.sharedInstance.createNewFootprint(footprintAnnotation)
         
+        //upon successful save, call delegate
+        delegate!.addFootprint(self)
+        self.navigationController?.popViewControllerAnimated(true)
+        
+        //MARK: Local Image Save
+        //I see no reason to do this since we are saving images to Firebase
         //save the selected photo to the photolibrary
-        UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image!, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+        //UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image!, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    func imageSaved(image: UIImage!, didFinishSavingWithError error: NSError?, contextInfo: AnyObject?) {
-        if (error != nil) {
-            // error - add a alertview
-        } else {
-            
-            //save and get tag uid FootprintAnnotation
-            FirebaseHelper.sharedInstance.createNewFootprint(footprintAnnotation)
-            
-            //upon successful save, call delegate
-            delegate!.addFootprint(self)
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-    }
+//    func imageSaved(image: UIImage!, didFinishSavingWithError error: NSError?, contextInfo: AnyObject?) {
+//        if (error != nil) {
+//            // error - add a alertview
+//        } else {
+//            
+//            //save and get tag uid FootprintAnnotation
+//            FirebaseHelper.sharedInstance.createNewFootprint(footprintAnnotation)
+//            
+//            //upon successful save, call delegate
+//            delegate!.addFootprint(self)
+//            self.navigationController?.popViewControllerAnimated(true)
+//        }
+//    }
     
     //MARK: Keyboard
     //dismiss keyboard on return key
@@ -157,6 +173,10 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         if(indexPath.row == 0){
             closeTable()
             performSegueWithIdentifier("CreateNewTrack", sender: nil)
+        } else {
+            //set the footprint name and
+            trackTextField.text = trackItems[indexPath.row].trackName
+            toSaveTrackUID = trackItems[indexPath.row].trackUID
         }
     }
     
@@ -216,10 +236,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         let newTrack = sender.newTrack
         trackTextField.text = newTrack.trackName
-        toSaveTrackKey = firebaseHelper.trackUID
         
-        
-
+        //set for use when setting footprint's trackUID
+        toSaveTrackUID = newTrack.trackUID
         
     }
     

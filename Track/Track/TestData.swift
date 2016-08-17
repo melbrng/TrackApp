@@ -21,8 +21,8 @@ class TestData {
     
     func loadData() {
         
-        let track = Track(name: "Test Track", desc: "Test track for loading test data")
-        firebaseHelper.createNewTrack(track)
+//        let track = Track(name: "Test Track", desc: "Test track for loading test data", image: UIImage.init(imageLiteral: "default.png"))
+//        firebaseHelper.createNewTrack(track)
         
         coordinate.latitude = 37.390749
         coordinate.longitude = -122.081651

@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         //loads test data
-        firebaseHelper.loadTestData(false, completion: { (success) -> Void in
-        })
+//        firebaseHelper.loadTestData(true, completion: { (success) -> Void in
+//        })
         
         
         loginPasswordTextField.secureTextEntry = true
@@ -49,20 +49,22 @@ class LoginViewController: UIViewController {
                 //move onto mapview
                 if(self.isSet == true){
                     
+                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    
 //                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
 //                            if success{
 //                                print("tracks downloaded successfully")
                     
-                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
-                                    if success{
-                                        
-                                        print("footprints downloaded successfully")
-                                         self.performSegueWithIdentifier("loginToMap", sender: nil)
-                                        
-                                    } else {
-                                        print("footprints download failed")
-                                    }
-                                })
+//                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+//                                    if success{
+//                                        
+//                                        print("footprints downloaded successfully")
+//                                         self.performSegueWithIdentifier("loginToMap", sender: nil)
+//                                        
+//                                    } else {
+//                                        print("footprints download failed")
+//                                    }
+//                                })
 //                            } else {
 //                               print("tracks download failed") 
 //                            }

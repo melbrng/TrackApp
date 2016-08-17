@@ -25,12 +25,11 @@
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
 		43B3CE441D5A8106003F5021 /* FootprintAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */; };
 		43B3CE461D5AB1CF003F5021 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE451D5AB1CF003F5021 /* blue.png */; };
-		43B3CE481D5AB1D7003F5021 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE471D5AB1D7003F5021 /* orange.png */; };
+		43B3CE481D5AB1D7003F5021 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE471D5AB1D7003F5021 /* default.png */; };
 		43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE491D5AB1DB003F5021 /* purple.png */; };
 		43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE4B1D5AB1E1003F5021 /* red.png */; };
 		43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */; };
 		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
-		43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE641D418C7900A2DF31 /* Footprint.swift */; };
 		80716D0B09302EDD9CDCFF1D /* Pods_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DECB8F5B21EA16FE76BE8C0 /* Pods_Track.framework */; };
 		9D32F4C32CD23ECF50ABF880 /* Pods_TrackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271997515E6E0983A89A0111 /* Pods_TrackTests.framework */; };
 /* End PBXBuildFile section */
@@ -80,12 +79,11 @@
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintAnnotation.swift; sourceTree = "<group>"; };
 		43B3CE451D5AB1CF003F5021 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
-		43B3CE471D5AB1D7003F5021 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		43B3CE471D5AB1D7003F5021 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		43B3CE491D5AB1DB003F5021 /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		43B3CE4B1D5AB1E1003F5021 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrackViewController.swift; sourceTree = "<group>"; };
 		43D6EE621D418C6900A2DF31 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		43D6EE641D418C7900A2DF31 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		60311EA62C719B42BEAB4AE1 /* Pods_TrackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DEE34DF705F452FA36DC55 /* Pods-TrackUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrackUITests/Pods-TrackUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6A07D5A6E9287E3D59FD03A /* Pods-Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,7 +149,7 @@
 				43B3CE451D5AB1CF003F5021 /* blue.png */,
 				43B3CE491D5AB1DB003F5021 /* purple.png */,
 				43B3CE4B1D5AB1E1003F5021 /* red.png */,
-				43B3CE471D5AB1D7003F5021 /* orange.png */,
+				43B3CE471D5AB1D7003F5021 /* default.png */,
 				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
 				4339FFAB1D3C091200CF0EDF /* Controllers */,
 				4339FFAA1D3C090B00CF0EDF /* Models */,
@@ -188,7 +186,6 @@
 			children = (
 				43D6EE621D418C6900A2DF31 /* User.swift */,
 				4339FFA71D3C08DA00CF0EDF /* Track.swift */,
-				43D6EE641D418C7900A2DF31 /* Footprint.swift */,
 				43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */,
 				432B10711D5E7C22002111DD /* TestData.swift */,
 			);
@@ -350,7 +347,7 @@
 				4339FF771D3AD07100CF0EDF /* Assets.xcassets in Resources */,
 				43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */,
 				4339FF751D3AD07100CF0EDF /* Main.storyboard in Resources */,
-				43B3CE481D5AB1D7003F5021 /* orange.png in Resources */,
+				43B3CE481D5AB1D7003F5021 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +505,6 @@
 				43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */,
 				4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */,
 				4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */,
-				43D6EE651D418C7900A2DF31 /* Footprint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

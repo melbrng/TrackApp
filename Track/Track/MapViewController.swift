@@ -22,7 +22,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     var annotations = [FootprintAnnotation]()
     var selectedFootprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
-    var viewFootprints = [String : Footprint]()
+ //   var viewFootprints = [String : Footprint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,21 +40,20 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
 //        firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
 //            if success{
-//
+//                
 //                print("footprints downloaded successfully")
 //                self.annotations = firebaseHelper.footprintArray
 //                
 //                self.mapView.addAnnotations(self.annotations)
-//
-//
+//                
+//                
 //            } else {
 //                print("footprints download failed")
 //            }
 //        })
         
-        annotations = firebaseHelper.footprintArray
         
-        mapView.addAnnotations(annotations)
+
         
     }
     
@@ -63,7 +62,53 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
         super.viewDidAppear(true)
         
+        let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
+        
+        // Listen for new tracks
+        reference.observeEventType(.ChildAdded, withBlock: { snapshot in
+            if (snapshot.exists()) {
+                
+                for footprint in snapshot.children {
+                    
+                    
+                    var coordinate = CLLocationCoordinate2D()
+                    coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
+                    coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
+                    
+                    let footprintAnnotation = FootprintAnnotation(coordinate: coordinate,
+                        trackUID: footprint.value!["trackUID"] as! String,
+                        footUID: footprint.value!["footUID"] as! String,
+                        title: footprint.value!["title"] as! String,
+                        subtitle: footprint.value!["subtitle"] as! String,
+                        image: UIImage(),
+                        imagePath: footprint.value!["imagePath"] as! String)
+                    
+                    //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
+                    firebaseHelper.retrieveFootprintImage(footprintAnnotation, completion: { (success) -> Void in
+                        if success{
+                            footprintAnnotation.image = firebaseHelper.retrievedImage
+                            print("query image retrieved")
+                        }
+                    })
+                    
+                    self.annotations.append(footprintAnnotation)
+                    
+                }
+                
+                
+            } else {
+                print("No Snapshot?!")
+            }
+            
+            self.mapView.addAnnotations(self.annotations)
+        })
+        
 
+        
+//        annotations = firebaseHelper.footprintArray
+//        
+//        mapView.addAnnotations(annotations)
+        
         
     }
     
