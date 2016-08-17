@@ -19,8 +19,8 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
-    var annotations = [FootprintAnnotation]()
-    var selectedFootprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
+    var annotations = [Footprint]()
+    var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(),image: UIImage())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         reference.observeEventType(.ChildAdded, withBlock: { snapshot in
             
             //Reset annotation array otherwise will get multiple copies of footprints
-            self.annotations = [FootprintAnnotation]()
+            self.annotations = [Footprint]()
             
             if (snapshot.exists()) {
                 
@@ -59,7 +59,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
                     coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
                     coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
                     
-                    let footprintAnnotation = FootprintAnnotation(coordinate: coordinate,
+                    let footprint = Footprint(coordinate: coordinate,
                         trackUID: footprint.value!["trackUID"] as! String,
                         footUID: footprint.value!["footUID"] as! String,
                         title: footprint.value!["title"] as! String,
@@ -68,13 +68,13 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
                         imagePath: footprint.value!["imagePath"] as! String)
                     
                     //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
-                    firebaseHelper.retrieveFootprintImage(footprintAnnotation, completion: { (success) -> Void in
+                    firebaseHelper.retrieveFootprintImage(footprint, completion: { (success) -> Void in
                         if success{
-                            footprintAnnotation.image = firebaseHelper.retrievedImage
+                            footprint.image = firebaseHelper.retrievedImage
                         }
                     })
                     
-                    self.annotations.append(footprintAnnotation)
+                    self.annotations.append(footprint)
                     
                 }
 
@@ -120,7 +120,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
 //            return nil
 //        }
         
-        if let annotation = annotation as? FootprintAnnotation {
+        if let annotation = annotation as? Footprint {
         
             let annotationIdentifier = "AnnotationIdentifier"
             
@@ -152,7 +152,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        selectedFootprintAnnotation = view.annotation as! FootprintAnnotation
+        selectedFootprint = view.annotation as! Footprint
         
         self.performSegueWithIdentifier("SetTrack", sender: nil)
     
@@ -206,8 +206,8 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         //set location coordinates for image to current location
         if let location = locationManager.location{
             
-            let footprintAnnotation = FootprintAnnotation(coordinate: location.coordinate, image: image)
-            selectedFootprintAnnotation = footprintAnnotation
+            let footprint = Footprint(coordinate: location.coordinate, image: image)
+            selectedFootprint = footprint
 
         }
 
@@ -235,7 +235,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
             
             let photoViewController:PhotoViewController = segue.destinationViewController as! PhotoViewController
             photoViewController.delegate = self
-            photoViewController.footprintAnnotation = selectedFootprintAnnotation
+            photoViewController.footprint = selectedFootprint
    
         }
 

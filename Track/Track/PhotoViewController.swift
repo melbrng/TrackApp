@@ -23,7 +23,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     @IBOutlet weak var trackTextField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
-    var footprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
+    var footprint = Footprint(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var delegate: PhotoViewControllerDelegate?
     
     var toSaveTrackUID: String?
@@ -41,9 +41,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         trackTextField.delegate = self
         footprintTextField.delegate = self
         
-        trackedImageView.image = footprintAnnotation.image
-        trackTextField.text = footprintAnnotation.subtitle
-        footprintTextField.text = footprintAnnotation.title
+        trackedImageView.image = footprint.image
+        trackTextField.text = footprint.subtitle
+        footprintTextField.text = footprint.title
         
         self.createTableViewPicker()
 
@@ -91,13 +91,13 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     //MARK: Add Image & Save
     @IBAction func add(sender: AnyObject) {
         
-        footprintAnnotation.title = footprintTextField.text
-        footprintAnnotation.subtitle = trackTextField.text
-        footprintAnnotation.trackUID = toSaveTrackUID
+        footprint.title = footprintTextField.text
+        footprint.subtitle = trackTextField.text
+        footprint.trackUID = toSaveTrackUID
         
         //MARK: This should be a completion block
         //save and get tag uid FootprintAnnotation
-        FirebaseHelper.sharedInstance.createNewFootprint(footprintAnnotation)
+        FirebaseHelper.sharedInstance.createNewFootprint(footprint)
         
         //upon successful save, call delegate
         delegate!.addFootprint(self)
@@ -225,7 +225,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         if(segue.identifier == "CreateNewTrack"){
             
             let addTrackViewController:AddTrackViewController = segue.destinationViewController as! AddTrackViewController
-            addTrackViewController.trackProfileImage = footprintAnnotation.image!
+            addTrackViewController.trackProfileImage = footprint.image!
             addTrackViewController.delegate = self
             
         }

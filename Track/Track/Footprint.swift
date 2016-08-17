@@ -1,5 +1,5 @@
 //
-//  FootprintAnnotation.swift
+//  Footprint.swift
 //  Track
 //
 //  Created by Melissa Boring on 8/9/16.
@@ -8,7 +8,7 @@
 
 import MapKit
 
-class FootprintAnnotation: NSObject, MKAnnotation {
+class Footprint: NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
     var image: UIImage?

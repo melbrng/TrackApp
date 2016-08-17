@@ -23,7 +23,7 @@
 		4339FFAD1D3C12A700CF0EDF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */; };
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
-		43B3CE441D5A8106003F5021 /* FootprintAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */; };
+		43B3CE441D5A8106003F5021 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE431D5A8106003F5021 /* Footprint.swift */; };
 		43B3CE461D5AB1CF003F5021 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE451D5AB1CF003F5021 /* blue.png */; };
 		43B3CE481D5AB1D7003F5021 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE471D5AB1D7003F5021 /* default.png */; };
 		43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE491D5AB1DB003F5021 /* purple.png */; };
@@ -77,7 +77,7 @@
 		4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
-		43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintAnnotation.swift; sourceTree = "<group>"; };
+		43B3CE431D5A8106003F5021 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		43B3CE451D5AB1CF003F5021 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		43B3CE471D5AB1D7003F5021 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		43B3CE491D5AB1DB003F5021 /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			children = (
 				43D6EE621D418C6900A2DF31 /* User.swift */,
 				4339FFA71D3C08DA00CF0EDF /* Track.swift */,
-				43B3CE431D5A8106003F5021 /* FootprintAnnotation.swift */,
+				43B3CE431D5A8106003F5021 /* Footprint.swift */,
 				432B10711D5E7C22002111DD /* TestData.swift */,
 			);
 			name = Models;
@@ -497,7 +497,7 @@
 			files = (
 				43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */,
 				432B10721D5E7C22002111DD /* TestData.swift in Sources */,
-				43B3CE441D5A8106003F5021 /* FootprintAnnotation.swift in Sources */,
+				43B3CE441D5A8106003F5021 /* Footprint.swift in Sources */,
 				4339FFA21D3AEE0500CF0EDF /* LoginViewController.swift in Sources */,
 				4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */,
 				43D6EE631D418C6900A2DF31 /* User.swift in Sources */,

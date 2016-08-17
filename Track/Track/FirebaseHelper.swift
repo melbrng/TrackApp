@@ -88,10 +88,10 @@ class FirebaseHelper{
         
     }
     
-    func retrieveFootprintImage(footprintAnnotation: FootprintAnnotation, completion: CompletionHandler){
+    func retrieveFootprintImage(footprint: Footprint, completion: CompletionHandler){
     
         
-        let footprintRef = trackImagesRef.child(footprintAnnotation.imagePath!)
+        let footprintRef = trackImagesRef.child(footprint.imagePath!)
         
         //MARK: Lazy method, downloading images into memory.
 
@@ -131,7 +131,7 @@ class FirebaseHelper{
     
     var trackArray = [Track]()
     let defaultTrack = Track(name: "Add New Track", desc: "Default track")
-    var footprintArray = [FootprintAnnotation]()
+    var footprintArray = [Footprint]()
     
     //MARK: Query Users
     
@@ -228,7 +228,7 @@ class FirebaseHelper{
         reference.observeSingleEventOfType (.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
                 
-                self.footprintArray = [FootprintAnnotation]()
+                self.footprintArray = [Footprint]()
                 for track in snapshot.children {
                     
                     for footprint in track.children {
@@ -237,7 +237,7 @@ class FirebaseHelper{
                         coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
                         coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
                             
-                        let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                        let footprintAnnotation = Footprint(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
                             footUID: footprint.value?.objectForKey("footUID") as! String,
                             title: footprint.value?.objectForKey("title") as! String,
                             subtitle: footprint.value?.objectForKey("subtitle") as! String,
@@ -287,7 +287,7 @@ class FirebaseHelper{
                             coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
                             coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
                             
-                            let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                            let footprintAnnotation = Footprint(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
                                 footUID: footprint.value?.objectForKey("footUID") as! String,
                                 title: footprint.value?.objectForKey("title") as! String,
                                 subtitle: footprint.value?.objectForKey("subtitle") as! String,
@@ -340,7 +340,7 @@ class FirebaseHelper{
         
     }
     
-    func createNewFootprint(footprintAnnotation: FootprintAnnotation){
+    func createNewFootprint(footprintAnnotation: Footprint){
         
         var footprintTrackUID: String
         let footUID = FOOT_REF.child("tracks").childByAutoId().key
