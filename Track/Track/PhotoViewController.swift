@@ -56,14 +56,13 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         self.trackItems = [Track]()
         self.trackItems.append(self.defaultTrack)
         
-        // Listen for new tracks
+        // Loads and listens for new tracks
         reference.observeEventType(.ChildAdded, withBlock: { snapshot in
 
             if (snapshot.exists()) {
 
                 let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
-                
-                //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Track
+
                 firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
                     if success{
                         track.trackImage = firebaseHelper.retrievedImage
@@ -105,7 +104,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         self.navigationController?.popViewControllerAnimated(true)
         
         //MARK: Local Image Save
-        //I see no reason to do this since we are saving images to Firebase
+        //I see no reason to do this since we are saving images to Firebase but i'm gonna leave this here until I decide how i'm 
+        //going to load/reload images. Now i'm doing it the lazy way (memory)
+        
         //save the selected photo to the photolibrary
         //UIImageWriteToSavedPhotosAlbum(footprintAnnotation.image!, self, #selector(self.imageSaved(_:didFinishSavingWithError:contextInfo:)), nil)
     }
@@ -174,7 +175,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
             closeTable()
             performSegueWithIdentifier("CreateNewTrack", sender: nil)
         } else {
-            //set the footprint name and
+            //set the footprint name 
             trackTextField.text = trackItems[indexPath.row].trackName
             toSaveTrackUID = trackItems[indexPath.row].trackUID
         }

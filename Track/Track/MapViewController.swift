@@ -15,14 +15,12 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     let locationManager = CLLocationManager()
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
     var annotations = [FootprintAnnotation]()
     var selectedFootprintAnnotation = FootprintAnnotation(coordinate: CLLocationCoordinate2D(),image: UIImage())
- //   var viewFootprints = [String : Footprint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,24 +35,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         mapView.delegate = self
         cameraPicker.delegate = self
         photoPicker.delegate = self
-        
-//        firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
-//            if success{
-//                
-//                print("footprints downloaded successfully")
-//                self.annotations = firebaseHelper.footprintArray
-//                
-//                self.mapView.addAnnotations(self.annotations)
-//                
-//                
-//            } else {
-//                print("footprints download failed")
-//            }
-//        })
-        
-        
 
-        
     }
     
 
@@ -64,12 +45,15 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
         let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
         
-        // Listen for new tracks
+        // Loads and listens for new tracks
         reference.observeEventType(.ChildAdded, withBlock: { snapshot in
+            
+            //Reset annotation array otherwise will get multiple copies of footprints
+            self.annotations = [FootprintAnnotation]()
+            
             if (snapshot.exists()) {
                 
                 for footprint in snapshot.children {
-                    
                     
                     var coordinate = CLLocationCoordinate2D()
                     coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
@@ -87,29 +71,20 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
                     firebaseHelper.retrieveFootprintImage(footprintAnnotation, completion: { (success) -> Void in
                         if success{
                             footprintAnnotation.image = firebaseHelper.retrievedImage
-                            print("query image retrieved")
                         }
                     })
                     
                     self.annotations.append(footprintAnnotation)
                     
                 }
-                
-                
+
             } else {
                 print("No Snapshot?!")
             }
-            
+
             self.mapView.addAnnotations(self.annotations)
         })
-        
 
-        
-//        annotations = firebaseHelper.footprintArray
-//        
-//        mapView.addAnnotations(annotations)
-        
-        
     }
     
      // MARK: Location Manager
@@ -228,7 +203,6 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        
         //set location coordinates for image to current location
         if let location = locationManager.location{
             
@@ -246,13 +220,10 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     
     // MARK: PhotoViewControllerDelegate
     func addFootprint(sender: PhotoViewController) {
-    
-        
-        //reload annotations
-        //annotations.append(sender.footprintAnnotation)
+
+        //prepare for reloading of footprints in ViewDidLoad
         mapView.removeAnnotations(annotations)
-        mapView.addAnnotations(annotations)
-        
+
 
     }
     

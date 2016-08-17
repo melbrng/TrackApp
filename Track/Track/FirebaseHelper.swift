@@ -91,16 +91,18 @@ class FirebaseHelper{
     func retrieveFootprintImage(footprintAnnotation: FootprintAnnotation, completion: CompletionHandler){
     
         
-        let islandRef = trackImagesRef.child(footprintAnnotation.imagePath!)
+        let footprintRef = trackImagesRef.child(footprintAnnotation.imagePath!)
+        
+        //MARK: Lazy method, downloading images into memory.
 
-        islandRef.dataWithMaxSize(2 * 1024 * 1024) { (data, error) -> Void in
+        footprintRef.dataWithMaxSize(5 * 1024 * 1024) { (data, error) -> Void in
             if (error != nil) {
                 print(error.debugDescription)
             } else {
                 self.retrievedImage = UIImage(data: data!)
                 let flag = true
                 completion(success: flag)
-                print("image retrieved")
+                //print("image retrieved")
             }
         }
 
@@ -109,16 +111,16 @@ class FirebaseHelper{
     func retrieveTrackImage(track: Track, completion: CompletionHandler){
         
         
-        let islandRef = trackImagesRef.child(track.trackImagePath!)
+        let trackRef = trackImagesRef.child(track.trackImagePath!)
         
-        islandRef.dataWithMaxSize(2 * 1024 * 1024) { (data, error) -> Void in
+        trackRef.dataWithMaxSize(2 * 1024 * 1024) { (data, error) -> Void in
             if (error != nil) {
                 print(error.debugDescription)
             } else {
                 self.retrievedImage = UIImage(data: data!)
                 let flag = true
                 completion(success: flag)
-                print("image retrieved")
+                //print("image retrieved")
             }
         }
         
@@ -130,21 +132,6 @@ class FirebaseHelper{
     var trackArray = [Track]()
     let defaultTrack = Track(name: "Add New Track", desc: "Default track")
     var footprintArray = [FootprintAnnotation]()
-    
-    //test data load
-//    func loadTestData(load: Bool, completion: CompletionHandler){
-//        
-//        testDataLoad = load
-//        
-//        if(load){
-//    
-//            let testData = TestData()
-//            testData.loadData()
-//        }
-//        
-//        let flag = true
-//        completion(success: flag)
-//    }
     
     //MARK: Query Users
     
@@ -168,78 +155,70 @@ class FirebaseHelper{
     }
     
     //MARK: Query Tracks
-//    func queryTracksByUid(uid: String, completion: CompletionHandler){
-//        
-//        let reference = TRACK_REF.child("\(uid)/")
-//        
-//        self.trackArray = [Track]()
-//        //add the "Add New Track" track
-//        self.trackArray.append(self.defaultTrack)
-//        
-//        reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
-//            if (snapshot.exists()) {
-//            
-//                for x in snapshot.children{
-//                    let track = Track.init(name: x.value?.objectForKey("name") as! String, desc: x.value?.objectForKey("desc") as! String, uid: x.value?.objectForKey("trackUID") as! String)
-//                    
-//                    self.trackArray.append(track)
-//                    
-//                }
-//                
-//            }else{
-//                print("No Snapshot?!")
-//            }
-//        })
-//        
-//        
-//        let flag = true
-//        completion(success: flag)
-//        
-//    }
+    func queryTracksByUid(uid: String, completion: CompletionHandler){
+        
+        let reference = TRACK_REF.child("\(uid)/")
+        
+        self.trackArray = [Track]()
+        
+        //add the "Add New Track" track
+        self.trackArray.append(self.defaultTrack)
+        
+        reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if (snapshot.exists()) {
+            
+                for x in snapshot.children{
+                    let track = Track.init(name: x.value?.objectForKey("name") as! String,
+                        desc: x.value?.objectForKey("desc") as! String,
+                        uid: x.value?.objectForKey("trackUID") as! String,
+                        imagePath: x.value?.objectForKey("imagePath") as! String)
+                    
+                    self.trackArray.append(track)
+                    
+                }
+                
+            }else{
+                print("No Snapshot?!")
+            }
+        })
+        
+        let flag = true
+        completion(success: flag)
+        
+    }
     
    
     
-//    func listenForNewTracks(uid: String) {
-//        
-//        let reference = TRACK_REF.child("\(uid)/")
-//        
-//        // Listen for new tracks
-//        reference.queryLimitedToLast(1)
-//        trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
-//            if (snapshot.exists()) {
-//               
-////                self.trackArray = [Track]()
-////                //add the "Add New Track" track
-////                self.trackArray.append(self.defaultTrack)
-//
-//                print("childrenCount " + String(snapshot.childrenCount))
-//                
-//                print(snapshot)
-//                
-//                    let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String)
-//                    
-//                    self.trackArray.append(track)
-//                
-//
-//            } else {
-//                print("No Snapshot?!")
-//            }
-//            
-//            print(self.trackArray.count)
-//        })
-//        
-//    }
-    
-    //not sure if need this
-    func queryForRemovedTracks(){
+    func listenForNewTracks(uid: String) {
         
-        // Listen for deleted tracks
-        TRACK_REF.observeEventType(.ChildRemoved, withBlock: { (snapshot) -> Void in
-            //            let index = self.indexOfMessage(snapshot)
-            //            self.comments.removeAtIndex(index)
-            //            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 1)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        let reference = TRACK_REF.child("\(uid)/")
+        
+        // Listen for new tracks
+        reference.queryLimitedToLast(1)
+        trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
+            if (snapshot.exists()) {
+                self.trackArray = [Track]()
+                
+                //add the "Add New Track" track
+                self.trackArray.append(self.defaultTrack)
+                
+                let track = Track.init(name: snapshot.value!["name"] as! String,
+                    desc: snapshot.value!["desc"] as! String,
+                    uid: snapshot.value!["trackUID"] as! String,
+                    imagePath: snapshot.value!["imagePath"] as! String)
+
+                self.trackArray.append(track)
+                
+            } else {
+                print("No Snapshot?!")
+            }
+            
+            print(self.trackArray.count)
         })
+        
     }
+    
+
     
     //MARK: Query Footprints
     func queryFootprintsByUid(uid: String, completion: CompletionHandler){
@@ -299,29 +278,23 @@ class FirebaseHelper{
         // Listen for new tracks
         trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
             if (snapshot.exists()) {
-                
-                print(snapshot)
-                print("x")
-                        
+
                     for track in snapshot.children {
                         
                         for footprint in track.children {
                             
-                            print("footprint")
-                            print(footprint)
+                            var coordinate = CLLocationCoordinate2D()
+                            coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
+                            coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
                             
-//                            var coordinate = CLLocationCoordinate2D()
-//                            coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
-//                            coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
-//                            
-//                            let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
-//                                footUID: footprint.value?.objectForKey("footUID") as! String,
-//                                title: footprint.value?.objectForKey("title") as! String,
-//                                subtitle: footprint.value?.objectForKey("subtitle") as! String,
-//                                image: UIImage(),
-//                                imagePath: footprint.value?.objectForKey("imagePath") as! String))
-//                            
-//                            self.footprintArray.append(footprintAnnotation)
+                            let footprintAnnotation = FootprintAnnotation(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                                footUID: footprint.value?.objectForKey("footUID") as! String,
+                                title: footprint.value?.objectForKey("title") as! String,
+                                subtitle: footprint.value?.objectForKey("subtitle") as! String,
+                                image: UIImage(),
+                                imagePath: footprint.value?.objectForKey("imagePath") as! String)
+                            
+                            self.footprintArray.append(footprintAnnotation)
                         }
                 }
                     
@@ -409,11 +382,6 @@ class FirebaseHelper{
         
         loadImage(imagePath, image: footprintAnnotation.image!)
         
-       // loadImage(currentUserUID!, name: footprintAnnotation.title!, image: footprintAnnotation.image!)
-        
-        //this is for updating  not insertion
-        //let footUpdates = ["/\(trackKey)/\(footKey)/": footprint]
-        //FOOT_REF.updateChildValues(footUpdates)
         
     }
     
