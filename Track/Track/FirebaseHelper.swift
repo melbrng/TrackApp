@@ -30,6 +30,7 @@ class FirebaseHelper{
     let currentUserUID = FIRAuth.auth()!.currentUser?.uid
     var testDataLoad = false
     var retrievedImage: UIImage!
+    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
     
     //MARK: Database References
     
@@ -68,7 +69,13 @@ class FirebaseHelper{
     // Points to the root reference
     let trackImagesRef = FIRStorage.storage().referenceForURL("gs://track-8f48d.appspot.com/images")
     
-    //MARK: Image Storage
+    //MARK: Data Arrays
+    
+    var trackArray = [Track]()
+    var footprintArray = [Footprint]()
+    
+    //MARK: Image Storage & Retrieval
+    
     func loadDefaultUserImage(){
         
         // Default image set when a user signs up
@@ -81,6 +88,10 @@ class FirebaseHelper{
     
     func loadImage(imagePath: String, image: UIImage){
         
+        print(imagePath)
+        print(image.size.width)
+        print(image.size.height)
+        
         // Default image set when a user signs up
         let fileData = UIImageJPEGRepresentation(image, 0.7)
         
@@ -89,7 +100,6 @@ class FirebaseHelper{
     }
     
     func retrieveFootprintImage(footprint: Footprint, completion: CompletionHandler){
-    
         
         let footprintRef = trackImagesRef.child(footprint.imagePath!)
         
@@ -127,12 +137,6 @@ class FirebaseHelper{
     }
 
     
-    //MARK: Data Arrays
-    
-    var trackArray = [Track]()
-    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
-    var footprintArray = [Footprint]()
-    
     //MARK: Query Users
     
     //query user by uid
@@ -159,10 +163,8 @@ class FirebaseHelper{
         
         let reference = TRACK_REF.child("\(uid)/")
         
-        self.trackArray = [Track]()
-        
         //add the "Add New Track" track
-        self.trackArray.append(self.defaultTrack)
+        trackArray.append(defaultTrack)
         
         reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
@@ -267,8 +269,6 @@ class FirebaseHelper{
     
         
     }
-    
-    
     
 
     func listenForNewFootprints(uid: String, completion: CompletionHandler) {

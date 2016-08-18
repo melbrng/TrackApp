@@ -32,7 +32,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     var tableViewPicker =  UITableView()
     var trackItems = firebaseHelper.trackArray
     
-    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
+  //  let defaultTrack = Track(name: "Add New Track", desc: "Default track")
     
     
     override func viewDidLoad() {
@@ -45,6 +45,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         trackTextField.text = footprint.subtitle
         footprintTextField.text = footprint.title
         
+        trackItems = firebaseHelper.trackArray
+        
         self.createTableViewPicker()
 
     }
@@ -52,33 +54,36 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
-        self.trackItems = [Track]()
-        self.trackItems.append(self.defaultTrack)
-        
-        // Loads and listens for new tracks
-        reference.observeEventType(.ChildAdded, withBlock: { snapshot in
-
-            if (snapshot.exists()) {
-
-                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
-
-                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
-                    if success{
-                        track.trackImage = firebaseHelper.retrievedImage
-                        print("query image retrieved")
-                    }
-                })
-                
-                self.trackItems.append(track)
-                
-                
-            } else {
-                print("No Snapshot?!")
-            }
-            
-            self.tableViewPicker.reloadData()
-        })
+//        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
+////        self.trackItems = [Track]()
+////        self.trackItems.append(self.defaultTrack)
+//        
+//        // Loads and listens for new tracks
+//
+//        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+//
+//            if (snapshot.exists()) {
+//                
+//                print(snapshot)
+//
+//                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
+//
+//                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
+//                    if success{
+//                        track.trackImage = firebaseHelper.retrievedImage
+//                        print("query image retrieved")
+//                    }
+//                })
+//                
+//                self.trackItems.append(track)
+//                
+//                
+//            } else {
+//                print("No Snapshot?!")
+//            }
+//            
+//            self.tableViewPicker.reloadData()
+//        })
         
 
     }
@@ -240,6 +245,37 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         //set for use when setting footprint's trackUID
         toSaveTrackUID = newTrack.trackUID
+        
+        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
+        //        self.trackItems = [Track]()
+        //        self.trackItems.append(self.defaultTrack)
+        
+        // Loads and listens for new tracks
+        
+        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+            
+            if (snapshot.exists()) {
+                
+                print(snapshot)
+                
+                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
+                
+                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
+                    if success{
+                        track.trackImage = firebaseHelper.retrievedImage
+                        print("query image retrieved")
+                    }
+                })
+                
+                self.trackItems.append(track)
+                
+                
+            } else {
+                print("No Snapshot?!")
+            }
+            
+            self.tableViewPicker.reloadData()
+        })
         
     }
     

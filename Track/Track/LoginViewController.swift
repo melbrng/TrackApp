@@ -45,13 +45,28 @@ class LoginViewController: UIViewController {
                 //move onto mapview
                 if(self.isSet == true){
                     
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                            if success{
+                                print("tracks downloaded successfully")
+                    
+                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                                    if success{
+                                        print("footprints downloaded successfully")
+                                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                                    } else {
+                                        print("footprints download failed")
+                                    }
+                                })
 
-                }
+                            } else {
+                                print("track download failed")
+                            }
+                        })
                 
-            } else {
-                print("No user is signed in.")
-            }
+                    } else {
+                        print("No user is signed in.")
+                    }
+                }
         }
 
     }
