@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+let firebaseHelper = FirebaseHelper.sharedInstance
+
 class LoginViewController: UIViewController {
 
     var userUID = String()
@@ -23,10 +25,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         loginPasswordTextField.secureTextEntry = true
         
         //monitor the user authentication state and present mapview is user is already logged in
+        
         handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
             if let user = user {
                 print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
@@ -40,12 +44,29 @@ class LoginViewController: UIViewController {
                 
                 //move onto mapview
                 if(self.isSet == true){
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
-                }
+                    
+                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                            if success{
+                                print("tracks downloaded successfully")
+                    
+                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                                    if success{
+                                        print("footprints downloaded successfully")
+                                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                                    } else {
+                                        print("footprints download failed")
+                                    }
+                                })
+
+                            } else {
+                                print("track download failed")
+                            }
+                        })
                 
-            } else {
-                print("No user is signed in.")
-            }
+                    } else {
+                        print("No user is signed in.")
+                    }
+                }
         }
 
     }
@@ -55,8 +76,8 @@ class LoginViewController: UIViewController {
 
     }
     
+    // logout when we unwind back to LoginVC
     @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
-        // logout when we unwind back to LoginVC
         
         try! FIRAuth.auth()!.signOut()
     }
@@ -84,7 +105,7 @@ class LoginViewController: UIViewController {
                 
                 if let error = error {
                     self.loginErrorMessage("Sign Up Error", message: error.localizedDescription)
-                    //print(error.localizedDescription)
+                    
                     return
                 } else {
                     
@@ -93,12 +114,22 @@ class LoginViewController: UIViewController {
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
                     // Store the uid
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
+                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
                     
                     self.loginActivityIndicator.stopAnimating()
                     
                     //move onto mapview
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
+                    if(self.isSet == false){
+                        self.isSet = true
+                    } else {
+                        self.isSet = false
+                    }
+                    
+                    //move onto mapview
+                    if(self.isSet == true){
+                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    }
                 }
             }
         }
@@ -116,17 +147,14 @@ class LoginViewController: UIViewController {
             if let error = error {
                 
                 self.loginErrorMessage("Login Error", message: error.localizedDescription)
-                //print(error.localizedDescription)
                 return
+                
             } else {
                 if user != nil {
 
                     //create database user entry
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
-                    
-                    // Store the uid
-                    NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
                     
                     self.loginActivityIndicator.stopAnimating()
                     
@@ -140,14 +168,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    
-    // MARK: ## I've added this method (and a breakpoint here) to mark when I'm segueing away from this view.
-    // This should only happen once, of course...
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
-    }
-    
     func loginErrorMessage(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -155,5 +175,14 @@ class LoginViewController: UIViewController {
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
+    // MARK: Segue
+    // This should only happen once, of course...
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
+    }
+
 
 }

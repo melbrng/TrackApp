@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 
-class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoViewControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -19,12 +19,13 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     let cameraPicker = UIImagePickerController()
     let photoPicker = UIImagePickerController()
     
-    let userPointAnnotation = MKPointAnnotation()
+    var annotations = [Footprint]()
+    var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(),image: UIImage())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
+
         //must ask for permission to use location services
         //below combined with setting the NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys in info.plist
         locationManager.delegate = self
@@ -32,67 +33,137 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         locationManager .requestAlwaysAuthorization()
         
         mapView.delegate = self
-        mapView.showsUserLocation = true
-        mapView.showsPointsOfInterest = true
-        
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
+        annotations = firebaseHelper.footprintArray
+        mapView.addAnnotations(annotations)
+
     }
     
-    // MARK : Map User location
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+
+    override func viewDidAppear(animated: Bool) {
         
-        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
-        mapView .setRegion(region, animated: true)
+        super.viewDidAppear(true)
         
-        
-        userPointAnnotation.coordinate = userLocation.coordinate
-        userPointAnnotation.title = "Where is Mel?"
-        userPointAnnotation.subtitle = "Mel is here!"
-        
-        mapView.addAnnotation(userPointAnnotation)
+//        let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
+//        
+//        // Loads and listens for new tracks
+//        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+//            
+//            //Reset annotation array otherwise will get multiple copies of footprints
+//            //self.annotations = [Footprint]()
+//            
+//            if (snapshot.exists()) {
+//                
+//                for footprint in snapshot.children {
+//                    
+//                    var coordinate = CLLocationCoordinate2D()
+//                    coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
+//                    coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
+//                    
+//                    let footprint = Footprint(coordinate: coordinate,
+//                        trackUID: footprint.value!["trackUID"] as! String,
+//                        footUID: footprint.value!["footUID"] as! String,
+//                        title: footprint.value!["title"] as! String,
+//                        subtitle: footprint.value!["subtitle"] as! String,
+//                        image: UIImage(),
+//                        imagePath: footprint.value!["imagePath"] as! String)
+//                    
+//                    //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
+//                    firebaseHelper.retrieveFootprintImage(footprint, completion: { (success) -> Void in
+//                        if success{
+//                            footprint.image = firebaseHelper.retrievedImage
+//                        }
+//                    })
+//                    
+//                    self.annotations.append(footprint)
+//                    
+//                }
+//
+//            } else {
+//                print("No Snapshot?!")
+//            }
+//
+//            self.mapView.addAnnotations(self.annotations)
+//        })
+
     }
+    
+     // MARK: Location Manager
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if(status == .AuthorizedWhenInUse || status == .AuthorizedAlways){
+            manager.startUpdatingLocation()
+           mapView.showsUserLocation = true
+            mapView.showsPointsOfInterest = true
+            
+        } else {
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    // MARK: Map View
+//    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+//        
+//       // let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
+//      //  mapView .setRegion(region, animated: true)
+//        
+//        userPointAnnotation.coordinate = userLocation.coordinate
+//        userPointAnnotation.title = "Where is Mel?"
+//        userPointAnnotation.subtitle = "Mel is here!"
+//        
+//        mapView.addAnnotation(userPointAnnotation)
+//    }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
         // Don't want to show a custom image if the annotation is the user's location.
-        guard !annotation.isKindOfClass(MKUserLocation) else {
-            return nil
+//        guard !annotation.isKindOfClass(MKUserLocation) else {
+//            return nil
+//        }
+        
+        if let annotation = annotation as? Footprint {
+        
+            let annotationIdentifier = "AnnotationIdentifier"
+            
+            var annotationView: MKAnnotationView?
+            
+            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
+                annotationView?.annotation = annotation
+            }
+            else {
+                let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                annotationView = av
+            }
+            
+            if let annotationView = annotationView {
+                
+                // Configure your annotation view here
+                annotationView.canShowCallout = true
+
+            }
+            
+            return annotationView
         }
         
-        let annotationIdentifier = "AnnotationIdentifier"
+        return nil
         
-        var annotationView: MKAnnotationView?
-        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
-            annotationView = dequeuedAnnotationView
-            annotationView?.annotation = annotation
-        }
-        else {
-            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-            annotationView = av
-        }
-        
-        if let annotationView = annotationView {
-            // Configure your annotation view here
-            annotationView.canShowCallout = true
-            annotationView.image = UIImage(named: "")
-        }
-        
-        return annotationView
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-
         
-        let photoViewController = PhotoViewController()
-        presentViewController(photoViewController, animated: true, completion: nil)
+        selectedFootprint = view.annotation as! Footprint
         
+        self.performSegueWithIdentifier("SetTrack", sender: nil)
+    
     }
     
     
     
-    // MARK : Track by Photo
+    // MARK: Track 
     @IBAction func trackLocation(sender: UIBarButtonItem) {
         
         //alert controller with image picker , camera , cancel actions
@@ -128,15 +199,97 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
     }
     
-    // MARK : ImagePicker Delegates
+    // MARK: ImagePicker Delegates
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
+        //set location coordinates for image to current location
+        if let location = locationManager.location{
+            
+            let footprint = Footprint(coordinate: location.coordinate, image: image)
+            selectedFootprint = footprint
 
-        dismissViewControllerAnimated(true, completion: nil)
+        }
+
+        dismissViewControllerAnimated(true) { () -> Void  in
+            
+            self.performSegueWithIdentifier("SetTrack", sender: nil)
+        }
+
+    }
+    
+    func reloadAnnotations(){
+        
+        mapView.removeAnnotations(annotations)
+        mapView.addAnnotations(annotations)
+        
+    }
+    
+    // MARK: PhotoViewControllerDelegate
+    func addFootprint(sender: PhotoViewController) {
+        
+        annotations.append(sender.footprint)
+        
+        reloadAnnotations()
+
+//        let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
+//        
+//        // Loads and listens for new tracks
+//        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+//            
+//            if (snapshot.exists()) {
+//                
+//                for footprint in snapshot.children {
+//                    
+//                    var coordinate = CLLocationCoordinate2D()
+//                    coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
+//                    coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
+//                    
+//                    let footprint = Footprint(coordinate: coordinate,
+//                        trackUID: footprint.value!["trackUID"] as! String,
+//                        footUID: footprint.value!["footUID"] as! String,
+//                        title: footprint.value!["title"] as! String,
+//                        subtitle: footprint.value!["subtitle"] as! String,
+//                        image: UIImage(),
+//                        imagePath: footprint.value!["imagePath"] as! String)
+//                    
+//                    //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
+//                    firebaseHelper.retrieveFootprintImage(footprint, completion: { (success) -> Void in
+//                        if success{
+//                            footprint.image = firebaseHelper.retrievedImage
+//                            self.annotations.append(footprint)
+//                        }
+//                    })
+//
+//                }
+//                
+//                self.mapView.removeAnnotations(self.annotations)
+//                self.mapView.addAnnotations(self.annotations)
+//
+//                
+//            } else {
+//                print("No Snapshot?!")
+//            }
+//            
+//        })
+        
+    }
+    
+    
+    // MARK: Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "SetTrack"){
+            
+            let photoViewController:PhotoViewController = segue.destinationViewController as! PhotoViewController
+            photoViewController.delegate = self
+            photoViewController.footprint = selectedFootprint
+   
+        }
+
     }
 }
 
