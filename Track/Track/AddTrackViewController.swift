@@ -33,13 +33,19 @@ class AddTrackViewController: UIViewController {
         
         newTrack = Track.init(name: trackNameTextField.text!, desc: trackDescriptionTextField.text!, image: trackProfileImage, imagePath: String())
 
-        FirebaseHelper.sharedInstance.createNewTrack(newTrack)
-        
-        //upon successful save, call delegate
-        delegate?.addTrack(self)
-    
-        self.navigationController?.popViewControllerAnimated(true)
-        
+        FirebaseHelper.sharedInstance.createNewTrack(newTrack, completion: {(success) -> Void in
+            if(success){
+                
+                //add to app array
+                firebaseHelper.trackArray.append(self.newTrack)
+                
+                //upon successful save, call delegate
+                self.delegate?.addTrack(self)
+                self.navigationController?.popViewControllerAnimated(true)
+                
+            }
+        })
+
     }
     
     @IBAction func cancelSaveTrack(sender: AnyObject) {

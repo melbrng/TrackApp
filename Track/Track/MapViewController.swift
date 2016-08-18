@@ -221,51 +221,60 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
 
     }
     
+    func reloadAnnotations(){
+        
+        mapView.removeAnnotations(annotations)
+        mapView.addAnnotations(annotations)
+        
+    }
+    
     // MARK: PhotoViewControllerDelegate
     func addFootprint(sender: PhotoViewController) {
-
-        let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
         
-        // Loads and listens for new tracks
-        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
-            
-            //Reset annotation array otherwise will get multiple copies of footprints
-            //self.annotations = [Footprint]()
-            
-            if (snapshot.exists()) {
-                
-                for footprint in snapshot.children {
-                    
-                    var coordinate = CLLocationCoordinate2D()
-                    coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
-                    coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
-                    
-                    let footprint = Footprint(coordinate: coordinate,
-                        trackUID: footprint.value!["trackUID"] as! String,
-                        footUID: footprint.value!["footUID"] as! String,
-                        title: footprint.value!["title"] as! String,
-                        subtitle: footprint.value!["subtitle"] as! String,
-                        image: UIImage(),
-                        imagePath: footprint.value!["imagePath"] as! String)
-                    
-                    //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
-                    firebaseHelper.retrieveFootprintImage(footprint, completion: { (success) -> Void in
-                        if success{
-                            footprint.image = firebaseHelper.retrievedImage
-                        }
-                    })
-                    
-                    self.annotations.append(footprint)
-                    
-                }
-                
-            } else {
-                print("No Snapshot?!")
-            }
-            
-            self.mapView.removeAnnotations(self.annotations)
-            self.mapView.addAnnotations(self.annotations)
-        })
+        annotations.append(sender.footprint)
+        
+        reloadAnnotations()
+
+//        let reference = firebaseHelper.FOOT_REF.child(firebaseHelper.currentUserUID!)
+//        
+//        // Loads and listens for new tracks
+//        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+//            
+//            if (snapshot.exists()) {
+//                
+//                for footprint in snapshot.children {
+//                    
+//                    var coordinate = CLLocationCoordinate2D()
+//                    coordinate.latitude = footprint.value!["latitude"]!!.doubleValue
+//                    coordinate.longitude = footprint.value!["longitude"]!!.doubleValue
+//                    
+//                    let footprint = Footprint(coordinate: coordinate,
+//                        trackUID: footprint.value!["trackUID"] as! String,
+//                        footUID: footprint.value!["footUID"] as! String,
+//                        title: footprint.value!["title"] as! String,
+//                        subtitle: footprint.value!["subtitle"] as! String,
+//                        image: UIImage(),
+//                        imagePath: footprint.value!["imagePath"] as! String)
+//                    
+//                    //MARK: Repetitive-I don't want to retrieve AGAIN when adding a new Footprint
+//                    firebaseHelper.retrieveFootprintImage(footprint, completion: { (success) -> Void in
+//                        if success{
+//                            footprint.image = firebaseHelper.retrievedImage
+//                            self.annotations.append(footprint)
+//                        }
+//                    })
+//
+//                }
+//                
+//                self.mapView.removeAnnotations(self.annotations)
+//                self.mapView.addAnnotations(self.annotations)
+//
+//                
+//            } else {
+//                print("No Snapshot?!")
+//            }
+//            
+//        })
         
     }
     

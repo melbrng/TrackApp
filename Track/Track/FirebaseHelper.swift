@@ -86,16 +86,19 @@ class FirebaseHelper{
         
     }
     
-    func loadImage(imagePath: String, image: UIImage){
+    func loadImage(imagePath: String, image: UIImage, completion: CompletionHandler){
         
-        print(imagePath)
-        print(image.size.width)
-        print(image.size.height)
+//        print(imagePath)
+//        print(image.size.width)
+//        print(image.size.height)
         
         // Default image set when a user signs up
         let fileData = UIImageJPEGRepresentation(image, 0.7)
         
         trackImagesRef.child(imagePath).putData(fileData!)
+        
+        let flag = true
+        completion(success: flag)
         
     }
     
@@ -112,7 +115,6 @@ class FirebaseHelper{
                 self.retrievedImage = UIImage(data: data!)
                 let flag = true
                 completion(success: flag)
-                //print("image retrieved")
             }
         }
 
@@ -214,8 +216,7 @@ class FirebaseHelper{
             } else {
                 print("No Snapshot?!")
             }
-            
-            print(self.trackArray.count)
+
         })
         
     }
@@ -318,7 +319,7 @@ class FirebaseHelper{
         
     }
     
-    func createNewTrack(track: Track){
+    func createNewTrack(track: Track, completion: CompletionHandler){
         
         trackUID = TRACK_REF.childByAutoId().key
         
@@ -334,55 +335,67 @@ class FirebaseHelper{
         
         let trackPath = "/" + currentUserUID! + "/" + trackUID + "/"
         
-        TRACK_REF.child(trackPath).setValue(trackD)
-        
-        loadImage(imagePath, image: track.trackImage)
+        loadImage(imagePath, image: track.trackImage, completion: { (success) -> Void in
+            
+            if(success){
+                
+                self.TRACK_REF.child(trackPath).setValue(trackD)
+                let flag = true
+                completion(success: flag)
+                
+            } else {
+                
+                print("unable to create track")
+                
+            }
+            
+        })
         
     }
     
-    func createNewFootprint(footprintAnnotation: Footprint){
+    func createNewFootprint(footprint: Footprint, completion: CompletionHandler){
         
-        var footprintTrackUID: String
+        //trackUID
+        let footprintTrackUID = footprint.trackUID!
+        //footprintUID
         let footUID = FOOT_REF.child("tracks").childByAutoId().key
-        var footprint : [String : AnyObject]
+        var footprintD : [String : AnyObject]
     
         let userFolderName = currentUserUID!
-        let fileName = footprintAnnotation.title!.stringByAppendingString(".jpg")
+        let fileName = footprint.title!.stringByAppendingString(".jpg")
         let encodedHost = fileName.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
         let imagePath = "/"+userFolderName+"/"+encodedHost!+""
+
+        footprintD = ["footUID": footUID,
+                    "latitude": String(footprint.coordinate.latitude),
+                    "longitude": String(footprint.coordinate.longitude),
+                    "title": footprint.title!,
+                    "subtitle": footprint.subtitle!,
+                    "trackUID": footprintTrackUID,
+                    "imagePath": imagePath]
+
         
-        if(testDataLoad){
-            footprintTrackUID = trackUID
-            
-             footprint = ["footUID": footUID,
-                        "latitude": String(footprintAnnotation.coordinate.latitude),
-                        "longitude": String(footprintAnnotation.coordinate.longitude),
-                        "title": footprintAnnotation.title!,
-                        "subtitle": "Test Track",
-                        "trackUID": footprintTrackUID,
-                        "imagePath": imagePath]
-        } else {
-            footprintTrackUID = footprintAnnotation.trackUID!
-            
-            footprint = ["footUID": footUID,
-                        "latitude": String(footprintAnnotation.coordinate.latitude),
-                        "longitude": String(footprintAnnotation.coordinate.longitude),
-                        "title": footprintAnnotation.title!,
-                        "subtitle": footprintAnnotation.subtitle!,
-                        "trackUID": footprintTrackUID,
-                        "imagePath": imagePath]
-        }
-        
-    
         //inserting
         let trackPath = "/" + currentUserUID! + "/" + footprintTrackUID + "/"
         let footprintPath = trackPath + footUID + "/"
         
-        FOOT_REF.child(footprintPath).setValue(footprint)
-        
-        loadImage(imagePath, image: footprintAnnotation.image!)
-        
-        
+        loadImage(imagePath, image: footprint.image!, completion: { (success) -> Void in
+            
+            if(success){
+                
+                self.FOOT_REF.child(footprintPath).setValue(footprintD)
+                let flag = true
+                completion(success: flag)
+                print("created footprint")
+                
+            } else {
+                
+                print("unable to create footprint")
+                
+            }
+            
+        })
+
     }
     
     

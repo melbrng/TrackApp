@@ -93,7 +93,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Add Image & Save
+    //MARK: Add Footprint
     @IBAction func add(sender: AnyObject) {
         
         footprint.title = footprintTextField.text
@@ -102,11 +102,20 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         //MARK: This should be a completion block
         //save and get tag uid FootprintAnnotation
-        FirebaseHelper.sharedInstance.createNewFootprint(footprint)
+        FirebaseHelper.sharedInstance.createNewFootprint(footprint, completion: { (success) -> Void in
+            
+            if(success) {
+                
+                //upon successful save, add new footprint to app array
+                firebaseHelper.footprintArray.append(self.footprint)
+                
+                //call delegate
+                self.delegate!.addFootprint(self)
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+        })
         
-        //upon successful save, call delegate
-        delegate!.addFootprint(self)
-        self.navigationController?.popViewControllerAnimated(true)
+
         
         //MARK: Local Image Save
         //I see no reason to do this since we are saving images to Firebase but i'm gonna leave this here until I decide how i'm 
@@ -183,6 +192,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
             //set the footprint name 
             trackTextField.text = trackItems[indexPath.row].trackName
             toSaveTrackUID = trackItems[indexPath.row].trackUID
+            closeTable()
         }
     }
     
@@ -243,38 +253,35 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         let newTrack = sender.newTrack
         trackTextField.text = newTrack.trackName
         
-        //set for use when setting footprint's trackUID
-        toSaveTrackUID = newTrack.trackUID
         
+        //query the newly added Track in order to retrieve trackUID
         let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
-        //        self.trackItems = [Track]()
-        //        self.trackItems.append(self.defaultTrack)
-        
-        // Loads and listens for new tracks
         
         reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
             
             if (snapshot.exists()) {
+
+                let track = Track.init(name: snapshot.value!["name"] as! String,
+                    desc: snapshot.value!["desc"] as! String,
+                    uid: snapshot.value!["trackUID"] as! String,
+                    imagePath: snapshot.value!["imagePath"] as! String)
                 
-                print(snapshot)
+                //use local image
+                track.trackImage = self.footprint.image!
                 
-                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
+                //set for use when setting footprint's trackUID
+                self.toSaveTrackUID = track.trackUID
+
+                firebaseHelper.trackArray.append(track)
+                self.trackItems = firebaseHelper.trackArray
                 
-                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
-                    if success{
-                        track.trackImage = firebaseHelper.retrievedImage
-                        print("query image retrieved")
-                    }
-                })
-                
-                self.trackItems.append(track)
-                
-                
+                self.tableViewPicker.reloadData()
+
             } else {
                 print("No Snapshot?!")
             }
             
-            self.tableViewPicker.reloadData()
+            
         })
         
     }
