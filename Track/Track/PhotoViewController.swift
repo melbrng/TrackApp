@@ -32,8 +32,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     var tableViewPicker =  UITableView()
     var trackItems = firebaseHelper.trackArray
     
-  //  let defaultTrack = Track(name: "Add New Track", desc: "Default track")
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,38 +52,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-//        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
-////        self.trackItems = [Track]()
-////        self.trackItems.append(self.defaultTrack)
-//        
-//        // Loads and listens for new tracks
-//
-//        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
-//
-//            if (snapshot.exists()) {
-//                
-//                print(snapshot)
-//
-//                let track = Track.init(name: snapshot.value!["name"] as! String, desc: snapshot.value!["desc"] as! String, uid: snapshot.value!["trackUID"] as! String,imagePath: snapshot.value!["imagePath"] as! String)
-//
-//                firebaseHelper.retrieveTrackImage(track, completion: { (success) -> Void in
-//                    if success{
-//                        track.trackImage = firebaseHelper.retrievedImage
-//                        print("query image retrieved")
-//                    }
-//                })
-//                
-//                self.trackItems.append(track)
-//                
-//                
-//            } else {
-//                print("No Snapshot?!")
-//            }
-//            
-//            self.tableViewPicker.reloadData()
-//        })
-        
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,7 +66,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         footprint.subtitle = trackTextField.text
         footprint.trackUID = toSaveTrackUID
         
-        //MARK: This should be a completion block
         //save and get tag uid FootprintAnnotation
         FirebaseHelper.sharedInstance.createNewFootprint(footprint, completion: { (success) -> Void in
             
