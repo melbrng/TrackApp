@@ -177,18 +177,24 @@ class FirebaseHelper{
                         uid: x.value?.objectForKey("trackUID") as! String,
                         imagePath: x.value?.objectForKey("imagePath") as! String)
                     
+                    self.retrieveTrackImage(track, completion: { (success) -> Void in
+                        if success{
+                            track.trackImage = firebaseHelper.retrievedImage
+                            print("query track image retrieved")
+                        }
+                    })
+                    
                     self.trackArray.append(track)
                     
                 }
+                let flag = true
+                completion(success: flag)
                 
             }else{
                 print("No Snapshot?!")
             }
         })
-        
-        let flag = true
-        completion(success: flag)
-        
+    
     }
     
    
@@ -234,27 +240,29 @@ class FirebaseHelper{
                 self.footprintArray = [Footprint]()
                 for track in snapshot.children {
                     
+                    print(track)
+                    
                     for footprint in track.children {
                         
                         var coordinate = CLLocationCoordinate2D()
                         coordinate.latitude = (footprint.value?.objectForKey("latitude")!.doubleValue)!
                         coordinate.longitude = (footprint.value?.objectForKey("longitude")!.doubleValue)!
                             
-                        let footprintAnnotation = Footprint(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
+                        let footprint = Footprint(coordinate: coordinate, trackUID: footprint.value?.objectForKey("trackUID") as! String,
                             footUID: footprint.value?.objectForKey("footUID") as! String,
                             title: footprint.value?.objectForKey("title") as! String,
                             subtitle: footprint.value?.objectForKey("subtitle") as! String,
                             image: UIImage(),
                             imagePath: footprint.value?.objectForKey("imagePath") as! String)
                         
-                        self.retrieveFootprintImage(footprintAnnotation, completion: { (success) -> Void in
+                        self.retrieveFootprintImage(footprint, completion: { (success) -> Void in
                             if success{
-                                footprintAnnotation.image = firebaseHelper.retrievedImage
-                                print("query image retrieved")
+                                footprint.image = firebaseHelper.retrievedImage
+                                print("query footprint image retrieved")
                             }
                         })
                         
-                        self.footprintArray.append(footprintAnnotation)
+                        self.footprintArray.append(footprint)
                     }
                    
                 }
