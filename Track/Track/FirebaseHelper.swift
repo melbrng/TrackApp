@@ -240,8 +240,6 @@ class FirebaseHelper{
                 self.footprintArray = [Footprint]()
                 for track in snapshot.children {
                     
-                    print(track)
-                    
                     for footprint in track.children {
                         
                         var coordinate = CLLocationCoordinate2D()

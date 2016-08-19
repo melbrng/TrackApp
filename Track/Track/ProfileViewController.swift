@@ -54,6 +54,15 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("selected: " + String(indexPath.item))
+        
+        let trackUID = trackArray[indexPath.item].trackUID
+        print(trackUID)
+        let evens = firebaseHelper.footprintArray.filter{ ($0.trackUID) == trackUID}
+        print(evens)
+        
+        let footprint = evens[0] 
+        print(footprint.imagePath)
+        
     }
 
 }
