@@ -129,6 +129,9 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <size key="customSize" width="100" height="100"/>
+                                        <connections>
+                                            <segue destination="xLR-Xg-Mu1" kind="show" identifier="ShowFootprints" id="xYB-4i-fMR"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -139,7 +142,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-P1-ggj">
                                 <rect key="frame" x="102" y="214" width="161" height="37"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFn-B3-pA1">
@@ -149,10 +152,71 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="trackCollectionView" destination="Qf7-ub-KqT" id="n7I-iL-2KP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENs-h6-dxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3318" y="-496"/>
+            <point key="canvasLocation" x="3112" y="-496"/>
+        </scene>
+        <!--Footprints Table View Controller-->
+        <scene sceneID="ftj-YS-US5">
+            <objects>
+                <tableViewController id="xLR-Xg-Mu1" customClass="FootprintsTableViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="182" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hb6-4I-YpY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FootprintCell" rowHeight="182" id="q7f-ir-s3T">
+                                <rect key="frame" x="0.0" y="92" width="414" height="182"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q7f-ir-s3T" id="SDb-ct-Lde">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="181"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="3nY-Wx-9PE" kind="show" identifier="ShowFootprint" id="UGF-c1-DwR"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xLR-Xg-Mu1" id="JEG-Uy-Iad"/>
+                            <outlet property="delegate" destination="xLR-Xg-Mu1" id="wiO-Jp-hCX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q5D-k5-75T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3923" y="-496"/>
+        </scene>
+        <!--Footprint View Controller-->
+        <scene sceneID="Jog-rA-OPT">
+            <objects>
+                <viewController id="3nY-Wx-9PE" customClass="FootprintViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dmc-8u-eh3"/>
+                        <viewControllerLayoutGuide type="bottom" id="M3b-L5-8Ld"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g59-zD-mvj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KqV-QB-1JO">
+                                <rect key="frame" x="0.0" y="132" width="414" height="604"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="footprintImageView" destination="KqV-QB-1JO" id="1Lf-i3-2Sb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vLI-0v-L6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4487" y="-496"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="MHo-bM-LEy">
@@ -166,28 +230,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Track" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
-                                <rect key="frame" x="14" y="78" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Decribe the Footprint" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
+                                <rect key="frame" x="20" y="108" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Decribe the Footprint" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
-                                <rect key="frame" x="14" y="108" width="343" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
+                                <rect key="frame" x="20" y="137" width="561" height="404"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Track" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
+                                <rect key="frame" x="20" y="78" width="510" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p98-zT-bAK">
-                                <rect key="frame" x="308" y="78" width="49" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p98-zT-bAK">
+                                <rect key="frame" x="531" y="78" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="9fU-Nr-nAi"/>
+                                </constraints>
                                 <state key="normal" title="T"/>
                                 <connections>
                                     <action selector="selectTrack:" destination="3zf-Nq-oYX" eventType="touchUpInside" id="K2S-1W-506"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
-                                <rect key="frame" x="14" y="137" width="343" height="393"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" id="0UF-NR-oac"/>
+                            <constraint firstItem="mZW-qh-hbA" firstAttribute="centerX" secondItem="inv-0f-pdb" secondAttribute="centerX" id="1bB-9m-HEd"/>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="trailing" secondItem="v4O-zf-Sxj" secondAttribute="trailingMargin" id="7Iv-3W-Gv1"/>
+                            <constraint firstItem="y1x-Bn-QSV" firstAttribute="top" secondItem="nfW-e7-m9A" secondAttribute="bottom" constant="14" id="7gG-Jm-Xxz"/>
+                            <constraint firstItem="p98-zT-bAK" firstAttribute="trailing" secondItem="inv-0f-pdb" secondAttribute="trailing" id="KWR-fW-Fc9"/>
+                            <constraint firstItem="p98-zT-bAK" firstAttribute="top" secondItem="y1x-Bn-QSV" secondAttribute="top" id="TRC-yI-93b"/>
+                            <constraint firstItem="kwP-sp-OEX" firstAttribute="top" secondItem="inv-0f-pdb" secondAttribute="bottom" constant="418" id="WKy-EO-mzy"/>
+                            <constraint firstItem="kwP-sp-OEX" firstAttribute="top" secondItem="mZW-qh-hbA" secondAttribute="bottom" constant="15" id="XmO-kR-99b"/>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="top" secondItem="p98-zT-bAK" secondAttribute="bottom" id="ZGD-CX-XoP"/>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="top" secondItem="y1x-Bn-QSV" secondAttribute="bottom" id="aFD-si-r2l"/>
+                            <constraint firstItem="p98-zT-bAK" firstAttribute="leading" secondItem="y1x-Bn-QSV" secondAttribute="trailing" constant="1" id="ecO-Z1-Xrp"/>
+                            <constraint firstItem="mZW-qh-hbA" firstAttribute="top" secondItem="p98-zT-bAK" secondAttribute="bottom" constant="29" id="fJ7-A3-GG7"/>
+                            <constraint firstItem="mZW-qh-hbA" firstAttribute="leading" secondItem="inv-0f-pdb" secondAttribute="leading" id="tWQ-dE-CjG"/>
+                            <constraint firstItem="y1x-Bn-QSV" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" id="tsb-JK-qdU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZGD-CX-XoP"/>
+                                <exclude reference="WKy-EO-mzy"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="nRO-4d-qHz">
@@ -226,11 +315,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Track Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AuA-mz-rOy">
-                                <rect key="frame" x="20" y="94" width="318" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe the Track" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYr-cd-ggt">
                                 <rect key="frame" x="20" y="125" width="318" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -239,6 +323,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URa-ub-z1w">
                                 <rect key="frame" x="20" y="153" width="318" height="354"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Track Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AuA-mz-rOy">
+                                <rect key="frame" x="20" y="94" width="318" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -278,11 +367,17 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-RM-bdJ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y6l-RM-bdJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="y6l-RM-bdJ" secondAttribute="trailing" constant="-20" id="8mY-Vy-11V"/>
+                            <constraint firstItem="y6l-RM-bdJ" firstAttribute="top" secondItem="G2x-3N-0CW" secondAttribute="bottom" id="AC4-9Z-DN8"/>
+                            <constraint firstItem="y6l-RM-bdJ" firstAttribute="leading" secondItem="wXj-W6-1JV" secondAttribute="leadingMargin" constant="-20" id="I1H-K0-km0"/>
+                            <constraint firstItem="SAO-Gr-0Em" firstAttribute="top" secondItem="y6l-RM-bdJ" secondAttribute="bottom" id="xNZ-EH-eJB"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
@@ -309,6 +404,7 @@
                     <connections>
                         <outlet property="mapView" destination="y6l-RM-bdJ" id="nuJ-ah-yYH"/>
                         <segue destination="3zf-Nq-oYX" kind="show" identifier="SetTrack" id="zsI-xE-4L9"/>
+                        <segue destination="3nY-Wx-9PE" kind="show" identifier="ShowFootprint" id="2MG-fU-wJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,4 +434,7 @@
             <point key="canvasLocation" x="2615" y="300"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2MG-fU-wJc"/>
+    </inferredMetricsTieBreakers>
 </document>

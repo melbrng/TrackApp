@@ -115,7 +115,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
         selectedFootprint = view.annotation as! Footprint
         
-        self.performSegueWithIdentifier("SetTrack", sender: nil)
+        self.performSegueWithIdentifier("ShowFootprint", sender: nil)
     
     }
     
@@ -206,6 +206,14 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
             photoViewController.delegate = self
             photoViewController.footprint = selectedFootprint
    
+        }
+        
+        if(segue.identifier == "ShowFootprint"){
+            
+            let footprintViewController:FootprintViewController = segue.destinationViewController as! FootprintViewController
+
+            footprintViewController.footprint = selectedFootprint
+            
         }
 
     }
