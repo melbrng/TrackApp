@@ -85,7 +85,7 @@
                         <outlet property="loginActivityIndicator" destination="UD5-aK-nBD" id="Xaq-iQ-bcQ"/>
                         <outlet property="loginEmailTextField" destination="dMk-cb-29o" id="XY9-T6-KJj"/>
                         <outlet property="loginPasswordTextField" destination="EPf-DF-5dc" id="5GI-gN-iwA"/>
-                        <segue destination="BQ7-uc-xSQ" kind="show" identifier="loginToMap" id="sRw-n4-Iv1"/>
+                        <segue destination="BQ7-uc-xSQ" kind="show" identifier="ShowMap" id="sRw-n4-Iv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

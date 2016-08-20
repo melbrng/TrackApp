@@ -31,20 +31,20 @@ class LoginViewController: UIViewController {
         
         //monitor the user authentication state and present mapview is user is already logged in
         
-        handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
-            if let user = user {
+        //handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
+            if let user =  FIRAuth.auth()?.currentUser {
                 print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
                 
                 //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
-                if(self.isSet == false){
-                    self.isSet = true
-                } else {
-                    self.isSet = false
-                }
+//                if(self.isSet == false){
+//                    self.isSet = true
+//                } else {
+//                    self.isSet = false
+//                }
+//                
+//                //move onto mapview
+//                if(self.isSet == true){
                 
-                //move onto mapview
-                if(self.isSet == true){
-                    
                     firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
                             if success{
                                 print("tracks downloaded successfully")
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
                                 firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
                                     if success{
                                         print("footprints downloaded successfully")
-                                        self.performSegueWithIdentifier("loginToMap", sender: nil)
+                                        self.performSegueWithIdentifier("ShowMap", sender: nil)
                                     } else {
                                         print("footprints download failed")
                                     }
@@ -66,8 +66,8 @@ class LoginViewController: UIViewController {
                     } else {
                         print("No user is signed in.")
                     }
-                }
-        }
+                //}
+        //}
 
     }
 
@@ -176,13 +176,6 @@ class LoginViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    
-    // MARK: Segue
-    // This should only happen once, of course...
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        FIRAuth.auth()?.removeAuthStateDidChangeListener(handle!)
-    }
 
 
 }

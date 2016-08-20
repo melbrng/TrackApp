@@ -10,13 +10,16 @@ import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
-    let trackArray = firebaseHelper.trackArray
+    var trackArray = firebaseHelper.trackArray
     var trackFootprints = [Footprint]()
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var trackCollectionView: UICollectionView!
     
     override func viewDidLoad() {
+        //remove "Add New Track" track
+        trackArray.removeAtIndex(0)
+        
         collectionViewFlowLayout.scrollDirection = .Vertical
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionViewFlowLayout.minimumInteritemSpacing = 0
