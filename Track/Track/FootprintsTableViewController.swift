@@ -13,8 +13,7 @@ class FootprintsTableViewController: UITableViewController {
     
     var footprintsArray = [Footprint]()
     var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(), image: UIImage())
-    
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return footprintsArray.count
@@ -24,11 +23,13 @@ class FootprintsTableViewController: UITableViewController {
         
         let cellIdentifier = "FootprintCell"
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! FootprintTableViewCell
         
-        cell!.textLabel?.text = footprintsArray[indexPath.row].title
+        cell.footprintNameLabel.text = footprintsArray[indexPath.row].title
+        cell.footprintTrackLabel.text = footprintsArray[indexPath.row].subtitle
+        cell.footprintImageView.image = footprintsArray[indexPath.row].image
         
-        return cell!
+        return cell
     }
     
     

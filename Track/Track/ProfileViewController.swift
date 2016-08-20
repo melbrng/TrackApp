@@ -8,19 +8,20 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     let trackArray = firebaseHelper.trackArray
     var trackFootprints = [Footprint]()
     
+    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var trackCollectionView: UICollectionView!
     
     override func viewDidLoad() {
-        
-//        trackCollectionView.delegate = self
-//        trackCollectionView.dataSource = self
-        
-        print(trackArray.count)
+        collectionViewFlowLayout.scrollDirection = .Vertical
+        collectionViewFlowLayout.minimumLineSpacing = 0
+        collectionViewFlowLayout.minimumInteritemSpacing = 0
+        collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+
     }
     
     
@@ -30,45 +31,34 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return trackArray.count
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+   
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        return CGSize(width: collectionView.frame.size.width/3.2, height: 100)
+
+        
+        let totalwidth = collectionView.bounds.size.width;
+        let numberOfCellsPerRow = 3
+        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
+        return CGSizeMake(dimensions, dimensions)
+
+
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cellIdentifier = "TrackCell"
         
-        let cell = collectionView .dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) 
-
-        let trackImageView = cell.viewWithTag(100) as! UIImageView
-        trackImageView.image = trackArray[indexPath.item].trackImage
-
-        cell.backgroundColor = UIColor .grayColor()
+        let cell = collectionView .dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! ProfileCollectionViewCell
+ 
+        cell.trackImageView.image = trackArray[indexPath.item].trackImage
+        cell.layer.borderWidth = 0.5
+        cell.layer.borderColor = UIColor.blackColor() .CGColor
+        cell.backgroundColor = UIColor .whiteColor()
         
         return cell
     }
     
-//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        
-//        
-//        let trackUID = trackArray[indexPath.item].trackUID
-// 
-//        trackFootprints = firebaseHelper.footprintArray.filter{ ($0.trackUID) == trackUID}
-//        
-//        for x in trackFootprints{
-//            
-//            let fp = x 
-//            print(fp.title)
-//            
-//        }
-//
-//        
-//    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
