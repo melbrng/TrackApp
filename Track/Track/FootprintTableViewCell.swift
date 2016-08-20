@@ -9,9 +9,8 @@
 import UIKit
 
 class FootprintTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var footprintImageView: UIImageView!
-
     @IBOutlet weak var footprintNameLabel: UILabel!
-    @IBOutlet weak var footprintTrackLabel: UILabel!
 
 }

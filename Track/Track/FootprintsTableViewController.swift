@@ -12,7 +12,12 @@ import MapKit
 class FootprintsTableViewController: UITableViewController {
     
     var footprintsArray = [Footprint]()
+    var trackName = ""
     var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(), image: UIImage())
+    
+    override func viewDidLoad() {
+        title = trackName
+    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -26,7 +31,6 @@ class FootprintsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! FootprintTableViewCell
         
         cell.footprintNameLabel.text = footprintsArray[indexPath.row].title
-        cell.footprintTrackLabel.text = footprintsArray[indexPath.row].subtitle
         cell.footprintImageView.image = footprintsArray[indexPath.row].image
         
         return cell

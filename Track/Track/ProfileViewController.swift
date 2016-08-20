@@ -68,7 +68,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             let indexPaths = trackCollectionView.indexPathsForSelectedItems()
             
             let indexPath = indexPaths![0]
-           // print("selected: " + String(indexPath.item))
             
             let trackUID = trackArray[indexPath.item].trackUID
             
@@ -76,6 +75,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             
             let destinationTableViewController = segue.destinationViewController as! FootprintsTableViewController
             
+            destinationTableViewController.trackName = trackArray[indexPath.item].trackName
             destinationTableViewController.footprintsArray = trackFootprints
             
         }
