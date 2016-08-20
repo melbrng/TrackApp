@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
         
         let totalwidth = collectionView.bounds.size.width;
-        let numberOfCellsPerRow = 3
+        let numberOfCellsPerRow = 2
         let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
         return CGSizeMake(dimensions, dimensions)
 

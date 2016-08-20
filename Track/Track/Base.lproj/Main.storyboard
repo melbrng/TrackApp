@@ -105,35 +105,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qf7-ub-KqT">
-                                <rect key="frame" x="20" y="64" width="560" height="492"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qf7-ub-KqT">
+                                <rect key="frame" x="20" y="263" width="560" height="293"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Dlf-EP-51q">
-                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="itemSize" width="176" height="181"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrackCell" id="nKg-rJ-Xpd" customClass="ProfileCollectionViewCell" customModule="Track" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="176" height="181"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="176" height="181"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7g8-rm-b6l">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7g8-rm-b6l">
+                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="181"/>
                                                     <edgeInsets key="layoutMargins" top="2" left="2" bottom="2" right="2"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="7g8-rm-b6l" firstAttribute="top" secondItem="nKg-rJ-Xpd" secondAttribute="top" id="6tq-je-Q9U"/>
-                                            <constraint firstItem="7g8-rm-b6l" firstAttribute="leading" secondItem="nKg-rJ-Xpd" secondAttribute="leading" id="KKz-Fp-7Zh"/>
-                                            <constraint firstAttribute="trailing" secondItem="7g8-rm-b6l" secondAttribute="trailing" id="T6E-nP-KeT"/>
-                                            <constraint firstAttribute="bottom" secondItem="7g8-rm-b6l" secondAttribute="bottom" id="Uuz-Ff-F2S"/>
+                                            <constraint firstItem="7g8-rm-b6l" firstAttribute="leading" secondItem="nKg-rJ-Xpd" secondAttribute="leading" id="Mzh-Ck-wfz"/>
+                                            <constraint firstItem="7g8-rm-b6l" firstAttribute="top" secondItem="nKg-rJ-Xpd" secondAttribute="top" id="UWo-90-aVH"/>
+                                            <constraint firstAttribute="trailing" secondItem="7g8-rm-b6l" secondAttribute="trailing" id="p9Q-e1-MXh"/>
+                                            <constraint firstAttribute="bottom" secondItem="7g8-rm-b6l" secondAttribute="bottom" id="wTB-eq-Uq0"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="trackImageView" destination="7g8-rm-b6l" id="F3a-Wx-c7F"/>
@@ -146,13 +146,95 @@
                                     <outlet property="delegate" destination="9kV-X7-pTb" id="w2C-v0-Quo"/>
                                 </connections>
                             </collectionView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="funnydog.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Gcn-Ib-3ov">
+                                <rect key="frame" x="260" y="72" width="81" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="X1W-jq-oh2"/>
+                                    <constraint firstAttribute="width" constant="81" id="XCO-19-L9t"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBY-bD-zB6">
+                                <rect key="frame" x="234" y="152" width="132" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="Jpk-pe-bE4"/>
+                                    <constraint firstAttribute="height" constant="21" id="Si3-KH-aW4"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="George">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="18" name="HelveticaNeue-Thin"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHO-v5-1TV">
+                                <rect key="frame" x="181" y="173" width="238" height="56"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Beer is proof that God loves us and wants us to be happy">
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Thin"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="84">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="112">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="140">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="168">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="196">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="224">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="252">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="280">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="308">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="336">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="trailing" secondItem="82b-7I-B78" secondAttribute="trailingMargin" id="DZf-xT-GWU"/>
-                            <constraint firstItem="nqb-Ih-imo" firstAttribute="top" secondItem="Qf7-ub-KqT" secondAttribute="bottom" id="WCH-TZ-T07"/>
-                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="top" secondItem="LDi-Gw-0SW" secondAttribute="bottom" id="am0-Az-Wox"/>
-                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="leading" secondItem="82b-7I-B78" secondAttribute="leadingMargin" id="ot9-Hb-xSB"/>
+                            <constraint firstItem="nqb-Ih-imo" firstAttribute="top" secondItem="Qf7-ub-KqT" secondAttribute="bottom" id="CyP-yf-gYq"/>
+                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="trailing" secondItem="82b-7I-B78" secondAttribute="trailingMargin" id="I77-y9-X3M"/>
+                            <constraint firstItem="eHO-v5-1TV" firstAttribute="top" secondItem="VBY-bD-zB6" secondAttribute="bottom" id="a13-Jn-TcV"/>
+                            <constraint firstItem="Gcn-Ib-3ov" firstAttribute="centerX" secondItem="82b-7I-B78" secondAttribute="centerX" id="agZ-7f-eTT"/>
+                            <constraint firstItem="Gcn-Ib-3ov" firstAttribute="top" secondItem="LDi-Gw-0SW" secondAttribute="bottom" constant="8" symbolic="YES" id="hcK-fc-CIb"/>
+                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="leading" secondItem="82b-7I-B78" secondAttribute="leadingMargin" id="hoV-Vk-flL"/>
+                            <constraint firstItem="VBY-bD-zB6" firstAttribute="top" secondItem="Gcn-Ib-3ov" secondAttribute="bottom" constant="1" id="lh4-O4-B1f"/>
+                            <constraint firstItem="VBY-bD-zB6" firstAttribute="centerX" secondItem="Qf7-ub-KqT" secondAttribute="centerX" id="s29-KW-Eqw"/>
+                            <constraint firstItem="Qf7-ub-KqT" firstAttribute="top" secondItem="eHO-v5-1TV" secondAttribute="bottom" constant="34" id="yYo-yE-VuE"/>
+                            <constraint firstItem="VBY-bD-zB6" firstAttribute="centerX" secondItem="eHO-v5-1TV" secondAttribute="centerX" id="zST-te-afD"/>
+                            <constraint firstItem="Gcn-Ib-3ov" firstAttribute="centerX" secondItem="Qf7-ub-KqT" secondAttribute="centerX" id="zzS-iG-jhp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -270,7 +352,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
                                 <rect key="frame" x="20" y="137" width="561" height="404"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Track" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
@@ -362,7 +444,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="URa-ub-z1w">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="URa-ub-z1w">
                                         <rect key="frame" x="0.0" y="60" width="560" height="404"/>
                                     </imageView>
                                 </subviews>
@@ -479,6 +561,9 @@
             <point key="canvasLocation" x="2615" y="300"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="funnydog.jpeg" width="230" height="219"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UGF-c1-DwR"/>
     </inferredMetricsTieBreakers>

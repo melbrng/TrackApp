@@ -23,6 +23,7 @@
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
 		436997C51D666A7900F8644A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436997C41D666A7900F8644A /* ProfileViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
+		43AE84021D68F89C00B33D9C /* funnydog.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 43AE84011D68F89C00B33D9C /* funnydog.jpeg */; };
 		43B3CE441D5A8106003F5021 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE431D5A8106003F5021 /* Footprint.swift */; };
 		43B3CE461D5AB1CF003F5021 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE451D5AB1CF003F5021 /* blue.png */; };
 		43B3CE481D5AB1D7003F5021 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE471D5AB1D7003F5021 /* default.png */; };
@@ -81,6 +82,7 @@
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		436997C41D666A7900F8644A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		43AE84011D68F89C00B33D9C /* funnydog.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funnydog.jpeg; sourceTree = "<group>"; };
 		43B3CE431D5A8106003F5021 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		43B3CE451D5AB1CF003F5021 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		43B3CE471D5AB1D7003F5021 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		4339FF6E1D3AD07100CF0EDF /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				43AE84011D68F89C00B33D9C /* funnydog.jpeg */,
 				43B3CE451D5AB1CF003F5021 /* blue.png */,
 				43B3CE491D5AB1DB003F5021 /* purple.png */,
 				43B3CE4B1D5AB1E1003F5021 /* red.png */,
@@ -355,6 +358,7 @@
 				4339FF7A1D3AD07100CF0EDF /* LaunchScreen.storyboard in Resources */,
 				43B3CE461D5AB1CF003F5021 /* blue.png in Resources */,
 				43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */,
+				43AE84021D68F89C00B33D9C /* funnydog.jpeg in Resources */,
 				4339FF9E1D3AD0A200CF0EDF /* GoogleService-Info.plist in Resources */,
 				4339FF771D3AD07100CF0EDF /* Assets.xcassets in Resources */,
 				43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */,
