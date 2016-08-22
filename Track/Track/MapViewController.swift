@@ -36,6 +36,12 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_nature_people2.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(self.trackLocation(_:)))
+        
+        let rightBarButtonImage : UIImage? = UIImage(named:"ic_person_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(self.profileButtonTouched(_:)))
+        
         annotations = firebaseHelper.footprintArray
         mapView.addAnnotations(annotations)
 
@@ -48,6 +54,10 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
 
     }
     
+    @IBAction func profileButtonTouched(sender: AnyObject) {
+        
+        performSegueWithIdentifier("ShowProfile", sender: sender)
+    }
      // MARK: Location Manager
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

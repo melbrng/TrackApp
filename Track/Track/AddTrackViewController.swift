@@ -35,9 +35,7 @@ class AddTrackViewController: UIViewController {
 
         FirebaseHelper.sharedInstance.createNewTrack(newTrack, completion: {(success) -> Void in
             if(success){
-                
-                //add to app array
-                firebaseHelper.trackArray.append(self.newTrack)
+
                 
                 //upon successful save, call delegate
                 self.delegate?.addTrack(self)
