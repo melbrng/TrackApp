@@ -17,6 +17,8 @@ class FootprintsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         title = trackName
+        
+        
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,8 +32,13 @@ class FootprintsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! FootprintTableViewCell
         
+        cell.footprintNameLabel.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        cell.footprintNameLabel.textColor = UIColor.whiteColor()
         cell.footprintNameLabel.text = footprintsArray[indexPath.row].title
+        
         cell.footprintImageView.image = footprintsArray[indexPath.row].image
+        cell.footprintImageView.contentMode = .ScaleAspectFill
+        cell.footprintImageView.frame = CGRectMake(0,0,cell.frame.size.width,cell.frame.size.height)
         
         return cell
     }

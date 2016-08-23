@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
@@ -15,8 +16,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var trackCollectionView: UICollectionView!
+    @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
+        
         //remove "Add New Track" track
         trackArray.removeAtIndex(0)
         
@@ -24,6 +27,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionViewFlowLayout.minimumInteritemSpacing = 0
         collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
+        profileImageView.layer.backgroundColor=UIColor.clearColor().CGColor
+        profileImageView.layer.cornerRadius=40
+        profileImageView.layer.borderWidth=1.0
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderColor = UIColor.grayColor().CGColor
 
     }
     

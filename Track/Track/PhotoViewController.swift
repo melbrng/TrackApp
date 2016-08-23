@@ -39,6 +39,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         trackTextField.delegate = self
         footprintTextField.delegate = self
         
+        
         trackedImageView.image = footprint.image
         trackTextField.text = footprint.subtitle
         footprintTextField.text = footprint.title

@@ -146,13 +146,6 @@
                                     <outlet property="delegate" destination="9kV-X7-pTb" id="w2C-v0-Quo"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="funnydog.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Gcn-Ib-3ov">
-                                <rect key="frame" x="260" y="72" width="81" height="79"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="X1W-jq-oh2"/>
-                                    <constraint firstAttribute="width" constant="81" id="XCO-19-L9t"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBY-bD-zB6">
                                 <rect key="frame" x="234" y="152" width="132" height="21"/>
                                 <constraints>
@@ -173,7 +166,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHO-v5-1TV">
                                 <rect key="frame" x="181" y="173" width="238" height="56"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Beer is proof that God loves us and wants us to be happy">
+                                    <fragment content="I love to photograph animals and places">
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue-Thin"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
@@ -182,6 +175,13 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="funnydog.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Gcn-Ib-3ov">
+                                <rect key="frame" x="260" y="72" width="81" height="79"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="X1W-jq-oh2"/>
+                                    <constraint firstAttribute="width" constant="81" id="XCO-19-L9t"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -200,6 +200,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="Dlf-EP-51q" id="SE6-3L-pE3"/>
+                        <outlet property="profileImageView" destination="Gcn-Ib-3ov" id="Qud-ic-pgn"/>
                         <outlet property="trackCollectionView" destination="Qf7-ub-KqT" id="n7I-iL-2KP"/>
                     </connections>
                 </viewController>
@@ -223,11 +224,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-MO-k5D">
-                                            <rect key="frame" x="8" y="8" width="584" height="168"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mmc-MO-k5D">
+                                            <rect key="frame" x="8" y="8" width="584" height="200"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I41-sz-MLx">
-                                            <rect key="frame" x="8" y="184" width="584" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I41-sz-MLx">
+                                            <rect key="frame" x="117" y="178" width="366" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="T2t-n0-WHo"/>
                                             </constraints>
@@ -236,6 +237,7 @@
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <font key="NSFont" size="16" name="HelveticaNeue-Thin"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>

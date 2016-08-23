@@ -14,16 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    override init() {
-        super.init()
-        FIRApp.configure()
-
-    }
+//    override init() {
+//        super.init()
+//        FIRApp.configure()
+//
+//    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //configure a FIRApp shared instance
-        //FIRApp.configure()
+        FIRApp.configure()
         
         return true
     }

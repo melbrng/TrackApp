@@ -40,6 +40,11 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
         
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.translucent = false
+        UIToolbar.appearance().tintColor = UIColor.whiteColor()
+        navigationController?.toolbar.translucent = false
+        
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_nature_people2.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(self.trackLocation(_:)))
         
