@@ -125,7 +125,7 @@ class FirebaseHelper{
         
         let trackRef = trackImagesRef.child(track.trackImagePath!)
         
-        trackRef.dataWithMaxSize(2 * 1024 * 1024) { (data, error) -> Void in
+        trackRef.dataWithMaxSize(5 * 1024 * 1024) { (data, error) -> Void in
             if (error != nil) {
                 print(error.debugDescription)
             } else {

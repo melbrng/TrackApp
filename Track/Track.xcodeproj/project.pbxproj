@@ -151,6 +151,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4328A1E71D6BCFF50063F034 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				4328A1E51D6BAAC10063F034 /* ic_person_outline.png */,
+				4328A1E31D6BAA090063F034 /* ic_nature_people2.png */,
+				4328A1DF1D6BA7660063F034 /* ic_nature_people.png */,
+				4328A1E01D6BA7660063F034 /* invert_or_fill.png */,
+				4328A1D31D6BA2FC0063F034 /* Icon-29@2x.png */,
+				4328A1D41D6BA2FC0063F034 /* Icon-29@3x.png */,
+				4328A1D51D6BA2FC0063F034 /* Icon-40@2x.png */,
+				4328A1D61D6BA2FC0063F034 /* Icon-40@3x.png */,
+				4328A1D71D6BA2FC0063F034 /* Icon-60@2x.png */,
+				4328A1D81D6BA2FC0063F034 /* Icon-60@3x.png */,
+				43AE84011D68F89C00B33D9C /* funnydog.jpeg */,
+				43B3CE451D5AB1CF003F5021 /* blue.png */,
+				43B3CE491D5AB1DB003F5021 /* purple.png */,
+				43B3CE4B1D5AB1E1003F5021 /* red.png */,
+				43B3CE471D5AB1D7003F5021 /* default.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		4339FF631D3AD07100CF0EDF = {
 			isa = PBXGroup;
 			children = (
@@ -176,21 +198,7 @@
 		4339FF6E1D3AD07100CF0EDF /* Track */ = {
 			isa = PBXGroup;
 			children = (
-				4328A1E51D6BAAC10063F034 /* ic_person_outline.png */,
-				4328A1E31D6BAA090063F034 /* ic_nature_people2.png */,
-				4328A1DF1D6BA7660063F034 /* ic_nature_people.png */,
-				4328A1E01D6BA7660063F034 /* invert_or_fill.png */,
-				4328A1D31D6BA2FC0063F034 /* Icon-29@2x.png */,
-				4328A1D41D6BA2FC0063F034 /* Icon-29@3x.png */,
-				4328A1D51D6BA2FC0063F034 /* Icon-40@2x.png */,
-				4328A1D61D6BA2FC0063F034 /* Icon-40@3x.png */,
-				4328A1D71D6BA2FC0063F034 /* Icon-60@2x.png */,
-				4328A1D81D6BA2FC0063F034 /* Icon-60@3x.png */,
-				43AE84011D68F89C00B33D9C /* funnydog.jpeg */,
-				43B3CE451D5AB1CF003F5021 /* blue.png */,
-				43B3CE491D5AB1DB003F5021 /* purple.png */,
-				43B3CE4B1D5AB1E1003F5021 /* red.png */,
-				43B3CE471D5AB1D7003F5021 /* default.png */,
+				4328A1E71D6BCFF50063F034 /* images */,
 				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
 				4339FFAB1D3C091200CF0EDF /* Controllers */,
 				4339FFAA1D3C090B00CF0EDF /* Models */,

@@ -282,11 +282,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KqV-QB-1JO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KqV-QB-1JO">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="KqV-QB-1JO" secondAttribute="trailing" constant="-20" id="Aw6-mB-qeg"/>
+                            <constraint firstItem="M3b-L5-8Ld" firstAttribute="top" secondItem="KqV-QB-1JO" secondAttribute="bottom" id="ONG-6w-syW"/>
+                            <constraint firstItem="KqV-QB-1JO" firstAttribute="leading" secondItem="g59-zD-mvj" secondAttribute="leadingMargin" constant="-20" id="iFr-No-DQ7"/>
+                            <constraint firstItem="KqV-QB-1JO" firstAttribute="top" secondItem="Dmc-8u-eh3" secondAttribute="bottom" id="mh7-4A-17L"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="footprintImageView" destination="KqV-QB-1JO" id="1Lf-i3-2Sb"/>
@@ -528,6 +534,6 @@
         <image name="ic_nature_people2.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2MG-fU-wJc"/>
+        <segue reference="UGF-c1-DwR"/>
     </inferredMetricsTieBreakers>
 </document>
