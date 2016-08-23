@@ -332,7 +332,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="49" id="9fU-Nr-nAi"/>
                                 </constraints>
-                                <state key="normal" title="T" image="ic_nature_people2.png"/>
+                                <state key="normal" image="ic_nature_people2.png"/>
                                 <connections>
                                     <action selector="selectTrack:" destination="3zf-Nq-oYX" eventType="touchUpInside" id="K2S-1W-506"/>
                                 </connections>

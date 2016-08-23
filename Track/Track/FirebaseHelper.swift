@@ -132,7 +132,7 @@ class FirebaseHelper{
                 self.retrievedImage = UIImage(data: data!)
                 let flag = true
                 completion(success: flag)
-                //print("image retrieved")
+
             }
         }
         

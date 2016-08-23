@@ -32,42 +32,30 @@ class LoginViewController: UIViewController {
         //monitor the user authentication state and present mapview is user is already logged in
         
         //handle = FIRAuth.auth()!.addAuthStateDidChangeListener() { (auth, user) in
-            if let user =  FIRAuth.auth()?.currentUser {
-                print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
+        if let user =  FIRAuth.auth()?.currentUser {
+            print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
+            
+                firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                        if success{
+                            print("tracks downloaded successfully")
                 
-                //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
-//                if(self.isSet == false){
-//                    self.isSet = true
-//                } else {
-//                    self.isSet = false
-//                }
-//                
-//                //move onto mapview
-//                if(self.isSet == true){
-                
-                    firebaseHelper.queryTracksByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
-                            if success{
-                                print("tracks downloaded successfully")
-                    
-                                firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
-                                    if success{
-                                        print("footprints downloaded successfully")
-                                        self.performSegueWithIdentifier("ShowMap", sender: nil)
-                                    } else {
-                                        print("footprints download failed")
-                                    }
-                                })
+                            firebaseHelper.queryFootprintsByUid((FIRAuth.auth()?.currentUser?.uid)!, completion: { (success) -> Void in
+                                if success{
+                                    print("footprints downloaded successfully")
+                                    self.performSegueWithIdentifier("ShowMap", sender: nil)
+                                } else {
+                                    print("footprints download failed")
+                                }
+                            })
 
-                            } else {
-                                print("track download failed")
-                            }
-                        })
-                
-                    } else {
-                        print("No user is signed in.")
-                    }
-                //}
-        //}
+                        } else {
+                            print("track download failed")
+                        }
+                    })
+            
+                } else {
+                    print("No user is signed in.")
+                }
 
     }
 
