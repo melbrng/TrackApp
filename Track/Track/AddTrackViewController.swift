@@ -26,6 +26,12 @@ class AddTrackViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(saveTrack(_:)))
+        
+        let rightBarButtonImage : UIImage? = UIImage(named:"ic_not_interested.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(cancelSaveTrack(_:)))
+        
         trackImageView.image = trackProfileImage
     }
     

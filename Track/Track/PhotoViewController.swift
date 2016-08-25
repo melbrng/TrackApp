@@ -36,9 +36,14 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(add(_:)))
+        
+        let rightBarButtonImage : UIImage? = UIImage(named:"ic_not_interested.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(cancel(_:)))
+        
         trackTextField.delegate = self
         footprintTextField.delegate = self
-        
         
         trackedImageView.image = footprint.image
         trackTextField.text = footprint.subtitle

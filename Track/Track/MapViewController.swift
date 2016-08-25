@@ -25,6 +25,8 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
     var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(),image: UIImage())
     var userPointAnnotation = MKPointAnnotation()
     
+    var profileView:UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,17 +37,30 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         locationManager .requestWhenInUseAuthorization()
         locationManager .requestAlwaysAuthorization()
         
-        
         mapView.delegate = self
         cameraPicker.delegate = self
         photoPicker.delegate = self
+    
+        let button = UIButton.init(type: .Custom)
+        let image = UIImage.init(named: "ic_menu.png")
+        button.setBackgroundImage(image, forState: .Normal)
+        button.addTarget(self, action: #selector(buttonPressed), forControlEvents: .TouchUpInside)
+        button.frame = CGRectMake(0,0,40,40)
+        button.backgroundColor = UIColor.whiteColor()
+        navigationItem.titleView = button
         
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         navigationController?.navigationBar.translucent = false
+        
+        profileView = NSBundle.mainBundle().loadNibNamed("Profile", owner: self, options: nil).last as! UIView
+       // settings.frame = CGRectMake(0, -self.view.frame.size.height + 66, self.view.frame.size.width, self.view.frame.size.height)
+
+        createProfileView()
+        
         UIToolbar.appearance().tintColor = UIColor.whiteColor()
         navigationController?.toolbar.translucent = false
         
-        let leftBarButtonImage : UIImage? = UIImage(named:"ic_nature_people2.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_track_changes.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(self.trackLocation(_:)))
         
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_person_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
@@ -61,6 +76,49 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         
         super.viewDidAppear(true)
 
+    }
+    
+    func buttonPressed(){
+        profileView.hidden ? openView() : closeView()
+    }
+    
+    
+    func createProfileView(){
+        
+        profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
+        // profileView = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291))
+        profileView.alpha = 0
+        profileView.backgroundColor = UIColor.whiteColor()
+        profileView.hidden = true
+        profileView.userInteractionEnabled = true
+        
+        
+        self.view.addSubview(profileView)
+        
+    }
+    
+    func openView()
+    {
+        profileView.hidden = false
+        
+        UIView.animateWithDuration(0.3,
+                                   animations: {
+                                    self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
+                                    self.profileView.alpha = 1
+        })
+    }
+    
+    func closeView()
+    {
+        UIView.animateWithDuration(0.3,
+                                   animations: {
+                                    self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
+                                    self.profileView.alpha = 0
+            },
+                                   completion: { finished in
+                                    self.profileView.hidden = true
+            }
+        )
     }
     
     @IBAction func profileButtonTouched(sender: AnyObject) {

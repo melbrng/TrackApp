@@ -23,6 +23,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         //remove "Add New Track" track
         trackArray.removeAtIndex(0)
         
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelProfile(_:)))
+        
         collectionViewFlowLayout.scrollDirection = .Vertical
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionViewFlowLayout.minimumInteritemSpacing = 0
@@ -93,4 +97,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
 
+    
+    @IBAction func cancelProfile(sender: AnyObject) {
+         self.navigationController?.popViewControllerAnimated(true)
+    }
+   
 }

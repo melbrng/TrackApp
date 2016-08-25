@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MW-qe-4w3">
+                    <rect key="frame" x="272" y="62" width="49" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJI-vt-gLy">
+                    <rect key="frame" x="189" y="108" width="222" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-QS-00X">
+                    <rect key="frame" x="83" y="542" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQJ-Hg-2iy">
+                    <rect key="frame" x="476" y="542" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Mep-QS-00X" secondAttribute="bottom" constant="28" id="M0c-Gd-bgX"/>
+                <constraint firstAttribute="bottom" secondItem="PQJ-Hg-2iy" secondAttribute="bottom" constant="28" id="P49-NI-Uf1"/>
+                <constraint firstAttribute="trailing" secondItem="PQJ-Hg-2iy" secondAttribute="trailing" constant="78" id="Vye-pl-gLS"/>
+                <constraint firstItem="Mep-QS-00X" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="83" id="ZVy-5F-Ebj"/>
+                <constraint firstItem="PQJ-Hg-2iy" firstAttribute="leading" secondItem="Mep-QS-00X" secondAttribute="trailing" constant="347" id="atA-Ra-DMZ"/>
+                <constraint firstItem="Mep-QS-00X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="542" id="sUk-Hp-Ec2"/>
+                <constraint firstItem="PQJ-Hg-2iy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="542" id="ydd-Nz-qlR"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

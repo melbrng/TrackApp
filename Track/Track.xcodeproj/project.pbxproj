@@ -33,6 +33,12 @@
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
 		436997C51D666A7900F8644A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436997C41D666A7900F8644A /* ProfileViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
+		439A73221D6E66C200FEFE85 /* ic_add_circle_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */; };
+		439A73241D6E66D200FEFE85 /* ic_not_interested.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73231D6E66D200FEFE85 /* ic_not_interested.png */; };
+		439A73261D6E66DC00FEFE85 /* ic_track_changes.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73251D6E66DC00FEFE85 /* ic_track_changes.png */; };
+		439A73281D6E6B5800FEFE85 /* ic_arrow_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73271D6E6B5800FEFE85 /* ic_arrow_back.png */; };
+		439A732A1D6E798F00FEFE85 /* ic_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73291D6E798F00FEFE85 /* ic_menu.png */; };
+		439A732C1D6E7E1C00FEFE85 /* Profile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439A732B1D6E7E1C00FEFE85 /* Profile.xib */; };
 		43AE84021D68F89C00B33D9C /* funnydog.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 43AE84011D68F89C00B33D9C /* funnydog.jpeg */; };
 		43B3CE441D5A8106003F5021 /* Footprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE431D5A8106003F5021 /* Footprint.swift */; };
 		43B3CE461D5AB1CF003F5021 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE451D5AB1CF003F5021 /* blue.png */; };
@@ -102,6 +108,12 @@
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		436997C41D666A7900F8644A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_circle_outline.png; sourceTree = "<group>"; };
+		439A73231D6E66D200FEFE85 /* ic_not_interested.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_not_interested.png; sourceTree = "<group>"; };
+		439A73251D6E66DC00FEFE85 /* ic_track_changes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_track_changes.png; sourceTree = "<group>"; };
+		439A73271D6E6B5800FEFE85 /* ic_arrow_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_arrow_back.png; sourceTree = "<group>"; };
+		439A73291D6E798F00FEFE85 /* ic_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu.png; sourceTree = "<group>"; };
+		439A732B1D6E7E1C00FEFE85 /* Profile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Profile.xib; sourceTree = "<group>"; };
 		43AE84011D68F89C00B33D9C /* funnydog.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = funnydog.jpeg; sourceTree = "<group>"; };
 		43B3CE431D5A8106003F5021 /* Footprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Footprint.swift; sourceTree = "<group>"; };
 		43B3CE451D5AB1CF003F5021 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
@@ -154,6 +166,11 @@
 		4328A1E71D6BCFF50063F034 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				439A73291D6E798F00FEFE85 /* ic_menu.png */,
+				439A73271D6E6B5800FEFE85 /* ic_arrow_back.png */,
+				439A73251D6E66DC00FEFE85 /* ic_track_changes.png */,
+				439A73231D6E66D200FEFE85 /* ic_not_interested.png */,
+				439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */,
 				4328A1E51D6BAAC10063F034 /* ic_person_outline.png */,
 				4328A1E31D6BAA090063F034 /* ic_nature_people2.png */,
 				4328A1DF1D6BA7660063F034 /* ic_nature_people.png */,
@@ -204,6 +221,7 @@
 				4339FFAA1D3C090B00CF0EDF /* Models */,
 				4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */,
 				4339FF731D3AD07100CF0EDF /* Main.storyboard */,
+				439A732B1D6E7E1C00FEFE85 /* Profile.xib */,
 				4339FF761D3AD07100CF0EDF /* Assets.xcassets */,
 				4339FF9D1D3AD0A200CF0EDF /* GoogleService-Info.plist */,
 				4339FF781D3AD07100CF0EDF /* LaunchScreen.storyboard */,
@@ -393,23 +411,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439A73221D6E66C200FEFE85 /* ic_add_circle_outline.png in Resources */,
 				4339FF7A1D3AD07100CF0EDF /* LaunchScreen.storyboard in Resources */,
+				439A732C1D6E7E1C00FEFE85 /* Profile.xib in Resources */,
 				43B3CE461D5AB1CF003F5021 /* blue.png in Resources */,
 				43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */,
 				4328A1DD1D6BA2FC0063F034 /* Icon-60@2x.png in Resources */,
+				439A73241D6E66D200FEFE85 /* ic_not_interested.png in Resources */,
 				4328A1DC1D6BA2FC0063F034 /* Icon-40@3x.png in Resources */,
+				439A73281D6E6B5800FEFE85 /* ic_arrow_back.png in Resources */,
 				4328A1E11D6BA7660063F034 /* ic_nature_people.png in Resources */,
 				43AE84021D68F89C00B33D9C /* funnydog.jpeg in Resources */,
 				4328A1DE1D6BA2FC0063F034 /* Icon-60@3x.png in Resources */,
 				4339FF9E1D3AD0A200CF0EDF /* GoogleService-Info.plist in Resources */,
 				4339FF771D3AD07100CF0EDF /* Assets.xcassets in Resources */,
 				43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */,
+				439A732A1D6E798F00FEFE85 /* ic_menu.png in Resources */,
 				4328A1E21D6BA7660063F034 /* invert_or_fill.png in Resources */,
 				4328A1DA1D6BA2FC0063F034 /* Icon-29@3x.png in Resources */,
 				4328A1E61D6BAAC10063F034 /* ic_person_outline.png in Resources */,
 				4339FF751D3AD07100CF0EDF /* Main.storyboard in Resources */,
 				4328A1DB1D6BA2FC0063F034 /* Icon-40@2x.png in Resources */,
 				4328A1D91D6BA2FC0063F034 /* Icon-29@2x.png in Resources */,
+				439A73261D6E66DC00FEFE85 /* ic_track_changes.png in Resources */,
 				4328A1E41D6BAA090063F034 /* ic_nature_people2.png in Resources */,
 				43B3CE481D5AB1D7003F5021 /* default.png in Resources */,
 			);
