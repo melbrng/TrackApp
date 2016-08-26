@@ -10,6 +10,14 @@ import UIKit
 
 class ProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var trackImageView: UIImageView!
-
-
+    @IBOutlet weak var trackLabel: UILabel!
+    
+    func isSelected(selected: Bool){
+        if(selected){
+            backgroundColor = UIColor .whiteColor().colorWithAlphaComponent(0.5)
+            
+        }else{
+            backgroundColor = UIColor .whiteColor()
+        }
+    }
 }

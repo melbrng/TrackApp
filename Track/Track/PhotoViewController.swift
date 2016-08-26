@@ -17,7 +17,7 @@ protocol PhotoViewControllerDelegate {
 
 
 
-class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewControllerDelegate, AddTagViewControllerDelegate,UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var trackedImageView: UIImageView!
     @IBOutlet weak var trackTextField: UITextField!
@@ -125,7 +125,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     //MARK: TableView Delegates and stuff
     func createTableViewPicker(){
         
-        tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 200, width: 286, height: 291)
+        tableViewPicker.frame = CGRect(x: 0, y: 0, width: 286, height: 291)
         tableViewPicker.alpha = 0
         tableViewPicker.hidden = true
         tableViewPicker.userInteractionEnabled = true
@@ -158,7 +158,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         if(indexPath.row == 0){
             closeTable()
-            performSegueWithIdentifier("CreateNewTrack", sender: nil)
+            performSegueWithIdentifier("AddTrack", sender: nil)
         } else {
             //set the footprint name 
             trackTextField.text = trackItems[indexPath.row].trackName
@@ -173,7 +173,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
         UIView.animateWithDuration(0.3,
                                    animations: {
-                                    self.tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 230, width: 286, height: 291)
+                                    self.tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 0, width: 286, height: 291)
                                     self.tableViewPicker.alpha = 1
         })
     }
@@ -182,7 +182,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     {
         UIView.animateWithDuration(0.3,
                                    animations: {
-                                    self.tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 200, width: 286, height: 291)
+                                    self.tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 0, width: 286, height: 291)
                                     self.tableViewPicker.alpha = 0
             },
                                    completion: { finished in
@@ -208,11 +208,16 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     //MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if(segue.identifier == "CreateNewTrack"){
+        if(segue.identifier == "AddTrack"){
             
             let addTrackViewController:AddTrackViewController = segue.destinationViewController as! AddTrackViewController
             addTrackViewController.trackProfileImage = footprint.image!
             addTrackViewController.delegate = self
+            
+        } else if(segue.identifier == "AddTag"){
+            
+            let addTagViewController:AddTagViewController = segue.destinationViewController as! AddTagViewController
+            addTagViewController.delegate = self
             
         }
     }
@@ -257,6 +262,10 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         
     }
     
- 
+    //MARK: Add Tag Delegate
+    
+    func addTag(sender: AddTagViewController) {
+        
+    }
   
 }

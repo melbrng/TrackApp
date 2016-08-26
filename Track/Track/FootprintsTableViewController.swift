@@ -45,6 +45,18 @@ class FootprintsTableViewController: UITableViewController {
     }
     
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete{
+            
+            print("deleting")
+            footprintsArray.removeAtIndex(indexPath.item)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
+            //will need to delete from Firebase
+        }
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if(segue.identifier == "ShowFootprint"){

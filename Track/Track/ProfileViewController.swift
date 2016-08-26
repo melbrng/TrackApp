@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var trackCollectionView: UICollectionView!
-    @IBOutlet weak var profileImageView: UIImageView!
+    //@IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         
@@ -24,22 +24,45 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         trackArray.removeAtIndex(0)
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
+
+        let rightBarButtonImage : UIImage? = UIImage(named:"blue.png")!.imageWithRenderingMode(.AlwaysOriginal)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelProfile(_:)))
+        
+        navigationItem.rightBarButtonItem =
+            UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(editTracks(_:)))
         
         collectionViewFlowLayout.scrollDirection = .Vertical
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionViewFlowLayout.minimumInteritemSpacing = 0
         collectionViewFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
-        profileImageView.layer.backgroundColor=UIColor.clearColor().CGColor
-        profileImageView.layer.cornerRadius=40
-        profileImageView.layer.borderWidth=1.0
-        profileImageView.layer.masksToBounds = true
-        profileImageView.layer.borderColor = UIColor.grayColor().CGColor
+//        profileImageView.layer.backgroundColor=UIColor.clearColor().CGColor
+//        profileImageView.layer.cornerRadius=40
+//        profileImageView.layer.borderWidth=1.0
+//        profileImageView.layer.masksToBounds = true
+//        profileImageView.layer.borderColor = UIColor.grayColor().CGColor
 
     }
     
+    @IBAction func editTracks(sender: AnyObject) {
+        
+        trackCollectionView.allowsMultipleSelection = true
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        print("highlight")
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProfileCollectionViewCell
+        
+        UIView.animateWithDuration(0.1,
+                                   delay: 0,
+                                   options: .AllowUserInteraction,
+                                   animations: {
+                                   cell.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.5)},
+                                   completion: nil)
+    }
     
     
     //MARK: Collection View Delegate
@@ -53,7 +76,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
 
         
         let totalwidth = collectionView.bounds.size.width;
-        let numberOfCellsPerRow = 2
+        let numberOfCellsPerRow = 3
         let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
         return CGSizeMake(dimensions, dimensions)
 
@@ -65,6 +88,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         let cellIdentifier = "TrackCell"
         
         let cell = collectionView .dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! ProfileCollectionViewCell
+        
+        cell.trackLabel.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        cell.trackLabel.textColor = UIColor.whiteColor()
+        cell.trackLabel.text = trackArray[indexPath.item].trackName
  
         cell.trackImageView.image = trackArray[indexPath.item].trackImage
         cell.layer.borderWidth = 0.5
@@ -74,6 +101,22 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        print("selected " + String(indexPath.item))
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProfileCollectionViewCell
+        cell.isSelected(true)
+        
+        
+        //collectionView.deleteItemsAtIndexPaths([indexPath])
+        
+        //trackArray.removeAtIndex(indexPath.item)
+    }
+    
+
+    
+
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

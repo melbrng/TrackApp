@@ -46,6 +46,8 @@
 		43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE491D5AB1DB003F5021 /* purple.png */; };
 		43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B3CE4B1D5AB1E1003F5021 /* red.png */; };
 		43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */; };
+		43B841071D70CCA100111B24 /* TrackOrTag.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43B841061D70CCA100111B24 /* TrackOrTag.xib */; };
+		43B841091D70D37600111B24 /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B841081D70D37600111B24 /* AddTagViewController.swift */; };
 		43BB347C1D67818300AAA151 /* FootprintsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB347B1D67818300AAA151 /* FootprintsTableViewController.swift */; };
 		43BB347E1D678A8000AAA151 /* FootprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB347D1D678A8000AAA151 /* FootprintViewController.swift */; };
 		43BB34801D67DDC500AAA151 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */; };
@@ -121,6 +123,8 @@
 		43B3CE491D5AB1DB003F5021 /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		43B3CE4B1D5AB1E1003F5021 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrackViewController.swift; sourceTree = "<group>"; };
+		43B841061D70CCA100111B24 /* TrackOrTag.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackOrTag.xib; sourceTree = "<group>"; };
+		43B841081D70D37600111B24 /* AddTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
 		43BB347B1D67818300AAA151 /* FootprintsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintsTableViewController.swift; sourceTree = "<group>"; };
 		43BB347D1D678A8000AAA151 /* FootprintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintViewController.swift; sourceTree = "<group>"; };
 		43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */,
 				4339FF731D3AD07100CF0EDF /* Main.storyboard */,
 				439A732B1D6E7E1C00FEFE85 /* Profile.xib */,
+				43B841061D70CCA100111B24 /* TrackOrTag.xib */,
 				4339FF761D3AD07100CF0EDF /* Assets.xcassets */,
 				4339FF9D1D3AD0A200CF0EDF /* GoogleService-Info.plist */,
 				4339FF781D3AD07100CF0EDF /* LaunchScreen.storyboard */,
@@ -270,6 +275,7 @@
 				43BB347D1D678A8000AAA151 /* FootprintViewController.swift */,
 				43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */,
 				43BB34811D67E26C00AAA151 /* FootprintTableViewCell.swift */,
+				43B841081D70D37600111B24 /* AddTagViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 				43AE84021D68F89C00B33D9C /* funnydog.jpeg in Resources */,
 				4328A1DE1D6BA2FC0063F034 /* Icon-60@3x.png in Resources */,
 				4339FF9E1D3AD0A200CF0EDF /* GoogleService-Info.plist in Resources */,
+				43B841071D70CCA100111B24 /* TrackOrTag.xib in Resources */,
 				4339FF771D3AD07100CF0EDF /* Assets.xcassets in Resources */,
 				43B3CE4C1D5AB1E1003F5021 /* red.png in Resources */,
 				439A732A1D6E798F00FEFE85 /* ic_menu.png in Resources */,
@@ -594,6 +601,7 @@
 				43BB34801D67DDC500AAA151 /* ProfileCollectionViewCell.swift in Sources */,
 				43BB347E1D678A8000AAA151 /* FootprintViewController.swift in Sources */,
 				43B3CE4E1D5BE087003F5021 /* AddTrackViewController.swift in Sources */,
+				43B841091D70D37600111B24 /* AddTagViewController.swift in Sources */,
 				4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */,
 				4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */,
 				43BB34821D67E26C00AAA151 /* FootprintTableViewCell.swift in Sources */,

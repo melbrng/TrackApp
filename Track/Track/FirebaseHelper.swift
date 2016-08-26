@@ -31,6 +31,7 @@ class FirebaseHelper{
     var testDataLoad = false
     var retrievedImage: UIImage!
     let defaultTrack = Track(name: "Add New Track", desc: "Default track")
+    let tagTrack = Track(name: "TAG", desc: "Tag track")
     
     //MARK: Database References
     
@@ -166,7 +167,9 @@ class FirebaseHelper{
         let reference = TRACK_REF.child("\(uid)/")
         
         //add the "Add New Track" track
+        trackArray.append(tagTrack)
         trackArray.append(defaultTrack)
+
         
         reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
