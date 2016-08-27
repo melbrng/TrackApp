@@ -155,8 +155,11 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         if(indexPath.row == 0){
+            closeTable()
+            performSegueWithIdentifier("AddTag", sender: nil)
+        } else if(indexPath.row == 1){
             closeTable()
             performSegueWithIdentifier("AddTrack", sender: nil)
         } else {

@@ -21,7 +21,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         
         //remove "Add New Track" track
-        trackArray.removeAtIndex(0)
+        //trackArray.removeAtIndex(0)
+        trackArray.removeRange(0...1)
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
 

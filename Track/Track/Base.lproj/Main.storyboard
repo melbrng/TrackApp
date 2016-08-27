@@ -407,7 +407,7 @@
         <!--Tag-->
         <scene sceneID="u3X-Ot-coD">
             <objects>
-                <viewController id="Wh8-g0-NSt" sceneMemberID="viewController">
+                <viewController id="Wh8-g0-NSt" customClass="AddTagViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e9K-GD-mZF"/>
                         <viewControllerLayoutGuide type="bottom" id="oxc-hy-bEv"/>
@@ -419,38 +419,60 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xBF-IA-fRB">
                                 <rect key="frame" x="20" y="132" width="560" height="384"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTn-Us-azR">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTn-Us-azR">
                                 <rect key="frame" x="503" y="84" width="77" height="30"/>
                                 <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchForTag:" destination="Wh8-g0-NSt" eventType="touchUpInside" id="wWD-nP-l1z"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ss6-ZR-VEt">
-                                <rect key="frame" x="20" y="85" width="450" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="450" id="i5w-a1-Cag"/>
-                                </constraints>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPQ-43-yI5">
+                                <rect key="frame" x="20" y="84" width="433" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="uTn-Us-azR" firstAttribute="trailing" secondItem="0r9-0Z-tKf" secondAttribute="trailingMargin" id="0Jn-Ry-wIU"/>
+                            <constraint firstItem="PPQ-43-yI5" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="20" id="2ZM-J5-ulg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uTn-Us-azR" secondAttribute="trailing" id="AX5-cR-Ltn"/>
-                            <constraint firstItem="Ss6-ZR-VEt" firstAttribute="baseline" secondItem="uTn-Us-azR" secondAttribute="baseline" id="B08-sz-pnQ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="PPQ-43-yI5" secondAttribute="leading" id="CAz-VP-oyc"/>
+                            <constraint firstItem="uTn-Us-azR" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="20" id="Csk-Lf-VYY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xBF-IA-fRB" secondAttribute="trailing" id="F2P-ZU-Soc"/>
-                            <constraint firstItem="Ss6-ZR-VEt" firstAttribute="leading" secondItem="xBF-IA-fRB" secondAttribute="leading" id="JMc-ib-maT"/>
                             <constraint firstItem="oxc-hy-bEv" firstAttribute="top" secondItem="xBF-IA-fRB" secondAttribute="bottom" constant="40" id="OcF-JW-ZVp"/>
-                            <constraint firstItem="Ss6-ZR-VEt" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="21" id="ZG8-dI-BTk"/>
-                            <constraint firstItem="uTn-Us-azR" firstAttribute="leading" secondItem="Ss6-ZR-VEt" secondAttribute="trailing" constant="33" id="crX-bY-GMT"/>
+                            <constraint firstItem="uTn-Us-azR" firstAttribute="leading" secondItem="PPQ-43-yI5" secondAttribute="trailing" constant="50" id="c5H-2Z-hYy"/>
                             <constraint firstItem="xBF-IA-fRB" firstAttribute="top" secondItem="uTn-Us-azR" secondAttribute="bottom" constant="18" id="dMw-QQ-L59"/>
+                            <constraint firstItem="xBF-IA-fRB" firstAttribute="top" secondItem="PPQ-43-yI5" secondAttribute="bottom" constant="18" id="lRT-Hf-pKA"/>
                             <constraint firstAttribute="leadingMargin" secondItem="xBF-IA-fRB" secondAttribute="leading" id="s5N-BZ-BgI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tag" id="AEl-mi-SDW">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="cy5-ga-rf8"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VlF-aC-0X8"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="cy5-ga-rf8">
+                            <connections>
+                                <action selector="addTag:" destination="Wh8-g0-NSt" id="GeQ-x2-YmR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VlF-aC-0X8">
+                            <connections>
+                                <action selector="cancelAddTag:" destination="Wh8-g0-NSt" id="f3r-Bz-Toj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="gRx-SM-AJI" id="LXG-Bg-p93"/>
+                        <outlet property="tagMapView" destination="xBF-IA-fRB" id="Z3h-bH-Sc3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="duy-Y9-Ra2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="gRx-SM-AJI">
+                    <connections>
+                        <outlet property="delegate" destination="Wh8-g0-NSt" id="0fT-sB-Bvt"/>
+                        <outlet property="searchContentsController" destination="Wh8-g0-NSt" id="4Fz-31-WbX"/>
+                        <outlet property="searchResultsDataSource" destination="Wh8-g0-NSt" id="Abv-sM-uXJ"/>
+                        <outlet property="searchResultsDelegate" destination="Wh8-g0-NSt" id="tFH-3J-qtO"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4634" y="1082"/>
         </scene>
