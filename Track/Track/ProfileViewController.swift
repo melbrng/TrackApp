@@ -24,10 +24,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         //trackArray.removeAtIndex(0)
         trackArray.removeRange(0...1)
         
-        let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
 
-        let rightBarButtonImage : UIImage? = UIImage(named:"blue.png")!.imageWithRenderingMode(.AlwaysOriginal)
+
+        let rightBarButtonImage : UIImage? = UIImage(named:"ic_mode_edit.png")!.imageWithRenderingMode(.AlwaysOriginal)
         
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelProfile(_:)))
         
         navigationItem.rightBarButtonItem =

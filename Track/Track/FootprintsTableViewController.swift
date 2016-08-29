@@ -16,11 +16,19 @@ class FootprintsTableViewController: UITableViewController {
     var selectedFootprint = Footprint(coordinate: CLLocationCoordinate2D(), image: UIImage())
     
     override func viewDidLoad() {
+        
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelFootprints(_:)))
+
         title = trackName
         
         
     }
 
+    @IBAction func cancelFootprints(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return footprintsArray.count

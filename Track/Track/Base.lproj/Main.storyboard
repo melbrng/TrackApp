@@ -127,7 +127,7 @@
                                                     <attributedString key="attributedText">
                                                         <fragment content="Label">
                                                             <attributes>
-                                                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <font key="NSFont" size="15" name="HelveticaNeue-Thin"/>
                                                             </attributes>
                                                         </fragment>
@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="3112" y="-496"/>
         </scene>
-        <!--Footprints Table View Controller-->
+        <!--Title-->
         <scene sceneID="ftj-YS-US5">
             <objects>
                 <tableViewController id="xLR-Xg-Mu1" customClass="FootprintsTableViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
@@ -226,12 +226,19 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Title" id="Ovq-wq-dMR">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Frk-fS-akU">
+                            <connections>
+                                <action selector="cancelFootprints:" destination="xLR-Xg-Mu1" id="MBt-48-LDE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5D-k5-75T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3923" y="-496"/>
         </scene>
-        <!--Footprint View Controller-->
+        <!--Title-->
         <scene sceneID="Jog-rA-OPT">
             <objects>
                 <viewController id="3nY-Wx-9PE" customClass="FootprintViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
@@ -255,6 +262,13 @@
                             <constraint firstItem="KqV-QB-1JO" firstAttribute="top" secondItem="Dmc-8u-eh3" secondAttribute="bottom" id="mh7-4A-17L"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="ilS-JO-bsb">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="X3V-ng-AOE">
+                            <connections>
+                                <action selector="cancelFootprint:" destination="3nY-Wx-9PE" id="61J-hi-VMz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="footprintImageView" destination="KqV-QB-1JO" id="1Lf-i3-2Sb"/>
                     </connections>
@@ -276,44 +290,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Decribe the Footprint" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="inv-0f-pdb">
-                                <rect key="frame" x="20" y="108" width="560" height="30"/>
+                                <rect key="frame" x="19" y="155" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Track" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Track" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="y1x-Bn-QSV">
                                 <rect key="frame" x="20" y="78" width="516" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p98-zT-bAK">
-                                <rect key="frame" x="545" y="78" width="35" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="Pyz-OD-0W9"/>
-                                </constraints>
+                                <rect key="frame" x="545" y="116" width="35" height="30"/>
                                 <state key="normal" image="ic_track_changes.png"/>
                                 <connections>
-                                    <action selector="selectTrack:" destination="3zf-Nq-oYX" eventType="touchUpInside" id="K2S-1W-506"/>
+                                    <segue destination="Wh8-g0-NSt" kind="show" identifier="AddTag" id="8E2-mv-MBa"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
-                                <rect key="frame" x="19" y="144" width="561" height="404"/>
+                                <rect key="frame" x="19" y="193" width="561" height="355"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mf2-HO-gfg">
+                                <rect key="frame" x="20" y="116" width="516" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZk-Ab-yzx">
+                                <rect key="frame" x="545" y="78" width="35" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="uBv-78-A6y"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="ic_menu.png"/>
+                                <connections>
+                                    <action selector="trackButtonPressed:" destination="3zf-Nq-oYX" eventType="touchUpInside" id="vZb-qA-fNr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="inv-0f-pdb" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" id="0UF-NR-oac"/>
-                            <constraint firstItem="inv-0f-pdb" firstAttribute="trailing" secondItem="v4O-zf-Sxj" secondAttribute="trailingMargin" id="7Iv-3W-Gv1"/>
-                            <constraint firstItem="y1x-Bn-QSV" firstAttribute="top" secondItem="nfW-e7-m9A" secondAttribute="bottom" constant="14" id="7gG-Jm-Xxz"/>
-                            <constraint firstItem="p98-zT-bAK" firstAttribute="trailing" secondItem="inv-0f-pdb" secondAttribute="trailing" id="8xb-bI-hsq"/>
-                            <constraint firstItem="mZW-qh-hbA" firstAttribute="centerX" secondItem="inv-0f-pdb" secondAttribute="centerX" id="IxR-Rj-63w"/>
-                            <constraint firstItem="p98-zT-bAK" firstAttribute="bottom" secondItem="y1x-Bn-QSV" secondAttribute="bottom" id="M12-pZ-zqG"/>
-                            <constraint firstItem="kwP-sp-OEX" firstAttribute="top" secondItem="mZW-qh-hbA" secondAttribute="bottom" constant="8" symbolic="YES" id="Qtb-JE-QIc"/>
-                            <constraint firstItem="mZW-qh-hbA" firstAttribute="top" secondItem="inv-0f-pdb" secondAttribute="bottom" constant="6" id="Vzd-v6-11r"/>
-                            <constraint firstItem="p98-zT-bAK" firstAttribute="leading" secondItem="y1x-Bn-QSV" secondAttribute="trailing" constant="9" id="Xcm-Gr-1a8"/>
-                            <constraint firstItem="inv-0f-pdb" firstAttribute="top" secondItem="y1x-Bn-QSV" secondAttribute="bottom" id="aFD-si-r2l"/>
-                            <constraint firstItem="p98-zT-bAK" firstAttribute="top" secondItem="y1x-Bn-QSV" secondAttribute="top" id="bB0-oA-3uu"/>
-                            <constraint firstItem="mZW-qh-hbA" firstAttribute="trailing" secondItem="inv-0f-pdb" secondAttribute="trailing" id="hHS-YW-j3f"/>
-                            <constraint firstItem="y1x-Bn-QSV" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" id="tsb-JK-qdU"/>
+                            <constraint firstItem="mf2-HO-gfg" firstAttribute="leading" secondItem="y1x-Bn-QSV" secondAttribute="leading" id="1qd-0O-6WA"/>
+                            <constraint firstItem="mf2-HO-gfg" firstAttribute="top" secondItem="p98-zT-bAK" secondAttribute="top" id="3G5-vd-Ggz"/>
+                            <constraint firstItem="p98-zT-bAK" firstAttribute="top" secondItem="jZk-Ab-yzx" secondAttribute="bottom" constant="8" symbolic="YES" id="O2z-Cx-zBt"/>
+                            <constraint firstItem="mZW-qh-hbA" firstAttribute="top" secondItem="inv-0f-pdb" secondAttribute="bottom" constant="8" id="Trd-MM-yL9"/>
+                            <constraint firstItem="kwP-sp-OEX" firstAttribute="top" secondItem="mZW-qh-hbA" secondAttribute="bottom" constant="8" id="VDX-Rr-tZn"/>
+                            <constraint firstItem="mf2-HO-gfg" firstAttribute="trailing" secondItem="y1x-Bn-QSV" secondAttribute="trailing" id="WpH-Ir-lco"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p98-zT-bAK" secondAttribute="trailing" id="bDZ-GL-12V"/>
+                            <constraint firstItem="mf2-HO-gfg" firstAttribute="bottom" secondItem="p98-zT-bAK" secondAttribute="bottom" id="byl-wb-kgY"/>
+                            <constraint firstItem="jZk-Ab-yzx" firstAttribute="bottom" secondItem="y1x-Bn-QSV" secondAttribute="bottom" id="drj-Ys-bmc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="inv-0f-pdb" secondAttribute="trailing" constant="1" id="iok-i9-rtr"/>
+                            <constraint firstItem="mZW-qh-hbA" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" constant="-1" id="kaG-II-U37"/>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="top" secondItem="p98-zT-bAK" secondAttribute="bottom" constant="9" id="kbT-fP-eMT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mZW-qh-hbA" secondAttribute="trailing" id="o7Z-bx-nxg"/>
+                            <constraint firstItem="jZk-Ab-yzx" firstAttribute="leading" secondItem="p98-zT-bAK" secondAttribute="leading" id="qCp-ar-j3q"/>
+                            <constraint firstItem="jZk-Ab-yzx" firstAttribute="trailing" secondItem="p98-zT-bAK" secondAttribute="trailing" id="sMm-kZ-FL0"/>
+                            <constraint firstItem="jZk-Ab-yzx" firstAttribute="leading" secondItem="y1x-Bn-QSV" secondAttribute="trailing" constant="9" id="tBL-rx-UVj"/>
+                            <constraint firstItem="jZk-Ab-yzx" firstAttribute="top" secondItem="y1x-Bn-QSV" secondAttribute="top" id="tJZ-yl-u4q"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="y1x-Bn-QSV" secondAttribute="leading" id="uRk-bh-XAJ"/>
+                            <constraint firstItem="y1x-Bn-QSV" firstAttribute="top" secondItem="nfW-e7-m9A" secondAttribute="bottom" constant="14" id="xno-wr-uG4"/>
+                            <constraint firstItem="inv-0f-pdb" firstAttribute="leading" secondItem="v4O-zf-Sxj" secondAttribute="leadingMargin" constant="-1" id="zcm-TM-xyX"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -330,16 +363,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footprintTagField" destination="mf2-HO-gfg" id="gKi-3C-FO1"/>
                         <outlet property="footprintTextField" destination="inv-0f-pdb" id="Po4-Uk-Bsr"/>
                         <outlet property="trackTextField" destination="y1x-Bn-QSV" id="z0A-8b-H1K"/>
                         <outlet property="trackedImageView" destination="mZW-qh-hbA" id="n1f-3I-mIU"/>
                         <segue destination="YLB-aT-CYp" kind="show" identifier="AddTrack" id="kjZ-EK-Ewj"/>
-                        <segue destination="Wh8-g0-NSt" kind="show" identifier="AddTag" id="Ggp-JU-dd3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVe-Yc-tsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4241" y="300"/>
+            <point key="canvasLocation" x="4356" y="327"/>
         </scene>
         <!--Add Track View Controller-->
         <scene sceneID="Sw9-dA-a1l">
@@ -402,7 +435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQM-24-ECE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3956" y="1082"/>
+            <point key="canvasLocation" x="4023" y="1082"/>
         </scene>
         <!--Tag-->
         <scene sceneID="u3X-Ot-coD">
@@ -416,43 +449,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xBF-IA-fRB">
-                                <rect key="frame" x="20" y="132" width="560" height="384"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBF-IA-fRB">
+                                <rect key="frame" x="20" y="79" width="560" height="437"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTn-Us-azR">
-                                <rect key="frame" x="503" y="84" width="77" height="30"/>
-                                <state key="normal" title="Search"/>
-                                <connections>
-                                    <action selector="searchForTag:" destination="Wh8-g0-NSt" eventType="touchUpInside" id="wWD-nP-l1z"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPQ-43-yI5">
-                                <rect key="frame" x="20" y="84" width="433" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uTn-Us-azR" firstAttribute="trailing" secondItem="0r9-0Z-tKf" secondAttribute="trailingMargin" id="0Jn-Ry-wIU"/>
-                            <constraint firstItem="PPQ-43-yI5" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="20" id="2ZM-J5-ulg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uTn-Us-azR" secondAttribute="trailing" id="AX5-cR-Ltn"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="PPQ-43-yI5" secondAttribute="leading" id="CAz-VP-oyc"/>
-                            <constraint firstItem="uTn-Us-azR" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="20" id="Csk-Lf-VYY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xBF-IA-fRB" secondAttribute="trailing" id="F2P-ZU-Soc"/>
                             <constraint firstItem="oxc-hy-bEv" firstAttribute="top" secondItem="xBF-IA-fRB" secondAttribute="bottom" constant="40" id="OcF-JW-ZVp"/>
-                            <constraint firstItem="uTn-Us-azR" firstAttribute="leading" secondItem="PPQ-43-yI5" secondAttribute="trailing" constant="50" id="c5H-2Z-hYy"/>
-                            <constraint firstItem="xBF-IA-fRB" firstAttribute="top" secondItem="uTn-Us-azR" secondAttribute="bottom" constant="18" id="dMw-QQ-L59"/>
-                            <constraint firstItem="xBF-IA-fRB" firstAttribute="top" secondItem="PPQ-43-yI5" secondAttribute="bottom" constant="18" id="lRT-Hf-pKA"/>
+                            <constraint firstItem="xBF-IA-fRB" firstAttribute="top" secondItem="e9K-GD-mZF" secondAttribute="bottom" constant="15" id="mn0-gW-jg8"/>
                             <constraint firstAttribute="leadingMargin" secondItem="xBF-IA-fRB" secondAttribute="leading" id="s5N-BZ-BgI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tag" id="AEl-mi-SDW">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="cy5-ga-rf8">
-                            <connections>
-                                <action selector="addTag:" destination="Wh8-g0-NSt" id="GeQ-x2-YmR"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="cy5-ga-rf8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VlF-aC-0X8">
                             <connections>
                                 <action selector="cancelAddTag:" destination="Wh8-g0-NSt" id="f3r-Bz-Toj"/>
@@ -460,7 +470,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="gRx-SM-AJI" id="LXG-Bg-p93"/>
+                        <outlet property="searchDisplayController" destination="inl-VT-1Sg" id="dCY-ai-yPe"/>
                         <outlet property="tagMapView" destination="xBF-IA-fRB" id="Z3h-bH-Sc3"/>
                     </connections>
                 </viewController>
@@ -473,8 +483,60 @@
                         <outlet property="searchResultsDelegate" destination="Wh8-g0-NSt" id="tFH-3J-qtO"/>
                     </connections>
                 </searchDisplayController>
+                <searchDisplayController id="inl-VT-1Sg">
+                    <connections>
+                        <outlet property="delegate" destination="Wh8-g0-NSt" id="3QV-dT-tMp"/>
+                        <outlet property="searchContentsController" destination="Wh8-g0-NSt" id="u03-FO-4AS"/>
+                        <outlet property="searchResultsDataSource" destination="Wh8-g0-NSt" id="AME-Mf-Wgi"/>
+                        <outlet property="searchResultsDelegate" destination="Wh8-g0-NSt" id="F9F-un-JVt"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4634" y="1082"/>
+            <point key="canvasLocation" x="4692" y="1082"/>
+        </scene>
+        <!--Tag Search Table View Controller-->
+        <scene sceneID="Fni-Hr-qdD">
+            <objects>
+                <tableViewController storyboardIdentifier="TagSearchTableViewController" id="gQO-dk-2h0" customClass="TagSearchTableViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="npU-k0-kdV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TagSearchCell" textLabel="Dmd-Vf-iqZ" detailTextLabel="KbP-uc-3ef" style="IBUITableViewCellStyleSubtitle" id="Oh3-Dh-Jqc">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oh3-Dh-Jqc" id="fjQ-61-5mf">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dmd-Vf-iqZ">
+                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KbP-uc-3ef">
+                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gQO-dk-2h0" id="7It-yA-N07"/>
+                            <outlet property="delegate" destination="gQO-dk-2h0" id="IVB-nO-Cc9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qXQ-jf-oIf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5321" y="1082"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="8Ga-Iy-IFk">
@@ -556,6 +618,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_menu.png" width="24" height="24"/>
         <image name="ic_track_changes.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

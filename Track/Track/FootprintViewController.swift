@@ -18,5 +18,13 @@ class FootprintViewController: UIViewController {
     override func viewDidLoad() {
 
         footprintImageView.image = footprint.image
+        
+        let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelFootprint(_:)))
+
+    }
+    
+    @IBAction func cancelFootprint(sender: AnyObject) {
+     self.navigationController?.popViewControllerAnimated(true)
     }
 }

@@ -13,24 +13,67 @@ protocol AddTagViewControllerDelegate {
     func addTag(sender: AddTagViewController)
 }
 
-class AddTagViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate {
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
+class AddTagViewController: UIViewController{
     
     var delegate: AddTagViewControllerDelegate?
+    var selectedPin:MKPlacemark? = nil
     let request = MKLocalSearchRequest()
-
+    var searchController: UISearchController!
+    let locationManager = CLLocationManager()
+    var selectedAnnotation:MKAnnotation? = nil
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tagMapView: MKMapView!
+    
+    @IBOutlet weak var tagSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(addTag(_:)))
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         
+        tagMapView.delegate = self
+        
+        //set up the search results VC
+        let tagSearchTableViewController = storyboard!.instantiateViewControllerWithIdentifier("TagSearchTableViewController") as! TagSearchTableViewController
+        searchController = UISearchController(searchResultsController: tagSearchTableViewController)
+        searchController?.searchResultsUpdater = tagSearchTableViewController
+        
+        //set up the search bar and embed in the nav bar
+        let searchBar = searchController.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = searchController?.searchBar
+        
+        //search controller appearance
+        //want search bar accessible at all times
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        //gives modal overlay semi-transparent background
+        searchController.dimsBackgroundDuringPresentation = true
+        
+        //limits overlap area to VC frame instead of entire nav controller
+        definesPresentationContext = true
+        
+        //pass along the handle of the tagMapView onto the tagSearchTVC
+        tagSearchTableViewController.mapView = tagMapView
+        
+        tagSearchTableViewController.handleMapSearchDelegate = self
+        
+        //nav bar buttons
+//        let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
+//        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(addTag(_:)))
+//        
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_not_interested.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(cancelAddTag(_:)))
-
-        // Do any additional setup after loading the view.
+        
         
    }
 
@@ -39,37 +82,81 @@ class AddTagViewController: UIViewController,UITableViewDelegate,UITableViewData
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func addTag(sender: AnyObject) {
-    }
     
     @IBAction func cancelAddTag(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
-    @IBAction func searchForTag(sender: AnyObject) {
+
+
+}
+
+    extension AddTagViewController : CLLocationManagerDelegate {
+        func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+            if status == .AuthorizedWhenInUse {
+                locationManager.requestLocation()
+            }
+        }
         
-        request.naturalLanguageQuery = searchTextField.text
+        func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let location = locations.first {
+                //print(location)
+                let span = MKCoordinateSpanMake(0.05, 0.05)
+                let region = MKCoordinateRegion(center: location.coordinate,span: span)
+                tagMapView.setRegion(region, animated: true)
+            }
+        }
         
-        request.region = tagMapView.region
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+            print(error)
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    extension AddTagViewController: HandleMapSearch {
+        func dropPinZoomIn(placemark:MKPlacemark){
+            
+            // cache the pin
+            selectedPin = placemark
+            
+            // clear existing pins
+            tagMapView.removeAnnotations(tagMapView.annotations)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = placemark.coordinate
+            annotation.title = placemark.name
+            if let city = placemark.locality,
+                let state = placemark.administrativeArea {
+                annotation.subtitle = String(city + " " + state)
+            }
+            tagMapView.addAnnotation(annotation)
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let region = MKCoordinateRegionMake(placemark.coordinate, span)
+            tagMapView.setRegion(region, animated: true)
+        }
     }
-    */
 
+
+    extension AddTagViewController : MKMapViewDelegate {
+        func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+
+            let reuseId = "pin"
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            
+            if annotation is MKUserLocation {
+                return nil
+            } else {
+                pinView?.pinTintColor = UIColor.orangeColor()
+            }
+            
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+//            pinView?.leftCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            return pinView
+        }
+        
+        func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+            print("selected " + ((view.annotation?.title)!)!)
+            selectedAnnotation = view.annotation
+            delegate?.addTag(self)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
 }

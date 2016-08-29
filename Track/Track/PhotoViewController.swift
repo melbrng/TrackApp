@@ -21,6 +21,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     @IBOutlet weak var trackedImageView: UIImageView!
     @IBOutlet weak var trackTextField: UITextField!
+    @IBOutlet weak var footprintTagField: UITextField!
     @IBOutlet weak var footprintTextField: UITextField!
     
     var footprint = Footprint(coordinate: CLLocationCoordinate2D(),image: UIImage())
@@ -35,6 +36,14 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let button = UIButton.init(type: .Custom)
+//        let image = UIImage.init(named: "ic_menu.png")
+//        button.setBackgroundImage(image, forState: .Normal)
+//        button.addTarget(self, action: #selector(buttonPressed), forControlEvents: .TouchUpInside)
+//        button.frame = CGRectMake(0,0,40,40)
+//        button.backgroundColor = UIColor.whiteColor()
+//        navigationItem.titleView = button
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(add(_:)))
@@ -123,6 +132,12 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     }
     
     //MARK: TableView Delegates and stuff
+    
+    @IBAction func trackButtonPressed(sender: AnyObject) {
+        tableViewPicker.hidden ? openTable() : closeTable()
+    }
+
+    
     func createTableViewPicker(){
         
         tableViewPicker.frame = CGRect(x: 0, y: 0, width: 286, height: 291)
@@ -158,12 +173,9 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
 
         if(indexPath.row == 0){
             closeTable()
-            performSegueWithIdentifier("AddTag", sender: nil)
-        } else if(indexPath.row == 1){
-            closeTable()
             performSegueWithIdentifier("AddTrack", sender: nil)
         } else {
-            //set the footprint name 
+            //set the track name
             trackTextField.text = trackItems[indexPath.row].trackName
             toSaveTrackUID = trackItems[indexPath.row].trackUID
             closeTable()
@@ -268,7 +280,10 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     //MARK: Add Tag Delegate
     
     func addTag(sender: AddTagViewController) {
-        
+        let annotation = sender.selectedAnnotation
+        footprint.coordinate = (annotation?.coordinate)!
+        footprintTagField.text = (annotation?.title)!
+
     }
   
 }
