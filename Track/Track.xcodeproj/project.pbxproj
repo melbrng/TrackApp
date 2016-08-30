@@ -31,6 +31,9 @@
 		4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4339FFA71D3C08DA00CF0EDF /* Track.swift */; };
 		4339FFAD1D3C12A700CF0EDF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */; };
 		4339FFAF1D3C12C900CF0EDF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4339FFAE1D3C12C900CF0EDF /* MapKit.framework */; };
+		434CDB551D7603D80007EE4F /* ic_mode_edit2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CDB541D7603D80007EE4F /* ic_mode_edit2x.png */; };
+		434CDB571D7604C10007EE4F /* ic_track_changes2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CDB561D7604C10007EE4F /* ic_track_changes2x.png */; };
+		434CDB591D7605BA0007EE4F /* ic_add_circle_outline2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CDB581D7605BA0007EE4F /* ic_add_circle_outline2x.png */; };
 		436997C51D666A7900F8644A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436997C41D666A7900F8644A /* ProfileViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
 		439A73221D6E66C200FEFE85 /* ic_add_circle_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */; };
@@ -110,6 +113,9 @@
 		4339FFA71D3C08DA00CF0EDF /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		4339FFAC1D3C12A700CF0EDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4339FFAE1D3C12C900CF0EDF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		434CDB541D7603D80007EE4F /* ic_mode_edit2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_mode_edit2x.png; sourceTree = "<group>"; };
+		434CDB561D7604C10007EE4F /* ic_track_changes2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_track_changes2x.png; sourceTree = "<group>"; };
+		434CDB581D7605BA0007EE4F /* ic_add_circle_outline2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_circle_outline2x.png; sourceTree = "<group>"; };
 		436997C41D666A7900F8644A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_circle_outline.png; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 		4328A1E71D6BCFF50063F034 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				434CDB581D7605BA0007EE4F /* ic_add_circle_outline2x.png */,
+				434CDB561D7604C10007EE4F /* ic_track_changes2x.png */,
+				434CDB541D7603D80007EE4F /* ic_mode_edit2x.png */,
 				43C789A81D74F52D0052AB89 /* ic_mode_edit.png */,
 				439A73291D6E798F00FEFE85 /* ic_menu.png */,
 				439A73271D6E6B5800FEFE85 /* ic_arrow_back.png */,
@@ -428,9 +437,12 @@
 				439A732C1D6E7E1C00FEFE85 /* Profile.xib in Resources */,
 				43B3CE461D5AB1CF003F5021 /* blue.png in Resources */,
 				43B3CE4A1D5AB1DB003F5021 /* purple.png in Resources */,
+				434CDB571D7604C10007EE4F /* ic_track_changes2x.png in Resources */,
 				4328A1DD1D6BA2FC0063F034 /* Icon-60@2x.png in Resources */,
 				439A73241D6E66D200FEFE85 /* ic_not_interested.png in Resources */,
+				434CDB591D7605BA0007EE4F /* ic_add_circle_outline2x.png in Resources */,
 				4328A1DC1D6BA2FC0063F034 /* Icon-40@3x.png in Resources */,
+				434CDB551D7603D80007EE4F /* ic_mode_edit2x.png in Resources */,
 				439A73281D6E6B5800FEFE85 /* ic_arrow_back.png in Resources */,
 				43C789A91D74F52D0052AB89 /* ic_mode_edit.png in Resources */,
 				4328A1E11D6BA7660063F034 /* ic_nature_people.png in Resources */,
