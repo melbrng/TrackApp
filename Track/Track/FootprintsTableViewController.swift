@@ -29,6 +29,7 @@ class FootprintsTableViewController: UITableViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    //MARK: TableView
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return footprintsArray.count
@@ -65,6 +66,7 @@ class FootprintsTableViewController: UITableViewController {
         
     }
     
+    //MARK: Segue 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if(segue.identifier == "ShowFootprint"){
@@ -79,3 +81,5 @@ class FootprintsTableViewController: UITableViewController {
     }
 
 }
+
+
