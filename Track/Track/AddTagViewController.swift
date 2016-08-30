@@ -67,10 +67,7 @@ class AddTagViewController: UIViewController{
         
         tagSearchTableViewController.handleMapSearchDelegate = self
         
-        //nav bar buttons
-//        let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
-//        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(addTag(_:)))
-//        
+        
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_not_interested.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(cancelAddTag(_:)))
         
@@ -79,7 +76,6 @@ class AddTagViewController: UIViewController{
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
@@ -138,10 +134,7 @@ class AddTagViewController: UIViewController{
     extension AddTagViewController : MKMapViewDelegate {
         func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
 
-            var reuseId = "pin"
-//            if annotation is MKUserLocation {
-//                reuseId = "currentPin"
-//            }
+            let reuseId = "pin"
             
             var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
             
