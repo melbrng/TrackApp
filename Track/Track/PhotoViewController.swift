@@ -15,9 +15,7 @@ protocol PhotoViewControllerDelegate {
 }
 
 
-
-
-class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewControllerDelegate, AddTagViewControllerDelegate,UITableViewDelegate, UITableViewDataSource {
+class PhotoViewController: UIViewController  {
     
     @IBOutlet weak var trackedImageView: UIImageView!
     @IBOutlet weak var trackTextField: UITextField!
@@ -36,14 +34,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let button = UIButton.init(type: .Custom)
-//        let image = UIImage.init(named: "ic_menu.png")
-//        button.setBackgroundImage(image, forState: .Normal)
-//        button.addTarget(self, action: #selector(buttonPressed), forControlEvents: .TouchUpInside)
-//        button.frame = CGRectMake(0,0,40,40)
-//        button.backgroundColor = UIColor.whiteColor()
-//        navigationItem.titleView = button
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(add(_:)))
@@ -71,7 +61,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: Add Footprint
@@ -119,25 +108,8 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
 //        }
 //    }
     
-    //MARK: Keyboard
-    //dismiss keyboard on return key
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        if(textField == footprintTextField){
-            footprintTextField.resignFirstResponder()
-        }else{
-            trackTextField.resignFirstResponder()
-        }
-        return true
-    }
-    
-    //MARK: TableView Delegates and stuff
-    
-    @IBAction func trackButtonPressed(sender: AnyObject) {
-        tableViewPicker.hidden ? openTable() : closeTable()
-    }
 
-    
+
     func createTableViewPicker(){
         
         tableViewPicker.frame = CGRect(x: 0, y: 0, width: 286, height: 291)
@@ -154,34 +126,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         self.view.addSubview(tableViewPicker)
         
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.trackItems.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell:UITableViewCell = tableViewPicker.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        
-        cell.textLabel?.text = self.trackItems[indexPath.row].trackName
-        
-        return cell
-        
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        if(indexPath.row == 0){
-            closeTable()
-            performSegueWithIdentifier("AddTrack", sender: nil)
-        } else {
-            //set the track name
-            trackTextField.text = trackItems[indexPath.row].trackName
-            toSaveTrackUID = trackItems[indexPath.row].trackUID
-            closeTable()
-        }
-    }
-    
     func openTable()
     {
         self.tableViewPicker.hidden = false
@@ -218,6 +163,10 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
         tableViewPicker.hidden ? openTable() : closeTable()
     }
 
+    
+    @IBAction func trackButtonPressed(sender: AnyObject) {
+        tableViewPicker.hidden ? openTable() : closeTable()
+    }
 
     
     //MARK: Segue
@@ -236,54 +185,106 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, AddTrackViewCo
             
         }
     }
-    
-    //MARK: Add Track Delegate
-    
-    func addTrack(sender: AddTrackViewController) {
-        
-        let newTrack = sender.newTrack
-        trackTextField.text = newTrack.trackName
-        
-        
-        //query the newly added Track in order to retrieve trackUID
-        let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
-        
-        reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+}
+
+
+    //MARK: Keyboard
+    //dismiss keyboard on return key
+    extension PhotoViewController: UITextFieldDelegate {
+        func textFieldShouldReturn(textField: UITextField) -> Bool {
             
-            if (snapshot.exists()) {
-
-                let track = Track.init(name: snapshot.value!["name"] as! String,
-                    desc: snapshot.value!["desc"] as! String,
-                    uid: snapshot.value!["trackUID"] as! String,
-                    imagePath: snapshot.value!["imagePath"] as! String)
-                
-                //use local image
-                track.trackImage = self.footprint.image!
-                
-                //set for use when setting footprint's trackUID
-                self.toSaveTrackUID = track.trackUID
-
-                firebaseHelper.trackArray.append(track)
-                self.trackItems = firebaseHelper.trackArray
-                
-                self.tableViewPicker.reloadData()
-
-            } else {
-                print("No Snapshot?!")
+            if(textField == footprintTextField){
+                footprintTextField.resignFirstResponder()
+            }else{
+                trackTextField.resignFirstResponder()
             }
-            
-            
-        })
+            return true
+        }
+    }
+
+    //MARK: TableView Delegate
+    extension PhotoViewController:UITableViewDelegate, UITableViewDataSource {
         
+        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return self.trackItems.count
+        }
+
+        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            
+            let cell:UITableViewCell = tableViewPicker.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+            
+            cell.textLabel?.text = self.trackItems[indexPath.row].trackName
+            
+            return cell
+            
+        }
+
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            
+            if(indexPath.row == 0){
+                closeTable()
+                performSegueWithIdentifier("AddTrack", sender: nil)
+            } else {
+                //set the track name
+                trackTextField.text = trackItems[indexPath.row].trackName
+                toSaveTrackUID = trackItems[indexPath.row].trackUID
+                closeTable()
+            }
+        }
+
+    }
+
+    //MARK: Add Track Delegate
+    extension PhotoViewController:AddTrackViewControllerDelegate {
+    
+        func addTrack(sender: AddTrackViewController) {
+            
+            let newTrack = sender.newTrack
+            trackTextField.text = newTrack.trackName
+            
+            
+            //query the newly added Track in order to retrieve trackUID
+            let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
+            
+            reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+                
+                if (snapshot.exists()) {
+
+                    let track = Track.init(name: snapshot.value!["name"] as! String,
+                        desc: snapshot.value!["desc"] as! String,
+                        uid: snapshot.value!["trackUID"] as! String,
+                        imagePath: snapshot.value!["imagePath"] as! String)
+                    
+                    //use local image
+                    track.trackImage = self.footprint.image!
+                    
+                    //set for use when setting footprint's trackUID
+                    self.toSaveTrackUID = track.trackUID
+
+                    firebaseHelper.trackArray.append(track)
+                    self.trackItems = firebaseHelper.trackArray
+                    
+                    self.tableViewPicker.reloadData()
+
+                } else {
+                    print("No Snapshot?!")
+                }
+                
+                
+            })
+            
+        }
     }
     
     //MARK: Add Tag Delegate
-    
-    func addTag(sender: AddTagViewController) {
-        let annotation = sender.selectedAnnotation
-        footprint.coordinate = (annotation?.coordinate)!
-        footprintTagField.text = (annotation?.title)!
 
-    }
+    extension PhotoViewController:AddTagViewControllerDelegate {
+    
+        func addTag(sender: AddTagViewController) {
+            let annotation = sender.selectedAnnotation
+            footprint.coordinate = (annotation?.coordinate)!
+            footprintTagField.text = (annotation?.title)!
+
+        }
   
 }
