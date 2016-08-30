@@ -138,18 +138,22 @@ class AddTagViewController: UIViewController{
     extension AddTagViewController : MKMapViewDelegate {
         func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
 
-            let reuseId = "pin"
+            var reuseId = "pin"
+//            if annotation is MKUserLocation {
+//                reuseId = "currentPin"
+//            }
+            
             var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
             
             if annotation is MKUserLocation {
-                return nil
+                pinView?.pinTintColor = UIColor.blueColor()
             } else {
-                pinView?.pinTintColor = UIColor.orangeColor()
+                pinView?.pinTintColor = UIColor.greenColor()
             }
             
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
-//            pinView?.leftCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+
             return pinView
         }
         

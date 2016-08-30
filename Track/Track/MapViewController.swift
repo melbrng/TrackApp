@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 
-class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoViewControllerDelegate {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -41,21 +41,10 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         cameraPicker.delegate = self
         photoPicker.delegate = self
     
-//        let button = UIButton.init(type: .Custom)
-//        let image = UIImage.init(named: "ic_menu.png")
-//        button.setBackgroundImage(image, forState: .Normal)
-//        button.addTarget(self, action: #selector(buttonPressed), forControlEvents: .TouchUpInside)
-//        button.frame = CGRectMake(0,0,40,40)
-//        button.backgroundColor = UIColor.whiteColor()
-//        navigationItem.titleView = button
         
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         navigationController?.navigationBar.translucent = false
-        
-        profileView = NSBundle.mainBundle().loadNibNamed("Profile", owner: self, options: nil).last as! UIView
-       // settings.frame = CGRectMake(0, -self.view.frame.size.height + 66, self.view.frame.size.width, self.view.frame.size.height)
 
-        //createProfileView()
         
         UIToolbar.appearance().tintColor = UIColor.whiteColor()
         navigationController?.toolbar.translucent = false
@@ -77,145 +66,13 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         super.viewDidAppear(true)
 
     }
-//    
-//    func buttonPressed(){
-//        profileView.hidden ? openView() : closeView()
-//    }
-//    
-//    
-//    func createProfileView(){
-//        
-//        profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
-//        // profileView = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291))
-//        profileView.alpha = 0
-//        profileView.backgroundColor = UIColor.whiteColor()
-//        profileView.hidden = true
-//        profileView.userInteractionEnabled = true
-//        
-//        
-//        self.view.addSubview(profileView)
-//        
-//    }
-//    
-//    func openView()
-//    {
-//        profileView.hidden = false
-//        
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
-//                                    self.profileView.alpha = 1
-//        })
-//    }
-//    
-//    func closeView()
-//    {
-//        UIView.animateWithDuration(0.3,
-//                                   animations: {
-//                                    self.profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 291)
-//                                    self.profileView.alpha = 0
-//            },
-//                                   completion: { finished in
-//                                    self.profileView.hidden = true
-//            }
-//        )
-//    }
+
     
     @IBAction func profileButtonTouched(sender: AnyObject) {
         
         performSegueWithIdentifier("ShowProfile", sender: sender)
     }
-     // MARK: Location Manager
-    
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if(status == .AuthorizedWhenInUse || status == .AuthorizedAlways){
-            mapView.showsUserLocation = true
-            mapView.showsPointsOfInterest = true
-            
-        } else {
-            manager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        if let updatedLocation = locations.last {
-            
-            //set location coordinates for image to current location
 
-            let footprint = Footprint(coordinate: updatedLocation.coordinate, image: selectedImage)
-            
-            selectedFootprint = footprint
-        
-        }
-        
-        
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error.description)
-    }
-    
-    // MARK: Map View
-//    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-//        
-//        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
-//        mapView .setRegion(region, animated: true)
-//        
-//        userPointAnnotation.coordinate = userLocation.coordinate
-//        userPointAnnotation.title = "Where is Mel?"
-//        userPointAnnotation.subtitle = "Mel is here!"
-//        
-//        mapView.addAnnotation(userPointAnnotation)
-//    }
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        // Don't want to show a custom image if the annotation is the user's location.
-//        guard !annotation.isKindOfClass(MKUserLocation) else {
-//            return nil
-//        }
-        
-        if let annotation = annotation as? Footprint {
-        
-            let annotationIdentifier = "AnnotationIdentifier"
-            
-            var annotationView: MKAnnotationView?
-            
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = annotation
-            }
-            else {
-                let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-                annotationView = av
-            }
-            
-            if let annotationView = annotationView {
-                
-                // Configure your annotation view here
-                annotationView.canShowCallout = true
-
-            }
-            
-            return annotationView
-        }
-        
-        return nil
-        
-    }
-    
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        selectedFootprint = view.annotation as! Footprint
-        
-        self.performSegueWithIdentifier("ShowFootprint", sender: nil)
-    
-    }
-    
     
     
     // MARK: Track 
@@ -253,27 +110,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         presentViewController(alertController, animated: true, completion: nil)
         
     }
-    
-    // MARK: ImagePicker Delegates
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
 
-        selectedImage = image
-        
-        locationManager.requestLocation()
-
-
-        dismissViewControllerAnimated(true) { () -> Void  in
-            
-            self.performSegueWithIdentifier("SetTrack", sender: nil)
-        }
-        
-
-    }
     
     func reloadAnnotations(){
         
@@ -281,17 +118,7 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
         mapView.addAnnotations(annotations)
 
     }
-    
-    // MARK: PhotoViewControllerDelegate
-    func addFootprint(sender: PhotoViewController) {
-        
-        annotations.append(sender.footprint)
-        
-        reloadAnnotations()
 
-        
-    }
-    
     
     // MARK: Segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -312,6 +139,141 @@ class MapViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDel
             
         }
 
+    }
+}
+
+
+// MARK: PhotoViewControllerDelegate
+
+extension MapViewController:PhotoViewControllerDelegate{
+    
+    func addFootprint(sender: PhotoViewController) {
+
+        annotations.append(sender.footprint)
+
+        reloadAnnotations()
+
+    }
+}
+
+// MARK: ImagePicker Delegates
+extension MapViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        selectedImage = image
+        
+        locationManager.requestLocation()
+        
+        dismissViewControllerAnimated(true) { () -> Void  in
+            
+            self.performSegueWithIdentifier("SetTrack", sender: nil)
+        }
+    
+    }
+    
+}
+
+    // MARK: Map View
+extension MapViewController:MKMapViewDelegate{
+    
+
+    //    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+    //
+    //        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
+    //        mapView .setRegion(region, animated: true)
+    //
+    //        userPointAnnotation.coordinate = userLocation.coordinate
+    //        userPointAnnotation.title = "Where is Mel?"
+    //        userPointAnnotation.subtitle = "Mel is here!"
+    //
+    //        mapView.addAnnotation(userPointAnnotation)
+    //    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        // Don't want to show a custom image if the annotation is the user's location.
+        //        guard !annotation.isKindOfClass(MKUserLocation) else {
+        //            return nil
+        //        }
+        
+        if let annotation = annotation as? Footprint {
+            
+            let annotationIdentifier = "AnnotationIdentifier"
+            
+            var annotationView: MKAnnotationView?
+            
+            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
+                annotationView?.annotation = annotation
+            }
+            else {
+                let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                annotationView = av
+            }
+            
+            if let annotationView = annotationView {
+                
+                // Configure your annotation view here
+                annotationView.canShowCallout = true
+                
+            }
+            
+            return annotationView
+        }
+        
+        return nil
+        
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        selectedFootprint = view.annotation as! Footprint
+        
+        self.performSegueWithIdentifier("ShowFootprint", sender: nil)
+        
+    }
+
+
+}
+
+
+// MARK: Location Manager
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if(status == .AuthorizedWhenInUse || status == .AuthorizedAlways){
+            mapView.showsUserLocation = true
+            mapView.showsPointsOfInterest = true
+            
+        } else {
+            manager.requestWhenInUseAuthorization()
+        }
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        
+        if let updatedLocation = locations.last {
+            
+            //set location coordinates for image to current location
+            
+            let footprint = Footprint(coordinate: updatedLocation.coordinate, image: selectedImage)
+            
+            selectedFootprint = footprint
+            
+        }
+        
+        
+        locationManager.stopUpdatingLocation()
+    }
+
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error.description)
     }
 }
 
