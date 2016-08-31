@@ -11,6 +11,7 @@ import UIKit
 class ProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var trackImageView: UIImageView!
     @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var footprintCountLabel: UILabel!
     
     func isSelected(selected: Bool){
         if(selected){

@@ -129,7 +129,8 @@ class FirebaseHelper{
             if (error != nil) {
                 print(error.debugDescription)
             } else {
-                self.retrievedImage = UIImage(data: data!)
+                let image = UIImage(data: data!)
+                self.retrievedImage = image?.decompressedImage
                 let flag = true
                 completion(success: flag)
 

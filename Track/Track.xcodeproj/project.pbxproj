@@ -36,6 +36,8 @@
 		434CDB591D7605BA0007EE4F /* ic_add_circle_outline2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434CDB581D7605BA0007EE4F /* ic_add_circle_outline2x.png */; };
 		436997C51D666A7900F8644A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436997C41D666A7900F8644A /* ProfileViewController.swift */; };
 		43954B651D3D65FC00ED41A4 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */; };
+		43961A191D777EC400B67986 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43961A181D777EC400B67986 /* UIImage+Resize.swift */; };
+		43961A1C1D777F4E00B67986 /* TrackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43961A1B1D777F4E00B67986 /* TrackLayout.swift */; };
 		439A73221D6E66C200FEFE85 /* ic_add_circle_outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */; };
 		439A73241D6E66D200FEFE85 /* ic_not_interested.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73231D6E66D200FEFE85 /* ic_not_interested.png */; };
 		439A73261D6E66DC00FEFE85 /* ic_track_changes.png in Resources */ = {isa = PBXBuildFile; fileRef = 439A73251D6E66DC00FEFE85 /* ic_track_changes.png */; };
@@ -58,6 +60,7 @@
 		43C789A71D74BA450052AB89 /* TagSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C789A61D74BA450052AB89 /* TagSearchTableViewController.swift */; };
 		43C789A91D74F52D0052AB89 /* ic_mode_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 43C789A81D74F52D0052AB89 /* ic_mode_edit.png */; };
 		43D6EE631D418C6900A2DF31 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6EE621D418C6900A2DF31 /* User.swift */; };
+		43E3A31C1D777A8500FE1A6B /* RoundedCornersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E3A31B1D777A8500FE1A6B /* RoundedCornersView.swift */; };
 		80716D0B09302EDD9CDCFF1D /* Pods_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DECB8F5B21EA16FE76BE8C0 /* Pods_Track.framework */; };
 		9D32F4C32CD23ECF50ABF880 /* Pods_TrackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271997515E6E0983A89A0111 /* Pods_TrackTests.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +121,8 @@
 		434CDB581D7605BA0007EE4F /* ic_add_circle_outline2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_circle_outline2x.png; sourceTree = "<group>"; };
 		436997C41D666A7900F8644A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		43961A181D777EC400B67986 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		43961A1B1D777F4E00B67986 /* TrackLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackLayout.swift; sourceTree = "<group>"; };
 		439A73211D6E66C200FEFE85 /* ic_add_circle_outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add_circle_outline.png; sourceTree = "<group>"; };
 		439A73231D6E66D200FEFE85 /* ic_not_interested.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_not_interested.png; sourceTree = "<group>"; };
 		439A73251D6E66DC00FEFE85 /* ic_track_changes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_track_changes.png; sourceTree = "<group>"; };
@@ -135,11 +140,12 @@
 		43B841081D70D37600111B24 /* AddTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
 		43BB347B1D67818300AAA151 /* FootprintsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintsTableViewController.swift; sourceTree = "<group>"; };
 		43BB347D1D678A8000AAA151 /* FootprintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintViewController.swift; sourceTree = "<group>"; };
-		43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
-		43BB34811D67E26C00AAA151 /* FootprintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintTableViewCell.swift; sourceTree = "<group>"; };
+		43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCollectionViewCell.swift; path = Track/ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		43BB34811D67E26C00AAA151 /* FootprintTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FootprintTableViewCell.swift; path = Track/FootprintTableViewCell.swift; sourceTree = "<group>"; };
 		43C789A61D74BA450052AB89 /* TagSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSearchTableViewController.swift; sourceTree = "<group>"; };
 		43C789A81D74F52D0052AB89 /* ic_mode_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_mode_edit.png; sourceTree = "<group>"; };
 		43D6EE621D418C6900A2DF31 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		43E3A31B1D777A8500FE1A6B /* RoundedCornersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersView.swift; sourceTree = "<group>"; };
 		60311EA62C719B42BEAB4AE1 /* Pods_TrackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DEE34DF705F452FA36DC55 /* Pods-TrackUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrackUITests/Pods-TrackUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A6A07D5A6E9287E3D59FD03A /* Pods-Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Track/Pods-Track.debug.xcconfig"; sourceTree = "<group>"; };
@@ -233,18 +239,16 @@
 		4339FF6E1D3AD07100CF0EDF /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				43961A1A1D777EE900B67986 /* Layouts */,
+				43961A151D777D5300B67986 /* Extensions */,
 				4328A1E71D6BCFF50063F034 /* images */,
-				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
-				4339FFAB1D3C091200CF0EDF /* Controllers */,
+				43961A111D777C8D00B67986 /* Helper */,
 				4339FFAA1D3C090B00CF0EDF /* Models */,
-				4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */,
-				4339FF731D3AD07100CF0EDF /* Main.storyboard */,
-				439A732B1D6E7E1C00FEFE85 /* Profile.xib */,
-				43B841061D70CCA100111B24 /* TrackOrTag.xib */,
-				4339FF761D3AD07100CF0EDF /* Assets.xcassets */,
-				4339FF9D1D3AD0A200CF0EDF /* GoogleService-Info.plist */,
-				4339FF781D3AD07100CF0EDF /* LaunchScreen.storyboard */,
-				4339FF7B1D3AD07100CF0EDF /* Info.plist */,
+				43E3A31A1D777A5F00FE1A6B /* Views */,
+				4339FFAB1D3C091200CF0EDF /* Controllers */,
+				43961A131D777CD200B67986 /* Other */,
+				43961A121D777CBC00B67986 /* Storyboard and Xibs */,
+				43961A141D777CE000B67986 /* Assets and Supporting */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -285,14 +289,76 @@
 				4339FFA61D3C08DA00CF0EDF /* PhotoViewController.swift */,
 				43BB347D1D678A8000AAA151 /* FootprintViewController.swift */,
 				43BB347B1D67818300AAA151 /* FootprintsTableViewController.swift */,
-				43BB34811D67E26C00AAA151 /* FootprintTableViewCell.swift */,
 				43B841081D70D37600111B24 /* AddTagViewController.swift */,
 				43C789A61D74BA450052AB89 /* TagSearchTableViewController.swift */,
 				43B3CE4D1D5BE087003F5021 /* AddTrackViewController.swift */,
 				436997C41D666A7900F8644A /* ProfileViewController.swift */,
-				43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		43961A111D777C8D00B67986 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				43954B641D3D65FC00ED41A4 /* FirebaseHelper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		43961A121D777CBC00B67986 /* Storyboard and Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				4339FF731D3AD07100CF0EDF /* Main.storyboard */,
+				439A732B1D6E7E1C00FEFE85 /* Profile.xib */,
+				43B841061D70CCA100111B24 /* TrackOrTag.xib */,
+				4339FF781D3AD07100CF0EDF /* LaunchScreen.storyboard */,
+			);
+			name = "Storyboard and Xibs";
+			sourceTree = "<group>";
+		};
+		43961A131D777CD200B67986 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				4339FF6F1D3AD07100CF0EDF /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		43961A141D777CE000B67986 /* Assets and Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				4339FF761D3AD07100CF0EDF /* Assets.xcassets */,
+				4339FF9D1D3AD0A200CF0EDF /* GoogleService-Info.plist */,
+				4339FF7B1D3AD07100CF0EDF /* Info.plist */,
+			);
+			name = "Assets and Supporting";
+			sourceTree = "<group>";
+		};
+		43961A151D777D5300B67986 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				43961A181D777EC400B67986 /* UIImage+Resize.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		43961A1A1D777EE900B67986 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				43961A1B1D777F4E00B67986 /* TrackLayout.swift */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		43E3A31A1D777A5F00FE1A6B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				43BB34811D67E26C00AAA151 /* FootprintTableViewCell.swift */,
+				43BB347F1D67DDC500AAA151 /* ProfileCollectionViewCell.swift */,
+				43E3A31B1D777A8500FE1A6B /* RoundedCornersView.swift */,
+			);
+			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		55D50FECAAD164081861E39C /* Pods */ = {
@@ -614,7 +680,9 @@
 				436997C51D666A7900F8644A /* ProfileViewController.swift in Sources */,
 				4339FFA21D3AEE0500CF0EDF /* LoginViewController.swift in Sources */,
 				43BB347C1D67818300AAA151 /* FootprintsTableViewController.swift in Sources */,
+				43961A191D777EC400B67986 /* UIImage+Resize.swift in Sources */,
 				4339FF701D3AD07100CF0EDF /* AppDelegate.swift in Sources */,
+				43E3A31C1D777A8500FE1A6B /* RoundedCornersView.swift in Sources */,
 				43D6EE631D418C6900A2DF31 /* User.swift in Sources */,
 				4339FFA51D3C068700CF0EDF /* MapViewController.swift in Sources */,
 				43BB34801D67DDC500AAA151 /* ProfileCollectionViewCell.swift in Sources */,
@@ -624,6 +692,7 @@
 				4339FFA81D3C08DA00CF0EDF /* PhotoViewController.swift in Sources */,
 				4339FFA91D3C08DA00CF0EDF /* Track.swift in Sources */,
 				43C789A71D74BA450052AB89 /* TagSearchTableViewController.swift in Sources */,
+				43961A1C1D777F4E00B67986 /* TrackLayout.swift in Sources */,
 				43BB34821D67E26C00AAA151 /* FootprintTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

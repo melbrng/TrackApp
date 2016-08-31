@@ -93,87 +93,78 @@
             </objects>
             <point key="canvasLocation" x="1879" y="300"/>
         </scene>
-        <!--Tracks-->
-        <scene sceneID="blh-GJ-x7j">
+        <!--Profile View Controller-->
+        <scene sceneID="2eI-1a-RWK">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9kV-X7-pTb" customClass="ProfileViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="LDi-Gw-0SW"/>
-                        <viewControllerLayoutGuide type="bottom" id="nqb-Ih-imo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="82b-7I-B78">
+                <collectionViewController id="XNk-5Q-iby" customClass="ProfileViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="lks-UV-v3k">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qf7-ub-KqT">
-                                <rect key="frame" x="20" y="64" width="560" height="492"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Dlf-EP-51q">
-                                    <size key="itemSize" width="176" height="181"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrackCell" id="nKg-rJ-Xpd" customClass="ProfileCollectionViewCell" customModule="Track" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="181"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="176" height="181"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.85118112056213024" green="0.85118112056213024" blue="0.85118112056213024" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wEE-I9-fu6">
+                            <size key="itemSize" width="180" height="180"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrackCell" id="Lj3-Gr-u9P" customClass="ProfileCollectionViewCell" customModule="Track" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="180" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NtP-4W-dtD" customClass="RoundedCornersView" customModule="Track" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhH-Ev-f9u">
-                                                    <rect key="frame" x="8" y="152" width="160" height="21"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MfS-Ic-pjq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="148"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlc-U2-eIz">
+                                                    <rect key="frame" x="0.0" y="151" width="180" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Label">
                                                             <attributes>
                                                                 <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <font key="NSFont" size="15" name="HelveticaNeue-Thin"/>
+                                                                <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7g8-rm-b6l">
-                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="144"/>
-                                                    <edgeInsets key="layoutMargins" top="2" left="2" bottom="2" right="2"/>
-                                                </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
-                                        <connections>
-                                            <outlet property="trackImageView" destination="7g8-rm-b6l" id="F3a-Wx-c7F"/>
-                                            <outlet property="trackLabel" destination="RhH-Ev-f9u" id="rFy-GC-OgO"/>
-                                            <segue destination="xLR-Xg-Mu1" kind="show" identifier="ShowFootprints" id="xYB-4i-fMR"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <connections>
-                                    <outlet property="dataSource" destination="9kV-X7-pTb" id="D2E-lN-5ub"/>
-                                    <outlet property="delegate" destination="9kV-X7-pTb" id="w2C-v0-Quo"/>
+                                    <outlet property="trackImageView" destination="MfS-Ic-pjq" id="oEl-lq-Ph8"/>
+                                    <outlet property="trackLabel" destination="mlc-U2-eIz" id="YpS-4F-0Ea"/>
+                                    <segue destination="xLR-Xg-Mu1" kind="show" identifier="ShowFootprints" id="F0R-zb-1LT"/>
                                 </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Tracks" id="cft-XG-MNj">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="IiX-B2-z9m"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="0he-JH-g6C">
-                            <connections>
-                                <action selector="editTracks:" destination="9kV-X7-pTb" id="Juj-8C-9W7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="XNk-5Q-iby" id="Hkt-uc-RAh"/>
+                            <outlet property="delegate" destination="XNk-5Q-iby" id="dOT-FV-XfR"/>
+                        </connections>
+                    </collectionView>
                     <connections>
-                        <outlet property="collectionViewFlowLayout" destination="Dlf-EP-51q" id="SE6-3L-pE3"/>
-                        <outlet property="trackCollectionView" destination="Qf7-ub-KqT" id="n7I-iL-2KP"/>
+                        <outlet property="trackCollectionView" destination="lks-UV-v3k" id="Dg3-p5-X4Z"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ENs-h6-dxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fH7-RC-rUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3112" y="-496"/>
+            <point key="canvasLocation" x="2986" y="-486"/>
         </scene>
-        <!--Title-->
+        <!--Footprints Table View Controller-->
         <scene sceneID="ftj-YS-US5">
             <objects>
                 <tableViewController id="xLR-Xg-Mu1" customClass="FootprintsTableViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
@@ -226,7 +217,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Title" id="Ovq-wq-dMR">
+                    <navigationItem key="navigationItem" id="Ovq-wq-dMR">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="Frk-fS-akU">
                             <connections>
                                 <action selector="cancelFootprints:" destination="xLR-Xg-Mu1" id="MBt-48-LDE"/>
@@ -238,7 +229,7 @@
             </objects>
             <point key="canvasLocation" x="3923" y="-496"/>
         </scene>
-        <!--Title-->
+        <!--Footprint View Controller-->
         <scene sceneID="Jog-rA-OPT">
             <objects>
                 <viewController id="3nY-Wx-9PE" customClass="FootprintViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
@@ -262,7 +253,7 @@
                             <constraint firstItem="KqV-QB-1JO" firstAttribute="top" secondItem="Dmc-8u-eh3" secondAttribute="bottom" id="mh7-4A-17L"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="ilS-JO-bsb">
+                    <navigationItem key="navigationItem" id="ilS-JO-bsb">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="X3V-ng-AOE">
                             <connections>
                                 <action selector="cancelFootprint:" destination="3nY-Wx-9PE" id="61J-hi-VMz"/>
@@ -473,7 +464,7 @@
             </objects>
             <point key="canvasLocation" x="4023" y="1082"/>
         </scene>
-        <!--Tag-->
+        <!--Add Tag View Controller-->
         <scene sceneID="u3X-Ot-coD">
             <objects>
                 <viewController id="Wh8-g0-NSt" customClass="AddTagViewController" customModule="Track" customModuleProvider="target" sceneMemberID="viewController">
@@ -497,7 +488,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="xBF-IA-fRB" secondAttribute="leading" id="s5N-BZ-BgI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tag" id="AEl-mi-SDW">
+                    <navigationItem key="navigationItem" id="AEl-mi-SDW">
                         <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="cy5-ga-rf8"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="VlF-aC-0X8">
                             <connections>
@@ -607,15 +598,15 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="uFB-LM-qds">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="search" id="HyA-KY-CB3">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="HyA-KY-CB3">
                             <connections>
                                 <action selector="trackLocation:" destination="MNr-Sw-nqv" id="Fus-FB-PG3"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="YfK-gK-CHp">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="YfK-gK-CHp">
                             <connections>
                                 <action selector="profileButtonTouched:" destination="MNr-Sw-nqv" id="z2x-EY-y7d"/>
-                                <segue destination="9kV-X7-pTb" kind="show" identifier="ShowProfile" id="yWy-mx-VYn"/>
+                                <segue destination="XNk-5Q-iby" kind="show" identifier="ShowProfile" id="Zs2-8M-Tjm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
