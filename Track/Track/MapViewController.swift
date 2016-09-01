@@ -143,40 +143,40 @@ class MapViewController: UIViewController {
 }
 
 
-// MARK: PhotoViewControllerDelegate
+    // MARK: PhotoViewControllerDelegate
 
-extension MapViewController:PhotoViewControllerDelegate{
-    
-    func addFootprint(sender: PhotoViewController) {
-
-        annotations.append(sender.footprint)
-
-        reloadAnnotations()
-
-    }
-}
-
-// MARK: ImagePicker Delegates
-extension MapViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    extension MapViewController:PhotoViewControllerDelegate{
         
-        selectedImage = image
-        
-        locationManager.requestLocation()
-        
-        dismissViewControllerAnimated(true) { () -> Void  in
-            
-            self.performSegueWithIdentifier("SetTrack", sender: nil)
+        func addFootprint(sender: PhotoViewController) {
+
+            annotations.append(sender.footprint)
+
+            reloadAnnotations()
+
         }
-    
     }
-    
-}
+
+    // MARK: ImagePicker Delegates
+    extension MapViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+        
+        func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+            
+            selectedImage = image
+            
+            locationManager.requestLocation()
+            
+            dismissViewControllerAnimated(true) { () -> Void  in
+                
+                self.performSegueWithIdentifier("SetTrack", sender: nil)
+            }
+        
+        }
+        
+    }
 
     // MARK: Map View
 extension MapViewController:MKMapViewDelegate{

@@ -18,6 +18,10 @@ class ProfileViewController: UICollectionViewController{
 
     override func viewDidLoad() {
         
+        if let layout = trackCollectionView?.collectionViewLayout as? TrackLayout {
+            layout.delegate = self
+        }
+        
         //remove "Add New Track" track
         trackArray.removeAtIndex(0)
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_mode_edit.png")!.imageWithRenderingMode(.AlwaysOriginal)
@@ -118,6 +122,7 @@ class ProfileViewController: UICollectionViewController{
             
             //Makes your image view fill the real estate you have available on your phones screen
             let rect  = AVMakeRectWithAspectRatioInsideRect(photo.size, boundingRect)
+            
             return rect.size.height
         }
         
@@ -126,14 +131,15 @@ class ProfileViewController: UICollectionViewController{
                             heightForAnnotationAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
             let annotationPadding = CGFloat(4)
             let annotationHeaderHeight = CGFloat(17)
-           // let photo = trackArray[indexPath.item].trackImage
+     
             let comment = trackArray[indexPath.item].trackName
-            let font = UIFont(name: "AvenirNext-Regular", size: 10)!
+            let font = UIFont(name: "HelveticaNeue-Thin", size: 10)!
             
             let rect = NSString(string: comment).boundingRectWithSize(CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
             
             let commentHeight = ceil(rect.height)
             let height = annotationPadding + annotationHeaderHeight + commentHeight + annotationPadding
+            
             return height
         }
     }

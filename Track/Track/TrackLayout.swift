@@ -122,7 +122,12 @@ class TrackLayout: UICollectionViewLayout {
                 yOffset[column] = yOffset[column] + height
                 
                 //advance column to next item will be placed in next column
-                column = column >= (numberOfColumns - 1) ? 0 : column++
+                if(column >= (numberOfColumns - 1)){
+                    column = 0
+                }else{
+                    column += 1
+                }
+
             }
         }
     }
