@@ -22,8 +22,6 @@ class ProfileViewController: UICollectionViewController{
             layout.delegate = self
         }
         
-        //remove "Add New Track" track
-        trackArray.removeAtIndex(0)
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_mode_edit.png")!.imageWithRenderingMode(.AlwaysOriginal)
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
@@ -31,8 +29,7 @@ class ProfileViewController: UICollectionViewController{
         
         navigationItem.rightBarButtonItem =
             UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(editTracks(_:)))
-        
-        print("profile: " + String(trackArray.count))
+
 
     }
     

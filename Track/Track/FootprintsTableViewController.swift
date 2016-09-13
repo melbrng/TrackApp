@@ -44,7 +44,6 @@ class FootprintsTableViewController: UITableViewController {
         cell.footprintNameLabel.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         cell.footprintNameLabel.textColor = UIColor.whiteColor()
         cell.footprintNameLabel.text = footprintsArray[indexPath.row].title
-     //   cell.footprintNameLabel.frame = CGRectMake(0,0,100,130)
         
         cell.footprintImageView.image = footprintsArray[indexPath.row].image
         cell.footprintImageView.contentMode = .ScaleAspectFill

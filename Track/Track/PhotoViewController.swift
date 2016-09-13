@@ -43,7 +43,6 @@ class PhotoViewController: UIViewController  {
         
         trackTextField.delegate = self
         footprintTextField.delegate = self
-        //footprint.image?. = CGSizeMake(350, 350)
         trackedImageView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/2)
         trackedImageView.contentMode = .ScaleToFill
         trackedImageView.image = footprint.image
@@ -253,7 +252,6 @@ class PhotoViewController: UIViewController  {
             
             let newTrack = sender.newTrack
             trackTextField.text = newTrack.trackName
-            
             
             //query the newly added Track in order to retrieve trackUID
             let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)

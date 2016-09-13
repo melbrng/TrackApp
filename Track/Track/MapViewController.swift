@@ -181,39 +181,38 @@ class MapViewController: UIViewController {
     }
 
     // MARK: Map View
-extension MapViewController:MKMapViewDelegate{
+    extension MapViewController:MKMapViewDelegate{
 
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
 
-        
-        if let annotation = annotation as? Footprint {
             
-            let annotationIdentifier = "AnnotationIdentifier"
-            
-            var annotationView: MKAnnotationView?
-            
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = annotation
-            }
-            else {
-                let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-                annotationView = av
-            }
-            
-            if let annotationView = annotationView {
+            if let annotation = annotation as? Footprint {
                 
-                // Configure your annotation view here
-                annotationView.canShowCallout = true
+                let annotationIdentifier = "AnnotationIdentifier"
                 
+                var annotationView: MKAnnotationView?
+                
+                if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
+                    annotationView = dequeuedAnnotationView
+                    annotationView?.annotation = annotation
+                }
+                else {
+                    let av = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                    av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                    annotationView = av
+                }
+                
+                if let annotationView = annotationView {
+                    
+                    // Configure your annotation view here
+                    annotationView.canShowCallout = true
+                    
+                }
+                
+                return annotationView
             }
             
-            return annotationView
-        }
-        
-        return nil
+            return nil
         
     }
     
@@ -229,17 +228,17 @@ extension MapViewController:MKMapViewDelegate{
 }
 
 
-// MARK: Location Manager
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if(status == .AuthorizedWhenInUse || status == .AuthorizedAlways){
-            mapView.showsUserLocation = true
-            mapView.showsPointsOfInterest = true
-            
-        } else {
-            manager.requestWhenInUseAuthorization()
+    // MARK: Location Manager
+    extension MapViewController: CLLocationManagerDelegate {
+        func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+            if(status == .AuthorizedWhenInUse || status == .AuthorizedAlways){
+                mapView.showsUserLocation = true
+                mapView.showsPointsOfInterest = true
+                
+            } else {
+                manager.requestWhenInUseAuthorization()
+            }
         }
-    }
 
 }
 
