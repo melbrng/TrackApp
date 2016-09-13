@@ -255,35 +255,34 @@ class PhotoViewController: UIViewController  {
             
             //query the newly added Track in order to retrieve trackUID
             let reference = firebaseHelper.TRACK_REF.child(firebaseHelper.currentUserUID!)
-            
-            reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
+            reference.queryOrderedByChild("name").queryEqualToValue(newTrack.trackName).observeEventType(.Value, withBlock: {
+                snapshot in
                 
                 if (snapshot.exists()) {
-                    
-                    print(snapshot)
 
-                    let track = Track.init(name: snapshot.value!["name"] as! String,
-                        desc: snapshot.value!["desc"] as! String,
-                        uid: snapshot.value!["trackUID"] as! String,
-                        imagePath: snapshot.value!["imagePath"] as! String)
-                    
-                    //use local image
-                    track.trackImage = self.footprint.image!
-                    
-                    //set for use when setting footprint's trackUID
-                    self.toSaveTrackUID = track.trackUID
+                    //TODO: Need a failsafe for when >1 child is retrieved--THERE CAN BE ONLY ONE!
+                     for x in snapshot.children{
 
-                    firebaseHelper.trackArray.append(track)
-                    self.trackItems = firebaseHelper.trackArray
-                    self.tableViewPicker.reloadData()
-
-                } else {
-                    print("No Snapshot?!")
-                }
-                
-                
+                        let track = Track.init(name: x.value?.objectForKey("name") as! String,
+                            desc: x.value?.objectForKey("desc") as! String,
+                            uid: x.value?.objectForKey("trackUID") as! String,
+                            imagePath: x.value?.objectForKey("imagePath") as! String)
+                        
+                            //use local image
+                            track.trackImage = self.footprint.image!
+        
+                            //set for use when setting footprint's trackUID
+                            self.toSaveTrackUID = track.trackUID
+        
+                            firebaseHelper.trackArray.append(track)
+                            self.trackItems = firebaseHelper.trackArray
+                            self.tableViewPicker.reloadData()
+                        }
+                    }
+                    else {
+                        print("No Snapshot?!")
+                    }
             })
-            
         }
     }
     

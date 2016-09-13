@@ -13,12 +13,6 @@ let firebaseHelper = FirebaseHelper.sharedInstance
 
 class LoginViewController: UIViewController {
 
-    var userUID = String()
-    var isSet = false
-    
-    //The handler for the auth state listener, to allow cancelling later.
-    var handle: FIRAuthStateDidChangeListenerHandle?
-    
     @IBOutlet weak var loginEmailTextField: UITextField!
     @IBOutlet weak var loginPasswordTextField: UITextField!
     @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
@@ -30,7 +24,8 @@ class LoginViewController: UIViewController {
         loginPasswordTextField.secureTextEntry = true
         
         //monitor the user authentication state and present mapview is user is already logged in
-        
+        //TODO: If user is logging in for the first time and there is no snapshot (no tracks or footprints). 
+        //Either create a default db set or allow segue
         if let user =  FIRAuth.auth()?.currentUser {
             print("User is signed in with uid: " + user.uid + " and email: " + user.email!)
             
@@ -97,6 +92,7 @@ class LoginViewController: UIViewController {
                 } else {
                     
                     //create database user entry
+                    //This is for the User Profile
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
