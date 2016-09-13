@@ -18,6 +18,8 @@ class ProfileViewController: UICollectionViewController{
 
     override func viewDidLoad() {
         
+        //TODO: Add Cell Editing Management
+        
         if let layout = trackCollectionView?.collectionViewLayout as? TrackLayout {
             layout.delegate = self
         }

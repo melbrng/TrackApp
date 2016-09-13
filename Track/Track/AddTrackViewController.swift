@@ -26,6 +26,8 @@ class AddTrackViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        //TODO: Format ImageView 
+        
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_add_circle_outline.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(saveTrack(_:)))
         

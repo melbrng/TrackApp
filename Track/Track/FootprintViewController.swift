@@ -23,6 +23,8 @@ class FootprintViewController: UIViewController {
         sender.scale = 1;
     }
     override func viewDidLoad() {
+        
+        //TODO: Add Zoom ability to the MapView and ImageView
 
         footprintImageView.image = footprint.image
         
