@@ -43,7 +43,9 @@ class PhotoViewController: UIViewController  {
         
         trackTextField.delegate = self
         footprintTextField.delegate = self
-        
+        //footprint.image?. = CGSizeMake(350, 350)
+        trackedImageView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height/2)
+        trackedImageView.contentMode = .ScaleToFill
         trackedImageView.image = footprint.image
         trackTextField.text = footprint.subtitle
         footprintTextField.text = footprint.title
@@ -86,7 +88,7 @@ class PhotoViewController: UIViewController  {
         
 
         
-        //MARK: Local Image Save
+        
         //I see no reason to do this since we are saving images to Firebase but i'm gonna leave this here until I decide how i'm 
         //going to load/reload images. Now i'm doing it the lazy way (memory)
         
@@ -109,10 +111,20 @@ class PhotoViewController: UIViewController  {
 //    }
     
 
-
+    //MARK: Track TableView Picker
     func createTableViewPicker(){
         
-        tableViewPicker.frame = CGRect(x: 0, y: 0, width: 286, height: 291)
+        tableViewPicker.frame = CGRect(x: 0, y: 30, width: 286, height: 291)
+        
+        //Header View
+        let headerView = UIView.init(frame: CGRectMake(0, 0, 286, 50))
+        let addNewTrackButton = UIButton.init(frame: CGRectMake(0, 0, 286, 50))
+        addNewTrackButton.backgroundColor = UIColor.grayColor()
+        addNewTrackButton.setTitle("Add New Track", forState: .Normal)
+        addNewTrackButton.addTarget(self, action: #selector(addNewTrack), forControlEvents: .TouchUpInside)
+        headerView.addSubview(addNewTrackButton)
+        tableViewPicker.tableHeaderView = headerView
+        
         tableViewPicker.alpha = 0
         tableViewPicker.hidden = true
         tableViewPicker.userInteractionEnabled = true
@@ -127,8 +139,7 @@ class PhotoViewController: UIViewController  {
         
     }
 
-    func openTable()
-    {
+    func openTable(){
         self.tableViewPicker.hidden = false
         
         UIView.animateWithDuration(0.3,
@@ -138,8 +149,7 @@ class PhotoViewController: UIViewController  {
         })
     }
     
-    func closeTable()
-    {
+    func closeTable(){
         UIView.animateWithDuration(0.3,
                                    animations: {
                                     self.tableViewPicker.frame = CGRect(x: ((self.view.frame.width / 2) - 143), y: 0, width: 286, height: 291)
@@ -149,6 +159,12 @@ class PhotoViewController: UIViewController  {
                                     self.tableViewPicker.hidden = true
             }
         )
+    }
+    
+    func addNewTrack(){
+        
+        closeTable()
+        performSegueWithIdentifier("AddTrack", sender: nil)
     }
     
     //MARK: UI Actions
@@ -221,15 +237,11 @@ class PhotoViewController: UIViewController  {
 
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             
-            if(indexPath.row == 0){
-                closeTable()
-                performSegueWithIdentifier("AddTrack", sender: nil)
-            } else {
-                //set the track name
-                trackTextField.text = trackItems[indexPath.row].trackName
-                toSaveTrackUID = trackItems[indexPath.row].trackUID
-                closeTable()
-            }
+            //set the track name
+            trackTextField.text = trackItems[indexPath.row].trackName
+            toSaveTrackUID = trackItems[indexPath.row].trackUID
+            closeTable()
+
         }
 
     }
@@ -249,6 +261,8 @@ class PhotoViewController: UIViewController  {
             reference.queryLimitedToLast(1).observeEventType(.ChildAdded, withBlock: { snapshot in
                 
                 if (snapshot.exists()) {
+                    
+                    print(snapshot)
 
                     let track = Track.init(name: snapshot.value!["name"] as! String,
                         desc: snapshot.value!["desc"] as! String,
@@ -263,7 +277,6 @@ class PhotoViewController: UIViewController  {
 
                     firebaseHelper.trackArray.append(track)
                     self.trackItems = firebaseHelper.trackArray
-                    
                     self.tableViewPicker.reloadData()
 
                 } else {

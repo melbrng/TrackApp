@@ -32,6 +32,7 @@ class ProfileViewController: UICollectionViewController{
         navigationItem.rightBarButtonItem =
             UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(editTracks(_:)))
         
+        print("profile: " + String(trackArray.count))
 
     }
     

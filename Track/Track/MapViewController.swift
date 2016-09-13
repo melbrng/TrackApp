@@ -165,14 +165,16 @@ class MapViewController: UIViewController {
         
         func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
             
-            selectedImage = image
-            
-            locationManager.requestLocation()
-            
-            dismissViewControllerAnimated(true) { () -> Void  in
+                selectedImage = image.imageWithImage(image, scaledToSize: CGSizeMake(500, 500))
                 
-                self.performSegueWithIdentifier("SetTrack", sender: nil)
-            }
+                let footprint = Footprint(coordinate: CLLocationCoordinate2D(), image: selectedImage)
+                selectedFootprint = footprint
+                
+                
+                dismissViewControllerAnimated(true) { () -> Void  in
+                    
+                    self.performSegueWithIdentifier("SetTrack", sender: nil)
+                }
         
         }
         
@@ -180,26 +182,10 @@ class MapViewController: UIViewController {
 
     // MARK: Map View
 extension MapViewController:MKMapViewDelegate{
-    
 
-    //    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-    //
-    //        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800)
-    //        mapView .setRegion(region, animated: true)
-    //
-    //        userPointAnnotation.coordinate = userLocation.coordinate
-    //        userPointAnnotation.title = "Where is Mel?"
-    //        userPointAnnotation.subtitle = "Mel is here!"
-    //
-    //        mapView.addAnnotation(userPointAnnotation)
-    //    }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        // Don't want to show a custom image if the annotation is the user's location.
-        //        guard !annotation.isKindOfClass(MKUserLocation) else {
-        //            return nil
-        //        }
+
         
         if let annotation = annotation as? Footprint {
             
@@ -255,26 +241,6 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        if let updatedLocation = locations.last {
-            
-            //set location coordinates for image to current location
-            
-            let footprint = Footprint(coordinate: updatedLocation.coordinate, image: selectedImage)
-            
-            selectedFootprint = footprint
-            
-        }
-        
-        
-        locationManager.stopUpdatingLocation()
-    }
-
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error.description)
-    }
 }
 
 

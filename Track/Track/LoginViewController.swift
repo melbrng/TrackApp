@@ -101,23 +101,20 @@ class LoginViewController: UIViewController {
                     let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
                     FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
-                    // Store the uid
-                    //NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: "uid")
-                    
                     self.loginActivityIndicator.stopAnimating()
                     
                     //move onto mapview
                     //temporary fix to prevent two mapVC's from being presented because the listener is calling twice
-                    if(self.isSet == false){
-                        self.isSet = true
-                    } else {
-                        self.isSet = false
-                    }
+//                    if(self.isSet == false){
+//                        self.isSet = true
+//                    } else {
+//                        self.isSet = false
+//                    }
                     
                     //move onto mapview
-                    if(self.isSet == true){
-                        self.performSegueWithIdentifier("loginToMap", sender: nil)
-                    }
+                    //if(self.isSet == true){
+                        self.performSegueWithIdentifier("ShowMap", sender: nil)
+                   // }
                 }
             }
         }
@@ -141,13 +138,13 @@ class LoginViewController: UIViewController {
                 if user != nil {
 
                     //create database user entry
-                    let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
-                    FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
+                  //  let trackUser = ["provider": user!.providerID, "email": email, "username": "name"]
+                 //   FirebaseHelper.sharedInstance.createNewUser((user?.uid)!, user: trackUser)
                     
                     self.loginActivityIndicator.stopAnimating()
                     
                     //move onto mapview
-                    self.performSegueWithIdentifier("loginToMap", sender: nil)
+                    self.performSegueWithIdentifier("ShowMap", sender: nil)
                     
                 }
             }

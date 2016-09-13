@@ -30,7 +30,7 @@ class FirebaseHelper{
     let currentUserUID = FIRAuth.auth()!.currentUser?.uid
     var testDataLoad = false
     var retrievedImage: UIImage!
-    let defaultTrack = Track(name: "Add New Track", desc: "Default track")
+  //  let defaultTrack = Track(name: "Add New Track", desc: "Default track")
     
     //MARK: Database References
     
@@ -76,29 +76,18 @@ class FirebaseHelper{
     
     //MARK: Image Storage & Retrieval
     
-    func loadDefaultUserImage(){
-        
-        // Default image set when a user signs up
-        let userFolderName = currentUserUID
-        let fileData = UIImageJPEGRepresentation((UIImage.init(named: "default.jpg"))!, 0.7)
-        
-        trackImagesRef.child("/"+userFolderName!+"/default.jpg").putData(fileData!)
-        
-    }
+    func loadImage(imagePath: String, image: UIImage?, completion: CompletionHandler){
     
-    func loadImage(imagePath: String, image: UIImage, completion: CompletionHandler){
+        if let loadImage = image {
         
-//        print(imagePath)
-//        print(image.size.width)
-//        print(image.size.height)
-        
-        // Default image set when a user signs up
-        let fileData = UIImageJPEGRepresentation(image, 0.7)
-        
-        trackImagesRef.child(imagePath).putData(fileData!)
-        
-        let flag = true
-        completion(success: flag)
+            // Default image set when a user signs up
+            let fileData = UIImageJPEGRepresentation(loadImage, 0.5)
+            
+            trackImagesRef.child(imagePath).putData(fileData!)
+            
+            let flag = true
+            completion(success: flag)
+        }
         
     }
     
@@ -130,7 +119,7 @@ class FirebaseHelper{
                 print(error.debugDescription)
             } else {
                 let image = UIImage(data: data!)
-                self.retrievedImage = image?.decompressedImage
+                self.retrievedImage = image
                 let flag = true
                 completion(success: flag)
 
@@ -165,10 +154,6 @@ class FirebaseHelper{
     func queryTracksByUid(uid: String, completion: CompletionHandler){
         
         let reference = TRACK_REF.child("\(uid)/")
-        
-        //add the "Add New Track" track
-        trackArray.append(defaultTrack)
-
         
         reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
@@ -210,10 +195,7 @@ class FirebaseHelper{
         trackHandle = reference.observeEventType(.ChildAdded, withBlock: { snapshot in
             if (snapshot.exists()) {
                 self.trackArray = [Track]()
-                
-                //add the "Add New Track" track
-                self.trackArray.append(self.defaultTrack)
-                
+
                 let track = Track.init(name: snapshot.value!["name"] as! String,
                     desc: snapshot.value!["desc"] as! String,
                     uid: snapshot.value!["trackUID"] as! String,

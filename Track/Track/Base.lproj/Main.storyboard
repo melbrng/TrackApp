@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -89,7 +89,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="Gg2-Ge-GzI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1879" y="300"/>
         </scene>
@@ -260,6 +259,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KqV-QB-1JO">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="8qE-Tk-Qq4" appends="YES" id="upQ-Db-bCm"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -284,9 +287,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="footprintImageView" destination="KqV-QB-1JO" id="1Lf-i3-2Sb"/>
+                        <outlet property="pinchGesture" destination="8qE-Tk-Qq4" id="u6V-ah-trt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLI-0v-L6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="8qE-Tk-Qq4">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="3nY-Wx-9PE" id="TA1-oK-lhn"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4692" y="-471"/>
         </scene>
@@ -329,6 +338,14 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mZW-qh-hbA">
                                 <rect key="frame" x="19" y="229" width="559" height="319"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="319" id="gJk-bI-N3a"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gJk-bI-N3a"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Tag the Footprint" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mf2-HO-gfg">
                                 <rect key="frame" x="20" y="130" width="516" height="35"/>
@@ -613,9 +630,9 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
-                        <barButtonItem title="Logout" id="5BC-Mg-dkb">
+                        <barButtonItem systemItem="stop" id="5BC-Mg-dkb">
                             <connections>
-                                <segue destination="Gg2-Ge-GzI" kind="unwind" unwindAction="unwindToViewController:" id="M7p-2r-k0l"/>
+                                <segue destination="oTs-03-Tmj" kind="unwind" unwindAction="unwindToViewController:" id="vxn-3X-4eZ"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -640,8 +657,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-Zh-y8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oTs-03-Tmj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3427" y="300"/>
+            <point key="canvasLocation" x="3329" y="300"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Vb-fa-OdZ">

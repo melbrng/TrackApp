@@ -16,6 +16,12 @@ class FootprintViewController: UIViewController {
     var footprint = Footprint(coordinate: CLLocationCoordinate2D(), image: UIImage())
     var footprintMapView = MKMapView()
     
+    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
+    @IBAction func handlePinchGesture(sender: UIPinchGestureRecognizer) {
+
+        sender.view!.transform = CGAffineTransformScale(sender.view!.transform, sender.scale, sender.scale);
+        sender.scale = 1;
+    }
     override func viewDidLoad() {
 
         footprintImageView.image = footprint.image
@@ -25,6 +31,7 @@ class FootprintViewController: UIViewController {
         let rightBarButtonImage : UIImage? = UIImage(named:"ic_place2x.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(showFootprintMap(_:)))
 
+        footprintImageView.addGestureRecognizer(pinchGesture)
         createFootprintMapViewPicker()
         
     }
