@@ -157,7 +157,7 @@ class FirebaseHelper{
         
         reference.observeSingleEventOfType(.Value, withBlock: { snapshot in
             if (snapshot.exists()) {
-            
+             self.trackArray = [Track]()
                 for x in snapshot.children{
                     let track = Track.init(name: x.value?.objectForKey("name") as! String,
                         desc: x.value?.objectForKey("desc") as! String,

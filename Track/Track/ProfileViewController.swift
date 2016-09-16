@@ -13,6 +13,7 @@ class ProfileViewController: UICollectionViewController{
     
     var trackArray = firebaseHelper.trackArray
     var trackFootprints = [Footprint]()
+    var editModeOn = false
     
     @IBOutlet weak var trackCollectionView: UICollectionView!
 
@@ -24,21 +25,64 @@ class ProfileViewController: UICollectionViewController{
             layout.delegate = self
         }
         
-        let rightBarButtonImage : UIImage? = UIImage(named:"ic_mode_edit.png")!.imageWithRenderingMode(.AlwaysOriginal)
+        
         
         let leftBarButtonImage : UIImage? = UIImage(named:"ic_arrow_back.png")!.imageWithRenderingMode(.AlwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: leftBarButtonImage, style: .Plain, target: self, action: #selector(cancelProfile(_:)))
         
-        navigationItem.rightBarButtonItem =
-            UIBarButtonItem.init(image: rightBarButtonImage, style: .Plain, target: self, action: #selector(editTracks(_:)))
-
+        updateRighBarButton(editModeOn)
 
     }
     
-    //MARK: UI
+    //MARK: Nav Buttons
+    func updateRighBarButton(isEditModeOn : Bool){
+        let editModeButton = UIButton(frame: CGRectMake(0,0,30,30))
+        editModeButton.addTarget(self, action: #selector(editTracks(_:)), forControlEvents: .TouchUpInside)
+        
+        
+        if isEditModeOn {
+            editModeButton.setImage(UIImage(named: "ic_mode_edit_on.png"), forState: .Normal)
+        } else {
+            editModeButton.setImage(UIImage(named: "ic_mode_edit.png"), forState: .Normal)
+        }
+        
+        let rightButton = UIBarButtonItem(customView: editModeButton)
+        self.navigationItem.setRightBarButtonItems([rightButton], animated: true)
+    }
+    
     @IBAction func editTracks(sender: AnyObject) {
+        
+        editModeOn = !editModeOn
+        
+        print("editMode: \(editModeOn)")
+        
+        if editModeOn {
+            editTracksEnabled()
+        } else {
+            editTracksDisabled()
+        }
+        
+        updateRighBarButton(editModeOn)
+        
+    }
+    
+    func editTracksEnabled()
+    {
+        
+        print("editing")
+        
         trackCollectionView.allowsMultipleSelection = true
     }
+    
+    func editTracksDisabled(){
+        
+          print("notEditing")
+        
+        trackCollectionView.allowsMultipleSelection = false
+    }
+    
+    
+
     
     
     @IBAction func cancelProfile(sender: AnyObject) {
@@ -66,6 +110,11 @@ class ProfileViewController: UICollectionViewController{
             }
         }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        return !editModeOn
+
+    }
 
     //MARK: Collection View Delegate
         
@@ -88,6 +137,8 @@ class ProfileViewController: UICollectionViewController{
         
         override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
+            print("cell selected")
+            
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProfileCollectionViewCell
             cell.isSelected(true)
             
@@ -95,9 +146,11 @@ class ProfileViewController: UICollectionViewController{
             
             //trackArray.removeAtIndex(indexPath.item)
         }
-        
+    
 
         override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+            
+            print("cell highlighted")
             
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProfileCollectionViewCell
             
@@ -105,7 +158,7 @@ class ProfileViewController: UICollectionViewController{
                                        delay: 0,
                                        options: .AllowUserInteraction,
                                        animations: {
-                                        cell.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.5)},
+                                        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(1.0)},
                                        completion: nil)
         }
        

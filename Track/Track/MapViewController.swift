@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //TODO: Add Zoom ability to the MapView
+        //TODO: Add Zoom buttons to the MapView
 
         //must ask for permission to use location services
         //below combined with setting the NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys in info.plist
