@@ -1,47 +1,48 @@
-#Track App 
-##V1
+# Track App 
+## V1
 App that allows Users to creates Tracks and Footprints detailing interesting geographical areas travelled.
 
-##Frameworks
+## Frameworks
 MapKit
 
 CoreLocation
 
 Firebase
 
-##User Stories
-###As a user I would like to 
-track my location
+## User Stories
+As a user I would like to:
 
-take and store photos of a location
+Track my location
 
-organize photos by category
+Take and store photos of a location
 
-see all photos associated with each category
+Organize photos by category
 
-see interesting attractions near my current location
+See all photos associated with each category
 
-broadcast my location to other users of the app - V2
+See interesting attractions near my current location
 
-share my photo/activity on social media
+Broadcast my location to other users of the app - V2
 
-create a user profile
+Share my photo/activity on social media
 
-##Model
-###User Profile
+Create a user profile
+
+## Model
+### User Profile
 Name
 Description
 Image
 [Track]
 
-###Track
+### Track
 Comprised of 1 or more Footprints
 
 [Footprint]
 Description
 User
 
-###Footprint
+### Footprint
 User will have at least one footprint showing their current location. Must remember to ask permission and give ability to hide current location.
 
 Image
@@ -54,16 +55,16 @@ Description
 
 Track
 
-##Firebase
-###Database
+## Firebase
+### Database
 Design proper JSON feed based on model
-###Storage
+### Storage
 Database will contain a file storage reference for each photo
 
-#Track App User Stories
+# Track App User Stories
 
-##User Story 1 - Track my location
-###Model
+## User Story 1 - Track my location
+### Model
 Hook up to Firebase
 
 Authenticate or create user
@@ -79,10 +80,10 @@ Map View with current user location
 
 Enable map to show interesting attractions near my current location
 
-###Test
+### Test
 Create a test user and verify authentication
 
-##User story 2 - Take and store photos of a location
+## User story 2 - Take and store photos of a location
 ### Model
 Implement a Footprint class for photo, latitude/longitude/GPS, description and write back data to Firebase database
 
@@ -94,7 +95,7 @@ UI for selected photo and for setting footprint attributes
 ![](https://github.com/melbrng/TrackApp/blob/master/images/user_2.png)
 ![](https://github.com/melbrng/TrackApp/blob/master/images/user_2a.png)
 
-##User story 3 - Organize photos by category
+## User story 3 - Organize photos by category
 ### Model
 Allow a user to assign each footprint to an existing Track or create/assign to a new Track
 
@@ -103,7 +104,7 @@ Photo UI and track category dropdown
 
 Track UI for creating a new track and assign to footprint
 
-##User story 4 - see all photos associated with each Track
+## User story 4 - see all photos associated with each Track
 ### Model
 
 Retrieve all footprints for the logged in user
@@ -128,7 +129,7 @@ User profile UI will contain a tableView of Tracks
 
 ![](https://github.com/melbrng/TrackApp/blob/master/images/user_5.png)
 
-##User story 6 - Share my photo/activity on social media
+## User story 6 - Share my photo/activity on social media
 
 ### Model
 Allow the user to share footprint photos on social media
@@ -137,8 +138,8 @@ Allow the user to share footprint photos on social media
 Photo UI add Facebook, Twitter buttons 
 
 
-#Track App V2 
-##Brainstorm:
+# Track App V2 
+## Brainstorm:
 Allow users to follow each other’s Tracks
 
 broadcast my location to other users of the app 
